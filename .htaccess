@@ -1,0 +1,54 @@
+# T.C. Philathlos München e.V. – Serverregeln für Apache-Hosting
+# Bei einem anderen Hoster (z. B. nginx, GitHub Pages) gelten diese Regeln nicht;
+# die Weiterleitungsseiten (ueber_uns.html usw.) fangen die alten Adressen dann trotzdem ab.
+
+ErrorDocument 404 /404.html
+AddType font/woff2 .woff2
+AddDefaultCharset utf-8
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # HTTPS und www erzwingen: erst einschalten, wenn ein SSL-Zertifikat aktiv ist.
+  # RewriteCond %{HTTPS} off [OR]
+  # RewriteCond %{HTTP_HOST} !^www\. [NC]
+  # RewriteRule ^ https://www.philathlos.de%{REQUEST_URI} [L,R=301]
+
+  # Arbeitsordner nicht ausliefern
+  RewriteRule ^(_quellen|\.git)(/|$) - [F,L]
+  RewriteRule ^(README|CLAUDE)\.md$ - [F,L]
+
+  # Adressen der bisherigen Website dauerhaft umleiten (301)
+  RewriteRule ^ueber_uns\.html$      /verein.html [R=301,L]
+  RewriteRule ^aktuelles\.html$      /index.html#aktuelles [NE,R=301,L]
+  RewriteRule ^partner\.htm$         /verein.html#partner [NE,R=301,L]
+  RewriteRule ^impressum\.htm$       /impressum.html [R=301,L]
+  RewriteRule ^Integration\.html$    /verein.html#projekte [NE,R=301,L]
+  RewriteRule ^Galerie\.html$        /galerie.html [R=301,L]
+  RewriteRule ^gallery/              /galerie.html [R=301,L]
+  RewriteRule ^beachflyer\.pdf$      /verein.html#projekte [NE,R=301,L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript text/javascript image/svg+xml application/xml text/plain
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 week"
+  ExpiresByType text/html "access plus 0 seconds"
+  # CSS und JS tragen eine Versionsnummer (?v=…), dürfen also lange im Cache bleiben
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType text/javascript "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+</IfModule>

@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /_quellen/
+
+Sitemap: https://www.philathlos.de/sitemap.xml

@@ -241,6 +241,32 @@ def seite(datei: str, meta: dict, inhalt: str) -> str:
 """
 
 
+# Adressen der bisherigen Website, die auf neue Seiten weiterleiten.
+# (Galerie.html fehlt bewusst: Auf macOS kollidiert sie mit galerie.html. Sie wird über .htaccess umgeleitet.)
+WEITERLEITUNGEN = {
+    "ueber_uns.html": "verein.html",
+    "aktuelles.html": "index.html#aktuelles",
+    "partner.htm": "verein.html#partner",
+    "impressum.htm": "impressum.html",
+    "Integration.html": "verein.html#projekte",
+}
+
+
+def weiterleitungen():
+    for alt, neu in WEITERLEITUNGEN.items():
+        html = (
+            '<!doctype html>\n<html lang="de">\n<head>\n<meta charset="utf-8">\n'
+            f'<title>Weiterleitung – T.C. Philathlos München e.V.</title>\n'
+            '<meta name="robots" content="noindex">\n'
+            f'<link rel="canonical" href="{DOMAIN}/{neu.split("#")[0] if neu.split("#")[0] != "index.html" else ""}">\n'
+            f'<meta http-equiv="refresh" content="0; url={neu}">\n'
+            '</head>\n<body>\n'
+            f'<p>Diese Seite ist umgezogen: <a href="{neu}">weiter zur neuen Seite</a>.</p>\n'
+            '</body>\n</html>\n'
+        )
+        (WURZEL / alt).write_text(html, encoding="utf-8")
+
+
 def sitemap(dateien):
     zeilen = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for d in dateien:
@@ -264,6 +290,7 @@ def main():
         erzeugt.append(quelle.name)
     reihenfolge = ["index.html"] + [d for d, _ in NAV] + ["impressum.html", "datenschutz.html"]
     sitemap([d for d in reihenfolge if d in erzeugt])
+    weiterleitungen()
     print("Erzeugt:", ", ".join(erzeugt))
 
 
