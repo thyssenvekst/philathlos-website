@@ -1,0 +1,90 @@
+<!--
+titel: Kontakt und Anfahrt
+beschreibung: Kontakt zum T.C. Philathlos München: Club 089 32210100, Christos 0172 9138965, tc@philathlos.de. Anlage am Föhringer Ring 5, 80805 München, U6 Studentenstadt, Parkplätze an der Anlage.
+nav: kontakt.html
+bild: plaetze-panorama.jpg
+-->
+<section class="seitenkopf seitenkopf--text">
+  <div class="rahmen">
+    <ol class="pfad"><li><a href="index.html">Start</a></li><li aria-current="page">Kontakt</li></ol>
+    <div class="seitenkopf__raster">
+      <div>
+        <p class="marke">Kontakt &amp; Anfahrt</p>
+        <h1>Wir stehen Ihnen mit Rat und <em>Tat</em> zur Seite</h1>
+        <p class="lead">Rufen Sie an, schreiben Sie eine E-Mail oder kommen Sie einfach vorbei: Die Anlage liegt direkt an der U6 Studentenstadt.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="abschnitt" style="padding-top:0" aria-label="Kontaktdaten und Anfrage">
+  <div class="rahmen kontakt-raster">
+    <div data-zeigen>
+      <div class="verzeichnis">
+        <div><h3>Christos, mobil</h3><p><a class="gross" href="tel:+491729138965">0172 913 89 65</a></p></div>
+        <div><h3>Club</h3><p><a class="gross" href="tel:+498932210100">089 32 21 01 00</a></p></div>
+        <div><h3>Tennisschule</h3><p><a class="gross" href="tel:+498935004114">089 35 00 41 14</a></p></div>
+        <div><h3>Fax</h3><p class="gross">089 32 21 01 01</p></div>
+        <div><h3>E-Mail</h3><p><a class="gross" href="mailto:tc@philathlos.de">tc@philathlos.de</a></p></div>
+        <div><h3>Postanschrift</h3><p>T.C. Philathlos München e.V.<br>c/o Christos Theodosiadis<br>Marianne-Brandt-Str. 20<br>80807 München</p></div>
+      </div>
+    </div>
+
+    <form class="formular" id="anfrage" action="mailto:tc@philathlos.de" method="post" enctype="text/plain" novalidate data-zeigen="1">
+      <h2 id="formular">Nachricht vorbereiten</h2>
+      <p>Füllen Sie die Felder aus, dann öffnet sich Ihr E-Mail-Programm mit der fertigen Nachricht an <strong>tc@philathlos.de</strong>. Gespeichert wird hier nichts.</p>
+      <div class="zeile">
+        <div class="feld">
+          <label for="f-name">Name</label>
+          <input id="f-name" name="Name" type="text" autocomplete="name" required aria-describedby="f-name-fehler">
+          <span class="feld__fehler" id="f-name-fehler"></span>
+        </div>
+        <div class="feld">
+          <label for="f-telefon">Telefon <small>(freiwillig, für Rückruf)</small></label>
+          <input id="f-telefon" name="Telefon" type="tel" autocomplete="tel" inputmode="tel">
+        </div>
+      </div>
+      <div class="feld">
+        <label for="f-anliegen">Worum geht es?</label>
+        <select id="f-anliegen" name="Anliegen">
+          <option value="mitgliedschaft">Schnupperstunde und Mitgliedschaft</option>
+          <option value="tennisschule">Tennisschule und Kurse</option>
+          <option value="camps">Feriencamps</option>
+          <option value="feier">Feier und Location</option>
+          <option value="partner">Partnerschaft</option>
+          <option value="sonstiges">Sonstiges</option>
+        </select>
+      </div>
+      <div class="feld">
+        <label for="f-nachricht">Ihre Nachricht</label>
+        <textarea id="f-nachricht" name="Nachricht" rows="6" required aria-describedby="f-nachricht-fehler"></textarea>
+        <span class="feld__fehler" id="f-nachricht-fehler"></span>
+      </div>
+      <div class="formular__fuss">
+        <button class="knopf knopf--voll" type="submit">{{post}} E-Mail-Programm öffnen</button>
+        <span class="hinweis">Kein E-Mail-Programm? Schreiben Sie direkt an <a href="mailto:tc@philathlos.de">tc@philathlos.de</a>.</span>
+      </div>
+      <p class="formular__status" id="anfrage-status" tabindex="-1" hidden>Ihr E-Mail-Programm sollte sich jetzt mit der vorbereiteten Nachricht geöffnet haben. Bitte dort auf „Senden“ klicken. Falls nichts passiert ist, schreiben Sie bitte direkt an tc@philathlos.de oder rufen Sie an.</p>
+    </form>
+  </div>
+</section>
+
+<section class="abschnitt abschnitt--sand" id="anfahrt" aria-labelledby="anfahrt-titel">
+  <div class="rahmen paar">
+    <figure class="bild bild--43 paar__bild" data-zeigen>
+      <img class="foto" src="assets/img/plaetze-panorama.jpg" width="798" height="412" alt="Die Tennisanlage am Föhringer Ring mit fünf Sandplätzen" loading="lazy">
+      <figcaption>Tennisanlage bei der Beach-Arena</figcaption>
+    </figure>
+    <div class="paar__text" data-zeigen="1">
+      <p class="marke">Anfahrt</p>
+      <h2 id="anfahrt-titel">Föhringer Ring 5, 80805 <em>München</em></h2>
+      <dl class="fakten">
+        <dt>Clubanlage</dt><dd>T.C. Philathlos München e.V.<br>Tennisverein in der Beach-Arena</dd>
+        <dt>U-Bahn</dt><dd>U6, Haltestelle Studentenstadt</dd>
+        <dt>Auto</dt><dd>Parkplätze an der Anlage</dd>
+      </dl>
+      <a class="knopf knopf--linie" href="{{osm}}" rel="noopener">{{karte}} Route planen auf OpenStreetMap</a>
+      <p class="hinweis" style="margin-top:1rem">Der Link öffnet OpenStreetMap. Erst dann werden Daten an diesen Dienst übertragen.</p>
+    </div>
+  </div>
+</section>
