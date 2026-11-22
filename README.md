@@ -13,7 +13,7 @@ Läuft auf jedem Webspace (Apache empfohlen wegen `.htaccess`).
 | `assets/css/site.css` | komplettes Designsystem |
 | `assets/js/site.js` | Menü, Galerie mit Lichtbild, Kontaktformular, Bewegung mit GSAP |
 | `assets/js/lib/` | GSAP 3.12.5 und ScrollTrigger (selbst gehostet, kein CDN) |
-| `assets/fonts/` | Piazzolla und Schibsted Grotesk (selbst gehostet, SIL Open Font License) |
+| `assets/fonts/` | Commissioner, lateinisch und griechisch (selbst gehostet, SIL Open Font License) |
 | `assets/img/` | Fotos, Wappen (`wappen.svg`), Galerie mit Vorschaubildern (`galerie/klein/`) |
 | `.htaccess` | 301-Weiterleitungen der alten Adressen, Caching, Sicherheits-Header |
 | `ueber_uns.html`, `partner.htm`, `impressum.htm`, `Integration.html`, `aktuelles.html` | Weiterleitungsseiten für alte Adressen (falls der Server `.htaccess` nicht kennt) |
@@ -29,26 +29,26 @@ CSS und JS bekommen beim Bauen automatisch eine Versionsnummer, damit Besucher n
 
 ## Designsystem in Kürze
 
-**Idee „Grundlinie“:** Der Sandplatz ist die Architektur der Seite. Auf der Startseite steht ein maßstäblich gezeichneter Platz (23,77 × 10,97 m) als Bühne, das Foto sitzt in der linken Platzhälfte. Die Grundlinie mit Mittelzeichen ordnet Listen und Abschnitte.
+**Idee „Ägäis“:** Griechischer Sommer, ernst gemeint. Kalkweiß und das Blau der griechischen Flagge als große, flache Flächen; hartes Licht statt weicher Verläufe. Der Vereinsname ist griechisch (φίλαθλος, „Freund des Sports“) und wird auf der Startseite so gezeigt.
 
 **Farben** (Tokens in `:root` von `assets/css/site.css`):
 
 | Name | Wert | Einsatz |
 |---|---|---|
-| Papier | `#f8f7f2` | Grundfläche |
-| Leinen | `#ece6d8` | Wechselflächen |
-| Tinte | `#101a33` | Überschriften |
-| Text | `#384054` | Fließtext |
-| Wappenblau | `#1d3f93` | Links, Knöpfe |
-| Nacht | `#0e1d42` | Startbereich, Abendabschnitt, Fuß |
-| Ziegel | `#b65c3d` | nur als Platzfläche |
-| Ball | `#ead544` | nur als Signal (Ballpunkte, Hauptknopf auf Nacht) |
+| Kalk | `#fdfdfb` | Grundfläche |
+| Stein | `#eef2f6` | Wechselflächen |
+| Ägäisblau | `#0d5eaf` | Leitfarbe, große Flächen, Knöpfe, Links |
+| Tiefsee | `#0b2447` | Überschriften, Fuß |
+| Text | `#2c394e` | Fließtext |
+| Sonne | `#f3cf3e` | nur Fokus und Markierung |
 
-**Schriften:** Piazzolla (Überschriften und Leittexte, mit griechischen Zeichen für φίλος und άθλος), Schibsted Grotesk für Fließtext und Bedienung.
+**Schrift:** Commissioner (Kostas Bartsokas) als einzige Familie. Überschriften mit ausgestellten Strichenden (Achse `FLAR`), angelehnt an griechische Steininschriften; Fließtext ohne.
 
-**Bewusst weggelassen:** Großbuchstaben-Rubriken über jeder Überschrift, angehängte Pfeile an Links, Nummern ohne Reihenfolge, einzelne farbige oder kursive Akzentwörter, Schatten-Karten, Verläufe.
+**Bilder:** Stimmungsbilder (Startseite, Seitenköpfe) als Cyanotypie in Blau und Weiß, per CSS aus den Originalen erzeugt. Inhaltsfotos in Farbe. Ein Torbogen-Ausschnitt nur beim Kinderbild.
 
-**Bewegung (GSAP):** Beim Laden zeichnet sich der Platz, die Überschrift steigt zeilenweise auf. Beim Scrollen blenden Inhalte einmalig ein, Bilder öffnen sich von unten; sanfte Parallaxe nur ab 900 px Breite. Nichts läuft dauerhaft. Wer „Bewegung reduzieren“ eingestellt hat, sieht alles sofort. Lädt GSAP nicht, ist trotzdem alles sichtbar.
+**Bausteine:** versetzte Bildkomposition „Was es bei uns gibt“, Jahresbeiträge als Tavernen-Karte mit Punktlinien, Zeitleiste mit senkrechter Linie, Mannschaften als fließende Wortreihe.
+
+**Bewegung (GSAP):** „Philathlos“ baut sich Buchstabe für Buchstabe auf, das Panorama öffnet sich von links. Beim Scrollen blenden Inhalte einmalig ein, Bilder öffnen sich von unten; leichte Parallaxe nur ab 900 px Breite. Nichts läuft dauerhaft. Wer „Bewegung reduzieren“ eingestellt hat, sieht alles sofort. Lädt GSAP nicht, ist trotzdem alles sichtbar.
 
 ## Veröffentlichen
 

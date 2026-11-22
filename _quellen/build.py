@@ -206,7 +206,7 @@ def seite(datei: str, meta: dict, inhalt: str) -> str:
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{voll}</title>
 <meta name="description" content="{beschreibung}">
-{robots}{kanon}<meta name="theme-color" content="#f8f7f2">
+{robots}{kanon}<meta name="theme-color" content="#0d5eaf">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="de_DE">
 <meta property="og:site_name" content="T.C. Philathlos München e.V.">
@@ -217,8 +217,7 @@ def seite(datei: str, meta: dict, inhalt: str) -> str:
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="preload" href="assets/fonts/piazzolla.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/commissioner.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/site.css?v={version("assets/css/site.css")}">
 <script>(function(h){{if(matchMedia("(prefers-reduced-motion: no-preference)").matches){{h.classList.add("bewegt");setTimeout(function(){{if(!window.gsap)h.classList.remove("bewegt")}},2500)}}}})(document.documentElement)</script>
 <script src="assets/js/lib/gsap.min.js?v={version("assets/js/lib/gsap.min.js")}" defer></script>

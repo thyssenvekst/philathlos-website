@@ -232,24 +232,21 @@
     G.registerPlugin(ST);
     G.defaults({ ease: "power3.out", duration: 0.9 });
 
-    /* --- Startbereich: der Platz zeichnet sich --- */
+    /* --- Startbereich: „Philathlos“ baut sich Buchstabe für Buchstabe auf --- */
     var start = d.querySelector(".start");
     if (start) {
-      var linien = start.querySelectorAll(".platz__linien .kreide");
-      linien.forEach(function (l) { l.setAttribute("pathLength", "1"); });
+      var wort = start.querySelector(".start__wort");
+      var text = wort.textContent;
+      /* Vorlesbarer Text bleibt ein Wort; die Einzelbuchstaben sind nur Optik */
+      wort.innerHTML = '<span class="sr">' + text + '</span><span aria-hidden="true">' +
+        text.split("").map(function (c) { return '<span class="b">' + c + "</span>"; }).join("") + "</span>";
       var tl = G.timeline({ defaults: { ease: "power3.out" } });
-      tl.fromTo(linien, { strokeDasharray: "1 1", strokeDashoffset: 1, visibility: "visible" },
-                        { strokeDashoffset: 0, duration: 1.15, stagger: 0.07, ease: "power2.inOut" }, 0)
-        .fromTo(".platz__foto", { clipPath: "inset(0% 0% 0% 100%)", visibility: "visible" },
-                                { clipPath: "inset(0% 0% 0% 0%)", duration: 1.2, ease: "power3.inOut" }, 0.35)
-        .fromTo(".platz__foto img", { scale: 1.18 }, { scale: 1, duration: 1.8, ease: "power2.out" }, 0.35)
-        .fromTo(".start h1 .zeile > span", { yPercent: 108, visibility: "visible" },
-                                           { yPercent: 0, duration: 1.05, stagger: 0.1 }, 0.1)
-        .fromTo([".start__ort", ".start .lead", ".start__aktionen"], { opacity: 0, y: 18, visibility: "visible" },
-                                                                     { opacity: 1, y: 0, duration: 0.8, stagger: 0.1 }, 0.5)
-        .fromTo(".platz__ball", { opacity: 0, y: -46, visibility: "visible" },
-                                { opacity: 1, y: 0, duration: 0.85, ease: "bounce.out" }, 1.15)
-        .add(function () { G.set(linien, { clearProps: "strokeDasharray,strokeDashoffset" }); });
+      tl.fromTo(wort.querySelectorAll(".b"), { yPercent: 55, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 1.1, stagger: 0.05, ease: "power4.out" }, 0)
+        .fromTo(".start__oben", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.7 }, 0.1)
+        .fromTo(".start__unter", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.9 }, 0.5)
+        .fromTo(".start__bild .bild__rahmen", { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.5, ease: "power3.inOut" }, 0.45)
+        .fromTo(".start__bild img", { scale: 1.2 }, { scale: 1.08, duration: 2.2, ease: "power2.out" }, 0.45)
+        .fromTo(".start__unten > *", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.12 }, 1);
     }
 
     /* --- Einblenden beim Scrollen: zusammengehörige Elemente versetzt --- */
@@ -299,20 +296,23 @@
     var mm = G.matchMedia();
     mm.add("(min-width: 900px)", function () {
       if (start) {
-        G.to(".platz", { yPercent: 7, ease: "none", scrollTrigger: { trigger: start, start: "top top", end: "bottom top", scrub: true } });
+        G.to(".start__bild img", { yPercent: 6, ease: "none", scrollTrigger: { trigger: ".start__bild", start: "top 60%", end: "bottom top", scrub: true } });
       }
       G.utils.toArray(".bild--parallax .bild__rahmen").forEach(function (r) {
         var img = r.querySelector("img");
         G.set(img, { scale: 1.12 });
         G.fromTo(img, { yPercent: -5 }, { yPercent: 5, ease: "none", scrollTrigger: { trigger: r, start: "top bottom", end: "bottom top", scrub: true } });
       });
-      var klein = d.querySelector(".abend__klein");
-      if (klein) {
-        G.fromTo(klein, { y: 60 }, { y: -40, ease: "none", scrollTrigger: { trigger: ".abend", start: "top bottom", end: "bottom top", scrub: true } });
-      }
-      var angebotBild = d.querySelector(".angebot__bilder");
-      if (angebotBild) {
-        G.fromTo(angebotBild, { clipPath: "inset(10% 0% 10% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", ease: "none", scrollTrigger: { trigger: ".angebot", start: "top 85%", end: "top 35%", scrub: true } });
+      /* Die Bilder der Anlage ziehen leicht unterschiedlich schnell: Tiefe ohne Effekthascherei */
+      G.utils.toArray(".ort .bild__rahmen").forEach(function (r, i) {
+        var bildInnen = r.querySelector("img");
+        var weg = i % 2 ? 7 : 4;
+        G.set(bildInnen, { scale: 1.15 });
+        G.fromTo(bildInnen, { yPercent: -weg }, { yPercent: weg, ease: "none", scrollTrigger: { trigger: r, start: "top bottom", end: "bottom top", scrub: true } });
+      });
+      var bogen = d.querySelector(".jugend .bild__rahmen");
+      if (bogen) {
+        G.fromTo(bogen, { boxShadow: "0rem 0rem 0 #094a8c" }, { boxShadow: "1.25rem 1.25rem 0 #094a8c", ease: "none", scrollTrigger: { trigger: bogen, start: "top 90%", end: "center 50%", scrub: true } });
       }
     });
 
