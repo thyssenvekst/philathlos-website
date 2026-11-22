@@ -11,8 +11,9 @@ Läuft auf jedem Webspace (Apache empfohlen wegen `.htaccess`).
 | `_quellen/seiten/*.html` | Inhalt jeder Seite (nur `<main>`), oben ein Kopfblock mit Titel und Beschreibung |
 | `_quellen/build.py` | setzt Kopf, Navigation, Fuß, Metadaten, Sitemap und Weiterleitungen zusammen |
 | `assets/css/site.css` | komplettes Designsystem |
-| `assets/js/site.js` | Menü, Galerie mit Lichtbild, Kontaktformular, dezentes Einblenden |
-| `assets/fonts/` | Newsreader und Schibsted Grotesk (selbst gehostet, SIL Open Font License) |
+| `assets/js/site.js` | Menü, Galerie mit Lichtbild, Kontaktformular, Bewegung mit GSAP |
+| `assets/js/lib/` | GSAP 3.12.5 und ScrollTrigger (selbst gehostet, kein CDN) |
+| `assets/fonts/` | Piazzolla und Schibsted Grotesk (selbst gehostet, SIL Open Font License) |
 | `assets/img/` | Fotos, Wappen (`wappen.svg`), Galerie mit Vorschaubildern (`galerie/klein/`) |
 | `.htaccess` | 301-Weiterleitungen der alten Adressen, Caching, Sicherheits-Header |
 | `ueber_uns.html`, `partner.htm`, `impressum.htm`, `Integration.html`, `aktuelles.html` | Weiterleitungsseiten für alte Adressen (falls der Server `.htaccess` nicht kennt) |
@@ -28,25 +29,26 @@ CSS und JS bekommen beim Bauen automatisch eine Versionsnummer, damit Besucher n
 
 ## Designsystem in Kürze
 
-**Idee:** Tennis mit Urlaubsgefühl. Ein griechisch geprägter Verein mit Sandplätzen, Palmen am Beachfeld und Biergarten: familiär, zwanglos, sorgfältig gemacht.
+**Idee „Grundlinie“:** Der Sandplatz ist die Architektur der Seite. Auf der Startseite steht ein maßstäblich gezeichneter Platz (23,77 × 10,97 m) als Bühne, das Foto sitzt in der linken Platzhälfte. Die Grundlinie mit Mittelzeichen ordnet Listen und Abschnitte.
 
-**Farben** (aus dem Vereinswappen abgeleitet, alle Text-Kontraste WCAG AA):
+**Farben** (Tokens in `:root` von `assets/css/site.css`):
 
 | Name | Wert | Einsatz |
 |---|---|---|
-| Kalk | `#f8f5ee` | Grundfläche |
-| Sand | `#efe8d9` | Wechselflächen |
-| Tinte | `#13213f` | Überschriften |
-| Text | `#3c4558` | Fließtext |
-| Wappenblau | `#1b3f94` | Leitfarbe: Links, Knöpfe, Akzente |
-| Nacht | `#0f2250` | dunkle Abschnitte, Fuß |
-| Wappengelb | `#f5dc3a` | nur als Signal: Markierung wichtiger Fakten, Ballpunkte, Akzente auf Dunkel |
+| Papier | `#f8f7f2` | Grundfläche |
+| Leinen | `#ece6d8` | Wechselflächen |
+| Tinte | `#101a33` | Überschriften |
+| Text | `#384054` | Fließtext |
+| Wappenblau | `#1d3f93` | Links, Knöpfe |
+| Nacht | `#0e1d42` | Startbereich, Abendabschnitt, Fuß |
+| Ziegel | `#b65c3d` | nur als Platzfläche |
+| Ball | `#ead544` | nur als Signal (Ballpunkte, Hauptknopf auf Nacht) |
 
-**Schriften:** Newsreader (Serife, erinnert an die Wappenschrift) für Überschriften und Leittexte, Schibsted Grotesk für Fließtext und Bedienelemente. Kursiv nur sparsam im Seitentitel.
+**Schriften:** Piazzolla (Überschriften und Leittexte, mit griechischen Zeichen für φίλος und άθλος), Schibsted Grotesk für Fließtext und Bedienung.
 
-**Bausteine:** Seitenkopf mit Pfad, Abschnittskopf (Marke + Überschrift + Einleitung), linierte Listen mit gelbem Ballpunkt, Faktentabellen, Zeitleiste, Angebotsindex mit Bildvorschau, Lichtbild-Galerie. Keine Karten mit Schatten, keine Verläufe, keine Icon-Raster.
+**Bewusst weggelassen:** Großbuchstaben-Rubriken über jeder Überschrift, angehängte Pfeile an Links, Nummern ohne Reihenfolge, einzelne farbige oder kursive Akzentwörter, Schatten-Karten, Verläufe.
 
-**Bewegung:** nur einmaliges, dezentes Einblenden. Wer „Bewegung reduzieren“ eingestellt hat, sieht alles sofort.
+**Bewegung (GSAP):** Beim Laden zeichnet sich der Platz, die Überschrift steigt zeilenweise auf. Beim Scrollen blenden Inhalte einmalig ein, Bilder öffnen sich von unten; sanfte Parallaxe nur ab 900 px Breite. Nichts läuft dauerhaft. Wer „Bewegung reduzieren“ eingestellt hat, sieht alles sofort. Lädt GSAP nicht, ist trotzdem alles sichtbar.
 
 ## Veröffentlichen
 

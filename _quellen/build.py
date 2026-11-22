@@ -35,7 +35,8 @@ NAV = [
 OSM = "https://www.openstreetmap.org/search?query=F%C3%B6hringer%20Ring%205%2C%2080805%20M%C3%BCnchen"
 
 SYMBOLE = {
-    "pfeil": '<svg class="pfeil" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2 8h11.5M9 3.5 13.5 8 9 12.5"/></svg>',
+    # Pfeile hinter Linktexten sind abgeschafft (Gestaltungsentscheidung 2026); {{pfeil}} in Quellen wird entfernt.
+    "pfeil": '',
     "telefon": '<svg class="symbol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 3.5h2.6l1.5 4-2 1.4a11 11 0 0 0 6.4 6.4l1.4-2 4 1.5v2.6a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2z"/></svg>',
     "post": '<svg class="symbol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="5.5" width="17" height="13" rx="1"/><path d="m4 6.5 8 6.5 8-6.5"/></svg>',
     "karte": '<svg class="symbol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s-6.5-6.2-6.5-11a6.5 6.5 0 0 1 13 0c0 4.8-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg>',
@@ -46,13 +47,14 @@ SYMBOLE = {
 # Draufsicht eines Sandplatzes (Steckbrief, „5 Sandplätze“)
 PLATZ_SYMBOL = (
     '<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="platz" viewBox="0 0 22 34">'
-    '<rect x="0" y="0" width="22" height="34" rx="1" fill="#c8643b"/>'
-    '<g fill="none" stroke="#fff" stroke-width=".9"><rect x="2.5" y="2.5" width="17" height="29"/>'
+    '<rect x="0" y="0" width="22" height="34" fill="#b65c3d"/>'
+    '<g fill="none" stroke="#fbfaf6" stroke-width=".9"><rect x="2.5" y="2.5" width="17" height="29"/>'
     '<path d="M4.6 2.5v29M17.4 2.5v29M4.6 10h12.8M4.6 24h12.8M11 10v14"/></g>'
-    '<path d="M1.5 17h19" stroke="#13213f" stroke-width="1.2"/></symbol></svg>'
+    '<path d="M1.5 17h19" stroke="#101a33" stroke-width="1.2"/></symbol></svg>'
 )
 
 def ersetze_symbole(text: str) -> str:
+    text = re.sub(r"\s*\{\{pfeil\}\}", "", text)
     return re.sub(r"\{\{(\w+)\}\}", lambda m: SYMBOLE.get(m.group(1), m.group(0)), text)
 
 
@@ -71,10 +73,9 @@ def kopfblock(text: str):
 
 def nav_liste(aktiv: str, mobil: bool = False) -> str:
     teile = []
-    for i, (datei, name) in enumerate(NAV, 1):
+    for datei, name in NAV:
         cur = ' aria-current="page"' if datei == aktiv else ""
-        zusatz = f" <span>0{i}</span>" if mobil else ""
-        teile.append(f'<li><a href="{datei}"{cur}>{name}{zusatz}</a></li>')
+        teile.append(f'<li><a href="{datei}"{cur}>{name}</a></li>')
     return "".join(teile)
 
 
@@ -84,28 +85,19 @@ def logo(klein: bool = False) -> str:
         f'<a class="logo" href="index.html" aria-label="T.C. Philathlos München, zur Startseite">'
         f'<img src="assets/img/wappen.svg" width="{g}" height="{g}" alt="">'
         f'<span class="logo__text"><span class="logo__name">T.C. Philathlos</span>'
-        f'<span class="logo__zusatz">München e.V. · seit 1995</span></span></a>'
+        f'<span class="logo__zusatz">München e.V., gegründet 1995</span></span></a>'
     )
 
 
 def kopf(aktiv: str) -> str:
     return f"""<a class="sprung" href="#inhalt">Zum Inhalt springen</a>
-<div class="leiste">
-  <div class="rahmen">
-    <p>Tennisverein in der Beach-Arena · Föhringer Ring 5 · U6 Studentenstadt</p>
-    <ul>
-      <li><span>Club</span><a href="tel:+498932210100">089 32 21 01 00</a></li>
-      <li><span>Christos</span><a href="tel:+491729138965">0172 913 89 65</a></li>
-      <li><a href="mailto:tc@philathlos.de">tc@philathlos.de</a></li>
-    </ul>
-  </div>
-</div>
 <header class="kopf">
   <div class="rahmen">
     {logo()}
     <nav class="hauptnav" aria-label="Hauptnavigation"><ul>{nav_liste(aktiv)}</ul></nav>
     <div class="kopf__aktion">
-      <a class="knopf knopf--voll" href="mitgliedschaft.html#schnuppern">Schnuppern</a>
+      <a class="kopf__tel" href="tel:+491729138965"><small>Christos</small>0172 913 89 65</a>
+      <a class="knopf knopf--voll" href="mitgliedschaft.html#schnuppern">Schnupperstunde</a>
       <a class="anruf-knopf" href="tel:+491729138965" aria-label="Christos anrufen, 0172 913 89 65">{SYMBOLE["telefon"].replace('class="symbol" ', '')}</a>
       <button class="menue-knopf" type="button" aria-expanded="false" aria-controls="menue" aria-label="Menü öffnen"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.5 8h17M3.5 16h17"/></svg><span>Menü</span></button>
     </div>
@@ -119,10 +111,10 @@ def kopf(aktiv: str) -> str:
     </div>
     <nav aria-label="Hauptnavigation"><ul>{nav_liste(aktiv, mobil=True)}</ul></nav>
     <div class="menue__kontakt">
-      <a class="knopf knopf--voll" href="tel:+491729138965">Christos anrufen <span>0172 913 89 65</span></a>
+      <a class="knopf knopf--ball" href="tel:+491729138965">Christos anrufen <span>0172 913 89 65</span></a>
       <a class="knopf knopf--linie" href="tel:+498932210100">Club anrufen <span>089 32 21 01 00</span></a>
       <a class="knopf knopf--linie" href="mailto:tc@philathlos.de">E-Mail schreiben <span>tc@philathlos.de</span></a>
-      <p class="menue__adresse">Föhringer Ring 5, 80805 München · U6 Studentenstadt</p>
+      <p class="menue__adresse">Föhringer Ring 5, 80805 München<br>U6, Haltestelle Studentenstadt</p>
     </div>
   </div>
 </dialog>"""
@@ -157,7 +149,8 @@ def fuss() -> str:
       </nav>
     </div>
     <div class="fuss__unten">
-      <p>© {JAHR} T.C. Philathlos München e.V. · BLSV 13425 · BTV 01115 · DTB 2611</p>
+      <p>© {JAHR} T.C. Philathlos München e.V.</p>
+      <ul class="fuss__verbaende" aria-label="Vereinsnummern"><li>BLSV 13425</li><li>BTV 01115</li><li>DTB 2611</li></ul>
       <ul><li><a href="impressum.html">Impressum</a></li><li><a href="datenschutz.html">Datenschutz</a></li></ul>
     </div>
   </div>
@@ -213,7 +206,7 @@ def seite(datei: str, meta: dict, inhalt: str) -> str:
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{voll}</title>
 <meta name="description" content="{beschreibung}">
-{robots}{kanon}<meta name="theme-color" content="#f8f5ee">
+{robots}{kanon}<meta name="theme-color" content="#f8f7f2">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="de_DE">
 <meta property="og:site_name" content="T.C. Philathlos München e.V.">
@@ -224,10 +217,12 @@ def seite(datei: str, meta: dict, inhalt: str) -> str:
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="preload" href="assets/fonts/newsreader.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/piazzolla.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/site.css?v={version("assets/css/site.css")}">
-<script>if("IntersectionObserver"in window&&!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("js")</script>
+<script>(function(h){{if(matchMedia("(prefers-reduced-motion: no-preference)").matches){{h.classList.add("bewegt");setTimeout(function(){{if(!window.gsap)h.classList.remove("bewegt")}},2500)}}}})(document.documentElement)</script>
+<script src="assets/js/lib/gsap.min.js?v={version("assets/js/lib/gsap.min.js")}" defer></script>
+<script src="assets/js/lib/ScrollTrigger.min.js?v={version("assets/js/lib/ScrollTrigger.min.js")}" defer></script>
 <script src="assets/js/site.js?v={version("assets/js/site.js")}" defer></script>
 {ld}</head>
 <body>

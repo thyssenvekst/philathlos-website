@@ -9,12 +9,11 @@ bild: plaetze-panorama.jpg
     <ol class="pfad"><li><a href="index.html">Start</a></li><li aria-current="page">Verein</li></ol>
     <div class="seitenkopf__raster">
       <div>
-        <p class="marke">Der Verein</p>
-        <h1>Gegründet <em>1995</em>, zu Hause an der Beach-Arena</h1>
+        <h1>Gegründet 1995, zu Hause an der Beach-Arena</h1>
         <p class="lead">Der T.C. Philathlos München ist ein Tennisverein mit fünf Sandplätzen, Beachsport und einem Clubleben, bei dem immer was los ist, vor allem zwanglos.</p>
       </div>
-      <figure class="bild">
-        <img class="foto" src="assets/img/plaetze-panorama.jpg" width="798" height="412" alt="Die Sandplätze des Vereins vor hohen Bäumen, auf mehreren Plätzen wird gespielt" fetchpriority="high">
+      <figure class="bild bild--quer">
+        <div class="bild__rahmen"><img class="foto" src="assets/img/plaetze-panorama.jpg" width="798" height="412" alt="Die Sandplätze des Vereins vor hohen Bäumen, auf mehreren Plätzen wird gespielt" fetchpriority="high"></div>
       </figure>
     </div>
   </div>
@@ -38,14 +37,13 @@ bild: plaetze-panorama.jpg
       <div data-zeigen>
         <h2 class="sr" id="name-titel">Der Name</h2>
         <p class="name__wort" aria-hidden="true">Phil<i>athlos</i></p>
-        <div class="name__silben">
-          <span><b>phílos</b>griechisch für Freund</span>
-          <span><b>áthlos</b>griechisch für Wettkampf</span>
-        </div>
       </div>
-      <div data-zeigen="1">
-        <p class="marke">Der Name</p>
+      <div data-zeigen>
         <p class="name__erklaerung">Philathlos ist griechisch und bedeutet „Freund des Sports“. Bei uns heißt das: Tennis für Jung und Alt, für die ganze Familie. Wo Spaß im Spiel ist, kommt das Interesse von allein.</p>
+        <div class="name__silben">
+          <span><b lang="el">φίλος <small lang="de">phílos</small></b>griechisch für Freund</span>
+          <span><b lang="el">άθλος <small lang="de">áthlos</small></b>griechisch für Wettkampf</span>
+        </div>
       </div>
     </div>
   </div>
@@ -54,10 +52,9 @@ bild: plaetze-panorama.jpg
 <section class="abschnitt" id="ziele" aria-labelledby="ziele-titel">
   <div class="rahmen spalten">
     <header data-zeigen>
-      <p class="marke">Ziele</p>
       <h2 id="ziele-titel">Kinder und Jugendliche fördern</h2>
     </header>
-    <div class="spalten__text" data-zeigen="1">
+    <div class="spalten__text" data-zeigen>
       <p class="lead">Hauptziel des Vereins ist die Förderung der Kinder und Jugendlichen. Die Erwachsenen unterstützen dieses Ziel mit Freude.</p>
       <p>Gemeinsam mit unseren Mitgliedern wollen wir durch neue Ideen und Veranstaltungen neue Mitglieder für den Verein gewinnen und die vorhandenen langfristig an den Club binden.</p>
       <h3>Was wir dafür tun</h3>
@@ -74,13 +71,12 @@ bild: plaetze-panorama.jpg
   </div>
 </section>
 
-<section class="abschnitt abschnitt--sand" id="projekte" aria-labelledby="projekte-titel">
+<section class="abschnitt abschnitt--leinen" id="projekte" aria-labelledby="projekte-titel">
   <div class="rahmen spalten">
     <header data-zeigen>
-      <p class="marke">Projekte</p>
       <h2 id="projekte-titel">Was den Verein geprägt hat</h2>
     </header>
-    <ol class="zeitleiste" data-zeigen="1">
+    <ol class="zeitleiste" data-zeigen>
       <li>
         <time datetime="1995">1995</time>
         <div><h3>Gründung des Vereins</h3><p>Der T.C. Philathlos München e.V. entsteht. Sein Name ist griechisch und bedeutet „Freund des Sports“.</p></div>
@@ -100,10 +96,9 @@ bild: plaetze-panorama.jpg
 <section class="abschnitt" id="vereinsdaten" aria-labelledby="daten-titel">
   <div class="rahmen spalten">
     <header data-zeigen>
-      <p class="marke">Vereinsdaten</p>
       <h2 id="daten-titel">Auf einen Blick</h2>
     </header>
-    <div data-zeigen="1">
+    <div data-zeigen>
       <dl class="fakten">
         <dt>Name</dt><dd>T.C. Philathlos München e.V.</dd>
         <dt>Gegründet</dt><dd>1995</dd>
@@ -117,14 +112,13 @@ bild: plaetze-panorama.jpg
   </div>
 </section>
 
-<section class="abschnitt abschnitt--sand" id="partner" aria-labelledby="partner-titel">
+<section class="abschnitt abschnitt--leinen" id="partner" aria-labelledby="partner-titel">
   <div class="rahmen">
     <header class="kopfzeile">
       <div data-zeigen>
-        <p class="marke">Partner</p>
         <h2 id="partner-titel">Mit Partnern an unserer Seite</h2>
       </div>
-      <p data-zeigen="1">Sie möchten den Verein unterstützen? Wir freuen uns über Ihre Nachricht.</p>
+      <p data-zeigen>Sie möchten den Verein unterstützen? Wir freuen uns über Ihre Nachricht.</p>
     </header>
     <ul class="partner" data-zeigen>
       <li><b>Christos Tennisschule</b><span>Tennisschule auf der Anlage</span><a href="http://www.rsc-tennis.de/" rel="noopener">rsc-tennis.de</a></li>
