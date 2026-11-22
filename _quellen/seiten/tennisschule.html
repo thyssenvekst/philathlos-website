@@ -1,66 +1,46 @@
 <!--
 titel: Tennisschule
-beschreibung: Tennisschule beim T.C. Philathlos München: Training mit Christos Theodosiadis für Kinder, Jugendliche und Erwachsene. Ganzjährig, Feriencamps im Sommer.
+beschreibung: Tennisschule beim T.C. Philathlos München: Training mit Christos Theodosiadis für Kinder, Jugendliche und Erwachsene. Ganzjährig, Feriencamps im Sommer, Mannschaften.
 nav: tennisschule.html
 bild: training.jpg
 -->
-<section class="seitenkopf">
-  <div class="rahmen">
-    <ol class="pfad"><li><a href="index.html">Start</a></li><li aria-current="page">Tennisschule</li></ol>
-    <div class="seitenkopf__raster">
-      <div>
-        <h1>Vom ersten Ballkontakt bis zum Mannschaftsspiel</h1>
-        <p class="lead">So bringen wir Jung und Alt und ganze Familien zum Tennissport. Die Kurse finden ganzjährig statt, im Sommer auf Sand, im Winter in der Halle.</p>
-      </div>
-      <figure class="bild">
-        <div class="bild__rahmen"><img class="foto" src="assets/img/training.jpg" width="798" height="598" alt="Gruppentraining auf dem Sandplatz, Kinder und Erwachsene mit Schlägern" fetchpriority="high"></div>
-      </figure>
+<section class="seitenkopf" aria-labelledby="seiten-titel">
+  <div class="rahmen raster">
+    <div class="kopf-schule__titel" data-auftritt>
+      <h1 id="seiten-titel">Vom ersten Ballkontakt bis zum Mannschaftsspiel</h1>
+      <p class="lead">Kurse für Jung und Alt und ganze Familien. Ganzjährig, im Sommer auf Sand, im Winter in der Halle.</p>
     </div>
+    <figure class="bild bild--32 kopf-schule__bild" data-auftritt>
+      <div class="bild__rahmen"><img src="assets/img/training.jpg" width="798" height="598" alt="Gruppentraining auf dem Sandplatz, Kinder und Erwachsene mit Schlägern" fetchpriority="high" style="object-position:50% 60%"></div>
+    </figure>
   </div>
 </section>
 
-<nav class="inhalt-nav" aria-label="Auf dieser Seite">
-  <div class="rahmen">
-    <ul>
-      <li><a href="#trainer">Trainer</a></li>
-      <li><a href="#programm">Programm</a></li>
-      <li><a href="#camps">Feriencamps</a></li>
-      <li><a href="#orte">Sommer &amp; Winter</a></li>
-      <li><a href="#mannschaften">Mannschaften</a></li>
-      <li><a href="#kontakt-schule">Kontakt</a></li>
+<section class="abschnitt abschnitt--eng" id="trainer" aria-labelledby="trainer-titel">
+  <div class="rahmen spalten">
+    <header class="spalten__kopf">
+      <span class="profil__rolle" data-zeigen>Leitung und Cheftrainer</span>
+      <h2 class="profil__name" id="trainer-titel" data-zeigen>Christos Theodosiadis</h2>
+      <p data-zeigen>Informationen über Tennisangebote, Kurse und kostenlose Aktionen gibt es direkt bei Christos.</p>
+      <p data-zeigen><a class="knopf knopf--gelb" href="tel:+491729138965">{{telefon}}<span>0172 913 89 65</span></a></p>
+    </header>
+    <ul class="qualis spalten__inhalt" data-zeigen>
+      <li>Diplom-Tennistrainer <span>DSB, DTB</span></li>
+      <li>Diplom-Sportlehrer</li>
+      <li>DTB-Vereinsmanager</li>
+      <li>Referent für Kindergartentennis <span>Bezirk München</span></li>
+      <li>Referent für Kleinfeld- und Midcourttennis <span>Bezirk München</span></li>
     </ul>
   </div>
-</nav>
-
-<section class="abschnitt" id="trainer" aria-labelledby="trainer-titel">
-  <div class="rahmen profil">
-    <div data-zeigen>
-      <p class="marke">Leitung und Cheftrainer</p>
-      <h2 class="profil__name" id="trainer-titel">Christos Theodosiadis</h2>
-      <p>Informationen über Tennisangebote, Kurse und kostenlose Aktionen gibt es direkt bei Christos.</p>
-      <p style="margin-top:1.75rem"><a class="knopf knopf--voll" href="tel:+491729138965">{{telefon}} 0172 913 89 65</a></p>
-    </div>
-    <div data-zeigen>
-      <ul class="qualis">
-        <li>Diplom-Tennistrainer <span>DSB · DTB</span></li>
-        <li>Diplom-Sportlehrer</li>
-        <li>DTB-Vereinsmanager</li>
-        <li>Referent für Kindergartentennis <span>Bezirk München</span></li>
-        <li>Referent für Kleinfeld- und Midcourttennis <span>Bezirk München</span></li>
-      </ul>
-    </div>
-  </div>
 </section>
 
-<section class="abschnitt abschnitt--leinen" id="programm" aria-labelledby="programm-titel">
-  <div class="rahmen">
-    <header class="kopfzeile">
-      <div data-zeigen>
-        <h2 id="programm-titel">Kurse für Kinder, Erwachsene und Familien</h2>
-      </div>
+<section class="abschnitt abschnitt--tanne" id="programm" aria-labelledby="programm-titel">
+  <div class="rahmen spalten">
+    <header class="spalten__kopf">
+      <h2 id="programm-titel" data-zeigen>Kurse für Kinder, Erwachsene und Familien</h2>
       <p data-zeigen>Vom Kindergarten bis zu den Senioren: Einzel- und Gruppenunterricht, Mannschaftstraining und Schnuppertennis zum Kennenlernen.</p>
     </header>
-    <div class="programm">
+    <div class="programm spalten__inhalt">
       <div data-zeigen>
         <h3>Kinder und Jugendliche <small>ab dem Kindergarten</small></h3>
         <ul class="liste">
@@ -89,79 +69,55 @@ bild: training.jpg
 </section>
 
 <section class="abschnitt" id="camps" aria-labelledby="camps-titel">
-  <div class="rahmen paar paar--umgekehrt">
-    <figure class="bild bild--43 paar__bild" data-zeigen>
-      <div class="bild__rahmen"><img class="foto" src="assets/img/beach-arena.jpg" width="798" height="598" alt="Beachfelder der Beach-Arena mit weißen Zelten an einem Sommertag" loading="lazy"></div>
-      <figcaption>Beachfelder an der Beach-Arena</figcaption>
+  <div class="rahmen raster paar paar--rechts">
+    <figure class="bild bild--43 paar__bild">
+      <div class="bild__rahmen"><img src="assets/img/galerie/events-01.jpg" width="798" height="598" alt="Kindertraining auf den Sandplätzen an einem Sommertag" loading="lazy"></div>
     </figure>
-    <div class="paar__text" data-zeigen>
-      <h2 id="camps-titel">Tennis und Beachsport in den Ferien</h2>
-      <p>Während der Sommerferien finden täglich Tennis- und Beachsportcamps statt. Dazu kommen Ferienkurse für Kinder. Termine und Anmeldung direkt bei Christos.</p>
-      <ul class="liste">
-        <li>Täglich Tennis und Beachsport in den Sommerferien</li>
-        <li>Kinder-Ferienkurse und Trainingscamps</li>
-        <li>Anmeldung unter 0172 913 89 65</li>
-      </ul>
-      <a class="weiter" href="tel:+491729138965">Christos anrufen {{pfeil}}</a>
+    <div class="paar__text">
+      <h2 id="camps-titel" data-zeigen>Tennis und Beachsport in den Ferien</h2>
+      <p data-zeigen>Während der Sommerferien finden täglich Tennis- und Beachsportcamps statt, dazu Ferienkurse für Kinder. Termine und Anmeldung direkt bei Christos.</p>
+      <div class="aktionen">
+        <a class="knopf knopf--rand" href="tel:+491729138965"><span>Christos anrufen</span></a>
+        <a class="weiter" href="aktuelles.html#camps">Mehr unter Aktuelles</a>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="abschnitt abschnitt--leinen" id="orte" aria-labelledby="orte-titel">
+<section class="abschnitt abschnitt--tief" id="mannschaften" aria-labelledby="mannschaften-titel">
   <div class="rahmen spalten">
-    <header data-zeigen>
-      <h2 id="orte-titel">Sommer auf Sand, Winter in der Halle</h2>
-    </header>
-    <div data-zeigen>
-      <div class="orte">
-        <div>
-          <h3>Sommer</h3>
-          <p>Tennisanlage bei der Beach-Arena<br>Föhringer Ring 5, 80805 München<br><span class="leise">U6, Haltestelle Studentenstadt</span></p>
-        </div>
-        <div>
-          <h3>Winter</h3>
-          <p>Winterspielbetrieb in der Halle<br>Tennishalle bei Iphitos, Aumeisterweg 10<br><span class="leise">80805 München</span></p>
-        </div>
-      </div>
-      <p class="hinweis" style="margin-top:1rem">Hallenstandort laut Website der Tennisschule. Bitte im Zweifel bei Christos nachfragen.</p>
-    </div>
-  </div>
-</section>
-
-<section class="abschnitt" id="mannschaften" aria-labelledby="mannschaften-titel">
-  <div class="rahmen">
-    <header class="kopfzeile">
-      <div data-zeigen>
-        <h2 id="mannschaften-titel">Mitspielen im Team</h2>
-      </div>
+    <header class="spalten__kopf">
+      <h2 id="mannschaften-titel" data-zeigen>Mitspielen im Team</h2>
       <p data-zeigen>Wer in einer Mannschaft spielen möchte, meldet sich bei Christos. Für talentierte Kinder gibt es verschiedene Fördermaßnahmen.</p>
     </header>
-    <ul class="mannschaften" data-zeigen>
-      <li>Herren</li>
-      <li>Herren 30</li>
-      <li>Herren 50</li>
-      <li>Juniorinnen</li>
-      <li>Junioren</li>
-      <li>Knaben</li>
-      <li>Bambino</li>
-      <li>Kleinfeldtennis</li>
-    </ul>
-    <p class="hinweis" style="margin-top:1rem">Zuletzt veröffentlichte Mannschaftsmeldung, Spieljahr 2014. Spielbetrieb auf der Tennisanlage bei der Beach-Arena.</p>
+    <div class="spalten__inhalt">
+      <ul class="wortreihe" data-zeigen>
+        <li>Herren</li>
+        <li>Herren 30</li>
+        <li>Herren 50</li>
+        <li>Juniorinnen</li>
+        <li>Junioren</li>
+        <li>Knaben</li>
+        <li>Bambino</li>
+        <li>Kleinfeldtennis</li>
+      </ul>
+      <p class="hinweis" style="margin-top:1.5rem">Zuletzt veröffentlichte Mannschaftsmeldung, Spieljahr 2014. Spielbetrieb auf der Tennisanlage bei der Beach-Arena.</p>
+    </div>
   </div>
 </section>
 
-<section class="abschnitt abschnitt--leinen" id="kontakt-schule" aria-labelledby="kontakt-schule-titel">
-  <div class="rahmen kontakt-raster">
-    <header data-zeigen>
-      <h2 id="kontakt-schule-titel">Fragen zu Kursen und Camps</h2>
-      <p style="margin-top:1.25rem;max-width:26em">Rufen Sie an oder schreiben Sie eine E-Mail. Christos berät Sie gern, auch zu kostenlosen Aktionen.</p>
+<section class="abschnitt" id="kontakt-schule" aria-labelledby="kontakt-schule-titel">
+  <div class="rahmen spalten">
+    <header class="spalten__kopf">
+      <h2 id="kontakt-schule-titel" data-zeigen>Fragen zu Kursen und Camps</h2>
+      <p data-zeigen>Rufen Sie an oder schreiben Sie eine E-Mail. Christos berät Sie gern, auch zu kostenlosen Aktionen.</p>
     </header>
-    <div class="verzeichnis" data-zeigen>
+    <div class="verzeichnis spalten__inhalt" data-zeigen>
       <div><h3>Mobil</h3><p><a class="gross" href="tel:+491729138965">0172 913 89 65</a></p></div>
       <div><h3>Büro</h3><p><a class="gross" href="tel:+498935004114">089 35 00 41 14</a></p></div>
-      <div><h3>Tennisanlage</h3><p><a class="gross" href="tel:+498932210100">089 32 21 01 00</a></p></div>
-      <div><h3>E-Mail</h3><p><a href="mailto:christos@rsc-tennis.de">christos@rsc-tennis.de</a></p></div>
-      <div><h3>Website</h3><p><a href="http://www.rsc-tennis.de/" rel="noopener">www.rsc-tennis.de</a></p></div>
+      <div><h3>Club</h3><p><a class="gross" href="tel:+498932210100">089 32 21 01 00</a></p></div>
+      <div><h3>E-Mail</h3><p><a class="gross" href="mailto:christos@rsc-tennis.de">christos@rsc-tennis.de</a></p></div>
+      <div><h3>Website der Tennisschule</h3><p><a class="gross" href="http://www.rsc-tennis.de/" rel="noopener">rsc-tennis.de</a></p></div>
     </div>
   </div>
 </section>

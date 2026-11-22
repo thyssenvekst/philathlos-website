@@ -3,79 +3,98 @@ titel_voll: T.C. Philathlos München e.V. – Tennisverein in der Beach-Arena
 beschreibung: Tennisverein in der Beach-Arena München: fünf Sandplätze, Beachfelder und Biergarten an der U6 Studentenstadt. Tennisschule für jedes Alter, keine Aufnahmegebühr.
 nav: index.html
 -->
-<section class="start" aria-labelledby="start-titel">
-  <div class="rahmen">
-    <p class="start__oben"><span>T.C. Philathlos München e.V.</span><span>Tennisverein seit 1995</span></p>
-    <h1 id="start-titel"><span class="start__wort">Philathlos</span><span class="start__unter">Tennis in der Beach-Arena, an der U6 Studentenstadt</span></h1>
+<section class="platz" aria-labelledby="start-titel">
+  <div class="platz__feld">
+    {{platz_quer}}
+    {{platz_hoch}}
+    <p class="platz__gasse platz__gasse--oben" aria-hidden="true"><span>T.C. Philathlos München e.V.</span><span>gegründet 1995</span></p>
+    <p class="platz__gasse platz__gasse--unten" aria-hidden="true"><span>Föhringer Ring 5</span><span>U6 Studentenstadt</span></p>
+    <figure class="bild platz__foto">
+      <div class="bild__rahmen"><img src="assets/img/plaetze-spielbetrieb.jpg" width="798" height="598" alt="Doppel auf den Sandplätzen des Vereins an einem Sommertag" fetchpriority="high" style="object-position:55% 60%"></div>
+    </figure>
   </div>
-  <figure class="bild duoton start__bild">
-    <div class="bild__rahmen"><img src="assets/img/plaetze-panorama.jpg" width="798" height="412" alt="Die Sandplätze des Vereins vor hohen Bäumen, auf mehreren Plätzen wird gespielt" fetchpriority="high"></div>
-    <figcaption class="bild__unterschrift">Die Sandplätze am Föhringer Ring</figcaption>
-  </figure>
-  <div class="rahmen start__unten">
-    <p class="lead">Fünf Sandplätze, Beachfelder mit Palmen und ein Biergarten. Für Kinder, Jugendliche, Erwachsene und ganze Familien, ohne Aufnahmegebühr.</p>
-    <div class="start__aktionen">
-      <a class="knopf knopf--voll" href="mitgliedschaft.html#schnuppern">Schnupperstunde vereinbaren</a>
-      <a class="start__tel" href="tel:+491729138965"><small>Oder direkt bei Christos</small><b>0172 913 89 65</b></a>
+  <h1 class="platz__titel" id="start-titel">Tennis in der Beach-Arena</h1>
+  <div class="platz__unten">
+    <p class="lead">Fünf Sandplätze, Beachfelder mit Palmen und ein Biergarten an der U6 Studentenstadt. Für Kinder, Jugendliche, Erwachsene und ganze Familien, ohne Aufnahmegebühr.</p>
+    <div class="platz__aktion">
+      <a class="knopf knopf--gelb" href="mitgliedschaft.html#schnuppern"><span>Schnupperstunde vereinbaren</span></a>
+      <a class="tel-gross" href="tel:+491729138965"><small>Oder direkt bei Christos</small><b>0172 913 89 65</b></a>
     </div>
   </div>
 </section>
 
 <section class="abschnitt" aria-labelledby="philo-titel">
-  <div class="rahmen philo">
-    <p class="philo__wort" data-zeigen><span lang="el">φίλαθλος</span><small>griechisch für „Freund des Sports“</small></p>
+  <div class="rahmen raster philo">
+    <p class="philo__wort" data-zeigen><span lang="el">φίλαθλος</span><span class="philo__bedeutung">griechisch für „Freund des Sports“</span></p>
     <div class="philo__text" data-zeigen>
       <h2 id="philo-titel">Ein Verein für Jung und Alt, für die ganze Familie</h2>
-      <p>Gegründet 1995, zu Hause auf fünf Sandplätzen bei der Beach-Arena im Münchner Norden. Hauptziel des Vereins ist die Förderung von Kindern und Jugendlichen; die Erwachsenen unterstützen dieses Ziel mit Freude.</p>
+      <p>Gegründet 1995, zu Hause auf fünf Sandplätzen an der Beach-Arena im Münchner Norden. Hauptziel des Vereins ist die Förderung von Kindern und Jugendlichen; die Erwachsenen unterstützen dieses Ziel mit Freude.</p>
+      <p class="zitat">Wo Spaß im Spiel ist, kommt das Interesse von allein.</p>
       <a class="weiter" href="verein.html">Mehr über den Verein</a>
     </div>
   </div>
 </section>
 
-<section class="abschnitt" aria-labelledby="anlage-titel">
-  <div class="rahmen">
-    <header class="kopfzeile">
-      <h2 id="anlage-titel" data-zeigen>Was es bei uns gibt</h2>
+<section class="abschnitt abschnitt--anschluss" aria-labelledby="angebot-titel">
+  <div class="rahmen index" data-index>
+    <header class="index__kopf">
+      <h2 id="angebot-titel" data-zeigen>Was es bei uns gibt</h2>
       <p data-zeigen>Vom Kindergarten-Tennis bis zum Mannschaftsspiel, dazu Beachsport für Mitglieder und nach dem Training die Sonnenterrasse.</p>
     </header>
-    <ul class="anlage">
-      <li class="ort" data-zeigen>
-        <a href="mitgliedschaft.html">
-          <div class="bild__rahmen"><img class="foto" src="assets/img/plaetze-spielbetrieb.jpg" width="798" height="598" alt="Doppel auf den Sandplätzen an einem Sommertag" loading="lazy"></div>
+    <div class="index__bilder bild" aria-hidden="true">
+      <div class="bild__rahmen">
+        <img class="ist-aktiv" src="assets/img/galerie/anlage-04.jpg" width="798" height="598" alt="" loading="lazy">
+        <img src="assets/img/beachfeld.jpg" width="798" height="598" alt="" loading="lazy" style="object-position:30% 50%">
+        <img src="assets/img/training.jpg" width="798" height="598" alt="" loading="lazy" style="object-position:45% 50%">
+        <img src="assets/img/bistro.jpg" width="798" height="598" alt="" loading="lazy" style="object-position:40% 50%">
+      </div>
+    </div>
+    <ul class="index__liste">
+      <li class="index__eintrag ist-aktiv">
+        <a href="anlage.html">
+          <span class="index__mobilbild"><img src="assets/img/galerie/anlage-04.jpg" width="798" height="598" alt="" loading="lazy"></span>
           <h3>Fünf Sandplätze</h3>
-          <p>Mitglied werden ohne Aufnahmegebühr. Jahresbeiträge ab 60 Euro für Kinder.</p>
+          <p>Sandplätze vor hohen Bäumen an der Beach-Arena, Parkplätze direkt an der Anlage.</p>
+          <span class="index__ziel">Zur Anlage</span>
         </a>
       </li>
-      <li class="ort" data-zeigen>
+      <li class="index__eintrag">
         <a href="clubleben.html#beachsport">
-          <div class="bild__rahmen"><img class="foto" src="assets/img/beachfeld.jpg" width="798" height="598" alt="Palmen am Beachfeld, im Hintergrund wird gespielt" loading="lazy" style="object-position:30% 50%"></div>
+          <span class="index__mobilbild"><img src="assets/img/beachfeld.jpg" width="798" height="598" alt="" loading="lazy" style="object-position:30% 50%"></span>
           <h3>Beachfelder</h3>
           <p>Beachvolleyball, Beachtennis, Beachbadminton und Beachsoccer für Mitglieder.</p>
+          <span class="index__ziel">Zum Beachsport</span>
         </a>
       </li>
-      <li class="ort" data-zeigen>
+      <li class="index__eintrag">
         <a href="tennisschule.html">
-          <div class="bild__rahmen"><img class="foto" src="assets/img/training.jpg" width="798" height="598" alt="Gruppentraining auf dem Sandplatz, Kinder und Erwachsene mit Schlägern" loading="lazy" style="object-position:40% 50%"></div>
+          <span class="index__mobilbild"><img src="assets/img/training.jpg" width="798" height="598" alt="" loading="lazy" style="object-position:45% 50%"></span>
           <h3>Tennisschule</h3>
           <p>Training mit Christos Theodosiadis, ganzjährig, im Winter in der Halle.</p>
+          <span class="index__ziel">Zur Tennisschule</span>
         </a>
       </li>
-      <li class="ort" data-zeigen>
+      <li class="index__eintrag">
         <a href="clubleben.html#bistro">
-          <div class="bild__rahmen"><img class="foto" src="assets/img/biergarten.jpg" width="798" height="598" alt="Blaue Stühle und Sonnenschirme im Beach-Biergarten" loading="lazy"></div>
+          <span class="index__mobilbild"><img src="assets/img/bistro.jpg" width="798" height="598" alt="" loading="lazy" style="object-position:40% 50%"></span>
           <h3>Bistro und Biergarten</h3>
           <p>Café, Bistro und Beach-Biergarten mit Sonnenterrasse, auch für Ihre Feier.</p>
+          <span class="index__ziel">Zum Clubleben</span>
         </a>
       </li>
     </ul>
   </div>
 </section>
 
-<section class="jugend" aria-labelledby="jugend-titel">
-  <div class="rahmen jugend__raster">
-    <div class="jugend__text" data-zeigen>
-      <h2 id="jugend-titel">Kinder und Jugendliche zuerst</h2>
-      <p>Wir wollen Kinder, Jugendliche und ihre Eltern für Bewegung und Sport begeistern. Wo Spaß im Spiel ist, kommt das Interesse von allein.</p>
+<section class="abschnitt abschnitt--tief" aria-labelledby="jugend-titel">
+  <div class="rahmen raster jugend">
+    <figure class="bild bild--43 jugend__bild">
+      <div class="bild__rahmen"><img src="assets/img/tennisschule.jpg" width="798" height="530" alt="Junger Spieler beim Schlag auf dem Sandplatz" loading="lazy"></div>
+    </figure>
+    <div class="jugend__text">
+      <h2 id="jugend-titel" data-zeigen>Kinder und Jugendliche zuerst</h2>
+      <p data-zeigen>Wir wollen Kinder, Jugendliche und ihre Eltern für Bewegung und Sport begeistern. Vom ersten Ballkontakt im Kindergarten bis zum Mannschaftsspiel.</p>
+      <p class="jugend__zahl" data-zeigen><b>156</b><span>von 296 Mitgliedern sind Kinder und Jugendliche (zuletzt veröffentlichter Stand)</span></p>
       <ul class="liste liste--zwei">
         <li>Kindergarten-Tennisschule</li>
         <li>Kleinfeldtennis</li>
@@ -86,43 +105,47 @@ nav: index.html
       </ul>
       <a class="weiter" href="tennisschule.html#programm">Zum Programm der Tennisschule</a>
     </div>
-    <figure class="bild bogen">
-      <div class="bild__rahmen"><img class="foto" src="assets/img/tennisschule.jpg" width="798" height="530" alt="Junger Spieler beim Schlag auf dem Sandplatz" loading="lazy"></div>
-      <figcaption>Training auf Sand, im Winter in der Halle</figcaption>
+  </div>
+</section>
+
+<section class="abschnitt abschnitt--tanne" aria-labelledby="abend-titel">
+  <div class="rahmen raster abend">
+    <div class="abend__text">
+      <h2 id="abend-titel" data-zeigen>Nach dem Spiel auf die Terrasse</h2>
+      <p data-zeigen>Café, Bistro und Beach-Biergarten liegen direkt an den Plätzen und bringen unsere Gäste ein Stück näher an den Urlaub. Der Biergarten steht auch für Ihre Feier bereit.</p>
+      <ul class="liste">
+        <li>Tennisstüberl mit Sonnenterrasse</li>
+        <li>Tenniszubehör und Bespannservice auf der Anlage</li>
+        <li>Parkplätze direkt an der Anlage</li>
+      </ul>
+      <a class="knopf knopf--hell" href="kontakt.html?anliegen=feier#formular"><span>Feier anfragen</span></a>
+    </div>
+    <figure class="bild bild--43 abend__bild">
+      <div class="bild__rahmen"><img src="assets/img/sommerabend.jpg" width="798" height="598" alt="Sommerabend im Beach-Biergarten, am Bistro brennen die Lichter" loading="lazy"></div>
     </figure>
   </div>
 </section>
 
-<section class="abend-buehne" aria-labelledby="abend-titel">
-  <figure class="bild bild--parallax">
-    <div class="bild__rahmen"><img class="foto" src="assets/img/sommerabend.jpg" width="798" height="598" alt="Sommerabend im Beach-Biergarten, am Bistro brennen die Lichter" loading="lazy"></div>
-  </figure>
-  <div class="rahmen">
-    <div class="abend-buehne__text" data-zeigen>
-      <p class="marke">Café, Bistro und Beach-Biergarten</p>
-      <h2 id="abend-titel">Nach dem Spiel auf die Terrasse</h2>
-      <p>Direkt an den Plätzen, mit Sonnenterrasse. Der Biergarten steht auch für Ihre Feier bereit.</p>
-      <ul>
-        <li>Tenniszubehör und Bespannservice auf der Anlage</li>
-        <li>Parkplätze direkt an der Anlage</li>
-      </ul>
-      <a class="knopf knopf--hell" href="kontakt.html?anliegen=feier#formular">Feier anfragen</a>
+<section class="abschnitt abschnitt--ziegel beitraege" aria-labelledby="beitraege-titel">
+  <span class="beitraege__linie beitraege__linie--quer" aria-hidden="true"></span><span class="beitraege__linie beitraege__linie--laengs" aria-hidden="true"></span>
+  <div class="rahmen raster">
+    <div class="beitraege__kopf">
+      <h2 id="beitraege-titel" data-zeigen>Jahresbeiträge</h2>
+      <b class="gross" data-zeigen>Keine Aufnahmegebühr</b>
+      <p data-zeigen>Erst schnuppern, dann entscheiden. Rufen Sie an oder schreiben Sie uns: Wir vereinbaren eine Schnupperstunde und zeigen Ihnen die Anlage.</p>
+      <div class="aktionen" data-zeigen>
+        <a class="knopf knopf--gelb" href="mitgliedschaft.html#schnuppern"><span>Schnupperstunde vereinbaren</span></a>
+      </div>
     </div>
-  </div>
-</section>
-
-<section class="abschnitt abschnitt--leinen" aria-labelledby="karte-titel">
-  <div class="rahmen karte">
-    <div class="karte__liste" data-zeigen>
-      <h2 id="karte-titel">Jahresbeiträge</h2>
+    <div class="beitraege__tabelle" data-zeigen>
       <table class="preise">
-        <caption>Alle Angaben in Euro pro Jahr.</caption>
-        <thead><tr><th scope="col">Mitgliedschaft</th><th scope="col">Euro</th></tr></thead>
+        <caption>Alle Angaben in Euro pro Jahr. Passive Mitgliedschaft 40 Euro.</caption>
+        <thead><tr><th scope="col">Mitgliedschaft</th><th scope="col">Euro pro Jahr</th></tr></thead>
         <tbody>
           <tr class="gruppe"><th scope="rowgroup" colspan="2">Erwachsene</th></tr>
           <tr><th scope="row">Erwachsene</th><td>220</td></tr>
           <tr><th scope="row">Ehepaare</th><td>360</td></tr>
-          <tr><th scope="row">Studierende, Senioren</th><td>110</td></tr>
+          <tr><th scope="row">Studierende, Seniorinnen und Senioren</th><td>110</td></tr>
           <tr class="gruppe"><th scope="rowgroup" colspan="2">Kinder und Familien</th></tr>
           <tr><th scope="row">Kinder bis 12 Jahre</th><td>60</td></tr>
           <tr><th scope="row">Kinder von 12 bis 18 Jahren</th><td>110</td></tr>
@@ -131,62 +154,43 @@ nav: index.html
           <tr><th scope="row">Familie mit mehr als zwei Kindern</th><td>500</td></tr>
         </tbody>
       </table>
-      <a class="weiter" href="mitgliedschaft.html#beitraege">Alle Beiträge, auch passiv</a>
-    </div>
-    <div class="karte__seite" data-zeigen>
-      <h3>Keine Aufnahmegebühr</h3>
-      <p>Erst schnuppern, dann entscheiden. Rufen Sie an oder schreiben Sie uns: Wir vereinbaren eine Schnupperstunde und zeigen Ihnen die Anlage.</p>
-      <a class="knopf knopf--voll" href="kontakt.html?anliegen=mitgliedschaft#formular">Schnupperstunde anfragen</a>
+      <a class="weiter" href="mitgliedschaft.html#beitraege">Alle Beiträge und der Weg zur Mitgliedschaft</a>
     </div>
   </div>
 </section>
 
-<section class="abschnitt" id="aktuelles" aria-labelledby="aktuelles-titel">
-  <div class="rahmen">
-    <header class="kopfzeile">
-      <h2 id="aktuelles-titel" data-zeigen>Am Aushang</h2>
+<section class="abschnitt" id="aktuelles" aria-labelledby="aushang-titel">
+  <div class="rahmen spalten">
+    <header class="spalten__kopf">
+      <h2 id="aushang-titel" data-zeigen>Am Aushang</h2>
       <p data-zeigen>Aktivitäten und Spielpläne hängen auf der Infotafel im Club. Für Einzelheiten fragen Sie bitte direkt bei uns nach.</p>
     </header>
-    <ul class="aushang">
+    <ul class="aushang spalten__inhalt">
       <li data-zeigen>
         <span class="aushang__art">Sommerferien</span>
-        <h3>Tennis- und Beachsportcamps</h3>
-        <p>In den Sommerferien täglich. Informationen und Anmeldung bei Christos.</p>
-        <a class="weiter aushang__link" href="tel:+491729138965">0172 913 89 65</a>
+        <div><h3>Tennis- und Beachsportcamps</h3><p>In den Sommerferien täglich. Informationen und Anmeldung bei Christos.</p><a class="weiter" href="aktuelles.html#camps">Zu den Camps</a></div>
       </li>
       <li data-zeigen>
         <span class="aushang__art">Saison</span>
-        <h3>Turniere und Feste</h3>
-        <p>Vom Schleifchenturnier bis zum Sommerfest. Termine hängen im Club aus.</p>
-        <a class="weiter aushang__link" href="clubleben.html#feste">Was im Verein los ist</a>
+        <div><h3>Turniere und Feste</h3><p>Von der Clubmeisterschaft bis zum Sommerfest. Termine hängen im Club aus.</p><a class="weiter" href="aktuelles.html#turniere">Was in der Saison los ist</a></div>
       </li>
       <li data-zeigen>
         <span class="aushang__art">Feiern</span>
-        <h3>Philathlos als Location</h3>
-        <p>Café, Bistro und Beach-Biergarten stehen auch für Ihre Feier bereit.</p>
-        <a class="weiter aushang__link" href="clubleben.html#location">Feiern bei uns</a>
-      </li>
-      <li data-zeigen>
-        <span class="aushang__art">Galerie</span>
-        <h3>Bilder aus dem Clubleben</h3>
-        <p>Anlage, Beachfelder, Sommerfeste und das Projekt „Mach mit … Spiel in der Beacharena!“.</p>
-        <a class="weiter aushang__link" href="galerie.html">Zur Galerie</a>
+        <div><h3>Philathlos als Ort für Ihre Feier</h3><p>Café, Bistro und Beach-Biergarten stehen auch für private Feiern bereit.</p><a class="weiter" href="clubleben.html#feiern">Feiern bei uns</a></div>
       </li>
     </ul>
   </div>
 </section>
 
-<section class="schluss abschnitt--leinen" aria-labelledby="schluss-titel">
-  <div class="rahmen schluss__raster">
-    <h2 id="schluss-titel"><span>Kommen.</span> <span>Probieren.</span> <span>Begeistert sein.</span></h2>
-    <div data-zeigen>
-      <p class="adresse">Föhringer Ring 5, 80805 München<br><span class="leise">U6 Studentenstadt, Parkplätze an der Anlage</span></p>
-      <ul class="telefone">
-        <li><a href="tel:+491729138965"><small>Christos, mobil</small><b>0172 913 89 65</b></a></li>
-        <li><a href="tel:+498932210100"><small>Club</small><b>089 32 21 01 00</b></a></li>
-        <li><a href="mailto:tc@philathlos.de"><small>E-Mail</small><b>tc@philathlos.de</b></a></li>
-      </ul>
-      <p style="margin-top:1.75rem"><a class="weiter" href="{{osm}}" rel="noopener">Route planen auf OpenStreetMap</a></p>
+<section class="abschnitt abschnitt--tief schluss" aria-labelledby="schluss-titel">
+  <div class="rahmen raster">
+    <h2 class="schluss__satz" id="schluss-titel" data-zeigen>Erst schnuppern, dann entscheiden.</h2>
+    <div class="schluss__aktion" data-zeigen>
+      <p>Wir vereinbaren eine Schnupperstunde und zeigen Ihnen die Anlage. Für Kinder und Erwachsene, ohne Aufnahmegebühr.</p>
+      <div class="aktionen">
+        <a class="knopf knopf--gelb" href="tel:+491729138965">{{telefon}}<span>Christos anrufen</span></a>
+        <a class="weiter" href="mitgliedschaft.html#schnuppern">So läuft es ab</a>
+      </div>
     </div>
   </div>
 </section>

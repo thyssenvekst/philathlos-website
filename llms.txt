@@ -6,10 +6,12 @@ Kontakt: Club 089 32210100, Christos Theodosiadis (Tennisschule) 0172 9138965, t
 
 ## Seiten
 
-- [Startseite](https://www.philathlos.de/): Überblick, Angebote, Aktuelles, Anfahrt
+- [Startseite](https://www.philathlos.de/): Überblick, Angebote, Beiträge, Aushang
 - [Verein](https://www.philathlos.de/verein.html): Name, Ziele, Projekte, Vereinsdaten, Partner
+- [Anlage](https://www.philathlos.de/anlage.html): Sandplätze, Beachfelder, Bistro und Service, Sommer und Winter, Anreise
 - [Tennisschule](https://www.philathlos.de/tennisschule.html): Trainer, Kursprogramm, Feriencamps, Mannschaften
 - [Clubleben](https://www.philathlos.de/clubleben.html): Beachsport, Bistro und Biergarten, Turniere und Feste, Feiern
+- [Aktuelles](https://www.philathlos.de/aktuelles.html): Camps, Turniere, Feste, Termine am Aushang im Club
 - [Mitgliedschaft](https://www.philathlos.de/mitgliedschaft.html): Jahresbeiträge, Schnupperstunde
 - [Galerie](https://www.philathlos.de/galerie.html): Fotos von Anlage, Beachfeldern, Turnieren und Sommerfesten
 - [Kontakt](https://www.philathlos.de/kontakt.html): Telefon, E-Mail, Anfahrt

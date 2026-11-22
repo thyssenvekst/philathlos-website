@@ -1,69 +1,54 @@
 <!--
 titel: Clubleben
-beschreibung: Clubleben beim T.C. Philathlos: Beachvolleyball, Beachtennis und mehr für Mitglieder, Café, Bistro und Beach-Biergarten, Turniere, Feste und Feiern.
+beschreibung: Clubleben beim T.C. Philathlos: Beachvolleyball, Beachtennis und mehr für Mitglieder, Café, Bistro und Beach-Biergarten, Feiern auf der Anlage.
 nav: clubleben.html
 bild: beachfeld.jpg
 -->
-<section class="seitenkopf seitenkopf--text">
-  <div class="rahmen">
-    <ol class="pfad"><li><a href="index.html">Start</a></li><li aria-current="page">Clubleben</li></ol>
-    <div class="seitenkopf__raster">
-      <div>
-        <h1>Bei uns ist immer was los, vor allem zwanglos</h1>
-        <p class="lead">Tennis, Beachsport, Turniere und Feste, und danach ein Platz auf der Sonnenterrasse. Unser Café, Bistro und Beach-Biergarten bringt die Gäste ein Stück näher an den Urlaub.</p>
-      </div>
+<section class="seitenkopf" aria-labelledby="seiten-titel">
+  <div class="rahmen raster">
+    <div class="kopf-club__text" data-auftritt>
+      <h1 id="seiten-titel">Bei uns ist immer was los, vor allem zwanglos</h1>
+      <p class="lead">Tennis, Beachsport, Turniere und Feste, und danach ein Platz auf der Sonnenterrasse.</p>
     </div>
-  </div>
-  <div class="rahmen" style="margin-top:clamp(2.5rem,5vw,4rem)">
-    <div class="mosaik">
-      <figure class="bild bild--links"><div class="bild__rahmen"><img class="foto" src="assets/img/beachfeld.jpg" width="798" height="598" alt="Palmen am Beachfeld, dahinter wird Beachvolleyball gespielt" fetchpriority="high"></div></figure>
-      <figure class="bild"><div class="bild__rahmen"><img class="foto" src="assets/img/biergarten.jpg" width="798" height="598" alt="Blaue Stühle und Sonnenschirme im Beach-Biergarten" loading="lazy"></div></figure>
-      <figure class="bild"><div class="bild__rahmen"><img class="foto" src="assets/img/beach-arena.jpg" width="798" height="598" alt="Beachfelder mit Zelten in der Beach-Arena" loading="lazy"></div></figure>
-    </div>
+    <figure class="bild bild--34 kopf-club__a" data-auftritt>
+      <div class="bild__rahmen"><img src="assets/img/beachfeld.jpg" width="798" height="598" alt="Palmen am Beachfeld, dahinter wird Beachvolleyball gespielt" fetchpriority="high" style="object-position:28% 50%"></div>
+    </figure>
+    <figure class="bild bild--43 kopf-club__b" data-auftritt>
+      <div class="bild__rahmen"><img src="assets/img/biergarten.jpg" width="798" height="598" alt="Blaue Stühle und Sonnenschirme im Beach-Biergarten" fetchpriority="high"></div>
+    </figure>
   </div>
 </section>
 
-<nav class="inhalt-nav" aria-label="Auf dieser Seite">
-  <div class="rahmen">
-    <ul>
-      <li><a href="#beachsport">Beachsport</a></li>
-      <li><a href="#bistro">Bistro &amp; Biergarten</a></li>
-      <li><a href="#feste">Turniere &amp; Feste</a></li>
-      <li><a href="#location">Feiern bei uns</a></li>
-    </ul>
-  </div>
-</nav>
-
-<section class="abschnitt" id="beachsport" aria-labelledby="beach-titel">
-  <div class="rahmen">
-    <header class="kopfzeile">
-      <div data-zeigen>
-        <h2 id="beach-titel">Sieben Sportarten, vier davon im Sand</h2>
-      </div>
+<section class="abschnitt abschnitt--eng" id="beachsport" aria-labelledby="beach-titel">
+  <div class="rahmen spalten">
+    <header class="spalten__kopf">
+      <h2 id="beach-titel" data-zeigen>Sieben Sportarten, vier davon im Sand</h2>
       <p data-zeigen>Für unsere Mitglieder, und besonders für die kleinen, gibt es nicht nur Tennis. Philathlos ist der einzige Tennisverein in München, der seinen Mitgliedern so viele Beachsportarten anbietet.</p>
     </header>
-    <ul class="sportarten" data-zeigen>
-      <li><span>Sandplatz</span><b>Tennis</b></li>
-      <li><span>Beachfeld</span><b>Beachtennis</b></li>
-      <li><span>Beachfeld</span><b>Beachvolleyball</b></li>
-      <li><span>Beachfeld</span><b>Beachbadminton</b></li>
-      <li><span>Beachfeld</span><b>Beachsoccer</b></li>
-      <li><span>Freizeit</span><b>Speedminton</b></li>
-      <li><span>Freizeit</span><b>Tischtennis</b></li>
-      <li><span>Ausprobieren</span><a class="weiter" href="mitgliedschaft.html#schnuppern">Schnupperstunde {{pfeil}}</a></li>
-    </ul>
+    <div class="spalten__inhalt">
+      <ul class="sportarten" data-zeigen>
+        <li><span>Sandplatz</span><b>Tennis</b></li>
+        <li><span>Beachfeld</span><b>Beachtennis</b></li>
+        <li><span>Beachfeld</span><b>Beachvolleyball</b></li>
+        <li><span>Beachfeld</span><b>Beachbadminton</b></li>
+        <li><span>Beachfeld</span><b>Beachsoccer</b></li>
+        <li><span>Freizeit</span><b>Speedminton</b></li>
+        <li><span>Freizeit</span><b>Tischtennis</b></li>
+      </ul>
+      <p style="margin-top:1.75rem"><a class="weiter" href="mitgliedschaft.html#schnuppern">Ausprobieren in einer Schnupperstunde</a></p>
+    </div>
   </div>
 </section>
 
-<section class="abschnitt abschnitt--nacht" id="bistro" aria-labelledby="bistro-titel">
-  <div class="rahmen paar">
-    <figure class="bild bild--43 paar__bild" data-zeigen>
-      <div class="bild__rahmen"><img class="foto" src="assets/img/bistro.jpg" width="798" height="598" alt="Terrasse am Bistro mit blauer Pergola, Blumenampeln und gelben Bänken" loading="lazy"></div>
+<section class="abschnitt abschnitt--tanne" id="bistro" aria-labelledby="bistro-titel">
+  <div class="rahmen raster paar">
+    <figure class="bild bild--43 paar__bild" style="grid-column:1 / span 6">
+      <div class="bild__rahmen"><img src="assets/img/bistro.jpg" width="798" height="598" alt="Terrasse am Bistro mit blauer Pergola, Blumenampeln und gelben Bänken" loading="lazy"></div>
     </figure>
-    <div class="paar__text" data-zeigen>
-      <h2 id="bistro-titel">Café, Bistro und Beach-Biergarten</h2>
-      <p>Unser Café, Bistro und Beach-Biergarten macht das Clubleben noch schöner und bringt unsere Gäste ein Stück näher an den Urlaub. Rund um die Plätze gibt es außerdem:</p>
-      <ul class="abend__fakten">
+    <div class="paar__text">
+      <h2 id="bistro-titel" data-zeigen>Café, Bistro und Beach-Biergarten</h2>
+      <p data-zeigen>Unser Café, Bistro und Beach-Biergarten macht das Clubleben noch schöner und bringt unsere Gäste ein Stück näher an den Urlaub. Rund um die Plätze gibt es außerdem:</p>
+      <ul class="liste">
         <li>Tennisstüberl mit Sonnenterrasse</li>
         <li>Verkauf von Tenniszubehör</li>
         <li>Bespannservice</li>
@@ -73,50 +58,32 @@ bild: beachfeld.jpg
   </div>
 </section>
 
-<section class="abschnitt abschnitt--leinen" id="feste" aria-labelledby="feste-titel">
-  <div class="rahmen">
-    <header class="kopfzeile">
-      <div data-zeigen>
-        <h2 id="feste-titel">Vom Schleifchenturnier bis zum Sommerfest</h2>
-      </div>
-      <p data-zeigen>Aktuelle Termine hängen auf der Infotafel im Club aus. Für Details fragen Sie bitte direkt bei uns nach.</p>
-    </header>
-    <div class="programm">
-      <div data-zeigen>
-        <h3>Turniere <small>im Verein</small></h3>
-        <ul class="liste">
-          <li>Clubmeisterschaft</li>
-          <li>Schleifchenturnier</li>
-          <li>Tie-Break-Turnier</li>
-          <li>„Wer kommt, macht mit“-Turnier</li>
-          <li>Familientennisolympiade</li>
-        </ul>
-      </div>
-      <div data-zeigen>
-        <h3>Gesellig <small>für alle</small></h3>
-        <ul class="liste">
-          <li>Doppel-Abend und Kennenlernnachmittag</li>
-          <li>Lauftreffs</li>
-          <li>Grillfest und Sommerfest</li>
-          <li>Saisonabschlussfeier</li>
-          <li>Tenniscamp in Griechenland</li>
-        </ul>
-      </div>
+<section class="abschnitt" id="feste" aria-labelledby="feste-titel">
+  <div class="rahmen raster paar paar--klein">
+    <figure class="bild bild--34 paar__bild">
+      <div class="bild__rahmen"><img src="assets/img/galerie/sommerfest-03.jpg" width="798" height="598" alt="Volle Tische unter den Sonnenschirmen beim Sommerfest" loading="lazy" style="object-position:55% 50%"></div>
+    </figure>
+    <div class="paar__text">
+      <h2 id="feste-titel" data-zeigen>Vom Schleifchenturnier bis zum Sommerfest</h2>
+      <p data-zeigen>Clubmeisterschaft, Doppel-Abend, Grillfest und Saisonabschlussfeier: Was in der Saison ansteht, steht unter Aktuelles und hängt auf der Infotafel im Club.</p>
+      <a class="weiter" href="aktuelles.html#turniere">Turniere und Feste unter Aktuelles</a>
     </div>
   </div>
 </section>
 
-<section class="abschnitt" id="location" aria-labelledby="location-titel">
-  <div class="rahmen paar paar--umgekehrt">
-    <figure class="bild bild--43 paar__bild" data-zeigen>
-      <div class="bild__rahmen"><img class="foto" src="assets/img/galerie/sommerfest-01.jpg" width="798" height="598" alt="Gäste an langen Tischen im Biergarten unter Sonnenschirmen" loading="lazy"></div>
+<section class="abschnitt abschnitt--tief" id="feiern" aria-labelledby="feiern-titel">
+  <div class="rahmen raster paar paar--rechts">
+    <figure class="bild bild--43 paar__bild">
+      <div class="bild__rahmen"><img src="assets/img/galerie/sommerfest-01.jpg" width="798" height="598" alt="Gäste an langen Tischen im Biergarten unter Sonnenschirmen" loading="lazy"></div>
       <figcaption>Sommerfest im Beach-Biergarten</figcaption>
     </figure>
-    <div class="paar__text" data-zeigen>
-      <h2 id="location-titel">Philathlos als Location</h2>
-      <p>Café, Bistro und Beach-Biergarten stehen auch für Ihre Feier bereit. Erzählen Sie uns, was Sie vorhaben, wir melden uns mit allen Einzelheiten.</p>
-      <p style="margin-top:1.75rem"><a class="knopf knopf--voll" href="kontakt.html?anliegen=feier#formular">Feier anfragen {{pfeil}}</a></p>
-      <p style="margin-top:1.25rem"><a class="weiter" href="galerie.html#sommerfest">Bilder von Sommerfesten {{pfeil}}</a></p>
+    <div class="paar__text">
+      <h2 id="feiern-titel" data-zeigen>Feiern bei uns</h2>
+      <p data-zeigen>Café, Bistro und Beach-Biergarten stehen auch für Ihre Feier bereit. Erzählen Sie uns, was Sie vorhaben, wir melden uns mit allen Einzelheiten.</p>
+      <div class="aktionen">
+        <a class="knopf knopf--gelb" href="kontakt.html?anliegen=feier#formular"><span>Feier anfragen</span></a>
+        <a class="weiter" href="galerie.html#sommerfest">Bilder von Sommerfesten</a>
+      </div>
     </div>
   </div>
 </section>

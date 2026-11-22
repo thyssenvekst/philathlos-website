@@ -13,10 +13,11 @@ Läuft auf jedem Webspace (Apache empfohlen wegen `.htaccess`).
 | `assets/css/site.css` | komplettes Designsystem |
 | `assets/js/site.js` | Menü, Galerie mit Lichtbild, Kontaktformular, Bewegung mit GSAP |
 | `assets/js/lib/` | GSAP 3.12.5 und ScrollTrigger (selbst gehostet, kein CDN) |
-| `assets/fonts/` | Commissioner, lateinisch und griechisch (selbst gehostet, SIL Open Font License) |
+| `assets/fonts/` | Archivo (Überschriften, Bedienung), Newsreader (Text), Commissioner nur für griechische Buchstaben; alle selbst gehostet, SIL Open Font License |
 | `assets/img/` | Fotos, Wappen (`wappen.svg`), Galerie mit Vorschaubildern (`galerie/klein/`) |
 | `.htaccess` | 301-Weiterleitungen der alten Adressen, Caching, Sicherheits-Header |
-| `ueber_uns.html`, `partner.htm`, `impressum.htm`, `Integration.html`, `aktuelles.html` | Weiterleitungsseiten für alte Adressen (falls der Server `.htaccess` nicht kennt) |
+| `ueber_uns.html`, `partner.htm`, `impressum.htm`, `Integration.html` | Weiterleitungsseiten für alte Adressen (falls der Server `.htaccess` nicht kennt). `aktuelles.html` ist jetzt wieder eine echte Seite |
+| `DESIGN.md` | Designsystem „Platzraster“: Leitidee, Schrift, Farben, Raster, Bilder, Komponenten, Bewegung, Responsive |
 
 ## Seiten bearbeiten
 
@@ -29,26 +30,15 @@ CSS und JS bekommen beim Bauen automatisch eine Versionsnummer, damit Besucher n
 
 ## Designsystem in Kürze
 
-**Idee „Ägäis“:** Griechischer Sommer, ernst gemeint. Kalkweiß und das Blau der griechischen Flagge als große, flache Flächen; hartes Licht statt weicher Verläufe. Der Vereinsname ist griechisch (φίλαθλος, „Freund des Sports“) und wird auf der Startseite so gezeigt.
+**Idee „Platzraster“:** Der Platz ist das Raster. Ziegelmehl (Sandplatz), Kreidelinie, Tanne (Windschutz und Bäume) und Wappengelb. Auf der Startseite ist der Kopf ein Tennisplatz in echten Maßen, dessen Linien beim Laden gezogen werden; das Foto liegt im rechten Feld zwischen Netz und Grundlinie. Ausführlich in `DESIGN.md`.
 
-**Farben** (Tokens in `:root` von `assets/css/site.css`):
+**Farben** (Tokens in `:root` von `assets/css/site.css`): Kreide `#f2f3ee`, Tinte `#13241b`, Tanne `#1c3a2b`, Ziegel `#b0461f`, Wappengelb `#f3d23c` (nur Hauptknopf, Fokus, Markierung).
 
-| Name | Wert | Einsatz |
-|---|---|---|
-| Kalk | `#fdfdfb` | Grundfläche |
-| Stein | `#eef2f6` | Wechselflächen |
-| Ägäisblau | `#0d5eaf` | Leitfarbe, große Flächen, Knöpfe, Links |
-| Tiefsee | `#0b2447` | Überschriften, Fuß |
-| Text | `#2c394e` | Fließtext |
-| Sonne | `#f3cf3e` | nur Fokus und Markierung |
+**Schrift:** Archivo breit für Überschriften und Bedienung, Newsreader für Text, φίλαθλος in Commissioner.
 
-**Schrift:** Commissioner (Kostas Bartsokas) als einzige Familie. Überschriften mit ausgestellten Strichenden (Achse `FLAR`), angelehnt an griechische Steininschriften; Fließtext ohne.
+**Seiten:** Start, Verein, Anlage (neu), Tennisschule, Clubleben, Aktuelles (neu), Mitgliedschaft, Galerie, Kontakt, Impressum, Datenschutz, 404. Jede Unterseite hat einen eigenen Seitenkopf.
 
-**Bilder:** Stimmungsbilder (Startseite, Seitenköpfe) als Cyanotypie in Blau und Weiß, per CSS aus den Originalen erzeugt. Inhaltsfotos in Farbe. Ein Torbogen-Ausschnitt nur beim Kinderbild.
-
-**Bausteine:** versetzte Bildkomposition „Was es bei uns gibt“, Jahresbeiträge als Tavernen-Karte mit Punktlinien, Zeitleiste mit senkrechter Linie, Mannschaften als fließende Wortreihe.
-
-**Bewegung (GSAP):** „Philathlos“ baut sich Buchstabe für Buchstabe auf, das Panorama öffnet sich von links. Beim Scrollen blenden Inhalte einmalig ein, Bilder öffnen sich von unten; leichte Parallaxe nur ab 900 px Breite. Nichts läuft dauerhaft. Wer „Bewegung reduzieren“ eingestellt hat, sieht alles sofort. Lädt GSAP nicht, ist trotzdem alles sichtbar.
+**Bewegung (GSAP 3.12.5, selbst gehostet):** Linien des Platzes, Seitenköpfe, einmalige Text- und Bild-Reveals, leichte Parallaxe ab 900 px, Kreidelinien bei den Beiträgen, Menü, Galerie-Filter, Lichtbild; Seitenwechsel per View Transition. Bei „Bewegung reduzieren“ ist alles sofort sichtbar.
 
 ## Veröffentlichen
 
@@ -70,5 +60,7 @@ Alle Inhalte stammen von der bisherigen Website, aus dem Projektordner oder von 
 8. **Aussage „einziger Tennisverein in München mit so vielen Beachsportarten“:** stand so auf der bisherigen Website. Bitte prüfen, ob sie noch zutrifft.
 9. **Fotos:** Die vorhandenen Bilder sind authentisch, aber älter und nur ca. 800 Pixel breit. Ein halber Tag mit einer Fotografin oder einem Fotografen im Sommer (Plätze, Beachfelder, Training, Biergarten am Abend) würde die Seite deutlich aufwerten. Die Seite ist so gebaut, dass neue Bilder einfach ersetzt werden können (gleicher Dateiname, gern 2000 Pixel breit).
 10. **Einwilligungen:** Auf einigen Galeriebildern sind Kinder erkennbar (z. B. Gruppenfoto). Die Bilder waren schon öffentlich, trotzdem bitte prüfen, ob Einwilligungen der Eltern vorliegen.
-11. **Termine:** Für Feriencamps und Turniere gibt es keine Daten auf der alten Seite. Sobald Termine feststehen, können sie im Abschnitt „Am Aushang“ auf der Startseite ergänzt werden.
+11. **Termine:** Für Feriencamps und Turniere gibt es keine Daten auf der alten Seite. Die neue Seite „Aktuelles“ (`_quellen/seiten/aktuelles.html`) führt deshalb nur, was regelmäßig stattfindet. Sobald Termine feststehen, gehören sie in die Spalte „termine__wann“ der jeweiligen Zeile.
 12. **Aufnahmeantrag/Beitragsordnung:** falls vorhanden, als PDF bereitstellen und auf der Seite Mitgliedschaft verlinken.
+13. **Seite „Anlage“:** Neu zusammengestellt aus bekannten Angaben (fünf Sandplätze, Beachfelder, Bistro, Service, Parkplätze, U6, Winterhalle). Eine Platzbeschreibung (z. B. Flutlicht, Platznummern, Öffnungszeiten) gibt es nicht, weil dazu keine Quelle vorliegt.
+14. **Foto „Mach mit“ auf der Vereinsseite:** Bildunterschrift nennt das Projektjahr 2011 laut Projektbeschreibung. Bitte bestätigen, dass das Foto aus dieser Saison stammt.

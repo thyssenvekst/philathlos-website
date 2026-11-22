@@ -1,8 +1,8 @@
-/* T.C. Philathlos München – Interaktionen und Bewegung.
-   Ohne Cookies, ohne Tracking. GSAP und ScrollTrigger liegen selbst gehostet
-   unter assets/js/lib/. Alles funktioniert auch ohne JavaScript und ohne GSAP;
-   hier wird nur verfeinert. Wer „Bewegung reduzieren“ eingestellt hat, sieht
-   alles sofort und ohne Animation. */
+/* T.C. Philathlos München – Interaktionen und Bewegung („Platzraster“).
+   Ohne Cookies, ohne Tracking. GSAP 3.12.5 und ScrollTrigger liegen selbst
+   gehostet unter assets/js/lib/. Alles funktioniert auch ohne JavaScript und
+   ohne GSAP; hier wird nur verfeinert. Wer „Bewegung reduzieren“ eingestellt
+   hat, sieht alles sofort und ohne Animation. */
 (function () {
   "use strict";
   var d = document;
@@ -12,16 +12,27 @@
   var ST = window.ScrollTrigger;
   var mitBewegung = !!(G && ST && !ruhig);
 
-  /* ---------- Kopf wird beim Scrollen kompakter ---------- */
+  /* ---------- Kopf: verschwindet beim Herunterscrollen, kommt beim Hochscrollen ---------- */
   var kopf = d.querySelector(".kopf");
   if (kopf) {
+    var letzte = window.scrollY;
     var wartet = false;
-    var pruefen = function () { kopf.classList.toggle("ist-kompakt", window.scrollY > 40); wartet = false; };
+    var pruefen = function () {
+      var y = window.scrollY;
+      kopf.classList.toggle("ist-gerollt", y > 8);
+      var offen = d.querySelector("dialog[open]");
+      if (!ruhig && !offen && y > 320 && y > letzte + 4) kopf.classList.add("ist-weg");
+      else if (y < letzte - 4 || y <= 320) kopf.classList.remove("ist-weg");
+      letzte = y;
+      wartet = false;
+    };
     window.addEventListener("scroll", function () { if (!wartet) { wartet = true; requestAnimationFrame(pruefen); } }, { passive: true });
+    /* Tastatur: Fokus im Kopf holt ihn zurück */
+    kopf.addEventListener("focusin", function () { kopf.classList.remove("ist-weg"); });
     pruefen();
   }
 
-  /* ---------- Mobiles Menü (natives dialog: Fokusfalle und Esc inklusive) ---------- */
+  /* ---------- Menü (natives dialog: Fokusfalle und Esc inklusive) ---------- */
   var menue = d.getElementById("menue");
   var menueKnopf = d.querySelector(".menue-knopf");
   if (menue && menueKnopf && typeof menue.showModal === "function") {
@@ -29,9 +40,9 @@
     if (mitBewegung) {
       menue.classList.add("ist-animiert");
       menueTl = G.timeline({ paused: true, defaults: { ease: "power3.out" } })
-        .fromTo(menue, { opacity: 0 }, { opacity: 1, duration: 0.3 })
-        .fromTo(menue.querySelectorAll("nav a"), { yPercent: 100 }, { yPercent: 0, duration: 0.6, stagger: 0.045 }, 0.05)
-        .fromTo(menue.querySelectorAll(".menue__kontakt > *"), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45, stagger: 0.05 }, 0.25);
+        .fromTo(menue, { opacity: 0 }, { opacity: 1, duration: 0.25 })
+        .fromTo(menue.querySelectorAll(".menue__nav a"), { yPercent: 105 }, { yPercent: 0, duration: 0.7, stagger: 0.04 }, 0.05)
+        .fromTo(menue.querySelectorAll(".menue__kontakt > *"), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45, stagger: 0.04 }, 0.3);
     }
     var schliessen = function () {
       if (!menue.open) return;
@@ -52,44 +63,25 @@
     menue.addEventListener("cancel", function (e) { e.preventDefault(); schliessen(); });
     menue.querySelector(".schliessen").addEventListener("click", schliessen);
     menue.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", function () { menue.close(); }); });
-    window.addEventListener("resize", function () { if (window.innerWidth > 1060 && menue.open) menue.close(); });
+    window.addEventListener("resize", function () { if (window.innerWidth >= 1240 && menue.open) menue.close(); });
   } else if (menueKnopf) {
-    /* Fallback für sehr alte Browser: Menü-Knopf führt zur Übersicht im Fuß */
     menueKnopf.addEventListener("click", function () { location.hash = "seiten"; });
   }
 
-  /* ---------- Angebotsindex: Bild folgt dem Eintrag (Maus und Tastatur, ab Tablet quer) ---------- */
-  var angebot = d.querySelector(".angebot");
-  if (angebot) {
-    var bilder = angebot.querySelectorAll(".angebot__bilder img");
-    var eintraege = angebot.querySelectorAll(".angebot__eintrag");
+  /* ---------- Index „Was es bei uns gibt“: Bild wechselt mit Maus und Tastatur ---------- */
+  var index = d.querySelector("[data-index]");
+  if (index) {
+    var bilder = index.querySelectorAll(".index__bilder img");
+    var eintraege = index.querySelectorAll(".index__eintrag");
     var aktiv = function (i) {
       bilder.forEach(function (b, n) { b.classList.toggle("ist-aktiv", n === i); });
       eintraege.forEach(function (e, n) { e.classList.toggle("ist-aktiv", n === i); });
     };
     eintraege.forEach(function (e, i) {
-      e.addEventListener("mouseenter", function () { aktiv(i); });
-      e.addEventListener("focus", function () { aktiv(i); });
+      var a = e.querySelector("a");
+      a.addEventListener("mouseenter", function () { aktiv(i); });
+      a.addEventListener("focus", function () { aktiv(i); });
     });
-  }
-
-  /* ---------- Sprungnavigation auf Unterseiten markiert den sichtbaren Abschnitt ---------- */
-  var inhaltNav = d.querySelector(".inhalt-nav");
-  if (inhaltNav && "IntersectionObserver" in window) {
-    var links = [].slice.call(inhaltNav.querySelectorAll("a[href^='#']"));
-    var ziele = links.map(function (a) { return d.getElementById(a.getAttribute("href").slice(1)); });
-    var io2 = new IntersectionObserver(function (es) {
-      es.forEach(function (e) {
-        if (e.isIntersecting) {
-          links.forEach(function (a) {
-            var an = a.getAttribute("href") === "#" + e.target.id;
-            a.classList.toggle("ist-aktiv", an);
-            if (an) a.setAttribute("aria-current", "location"); else a.removeAttribute("aria-current");
-          });
-        }
-      });
-    }, { rootMargin: "-35% 0px -60% 0px" });
-    ziele.forEach(function (z) { if (z) io2.observe(z); });
   }
 
   /* ---------- Galerie: Filter und Lichtbild ---------- */
@@ -223,100 +215,109 @@
 
   /* =====================================================================
      Bewegung mit GSAP
-     Ein inszenierter Moment beim Laden (der Platz zeichnet sich, die
-     Überschrift steigt zeilenweise auf), danach nur noch Bewegung, die auf
-     das Scrollen antwortet. Nichts wiederholt sich, nichts läuft dauerhaft.
-     Inhalte bleiben im Barrierefreiheitsbaum (nur opacity, kein visibility).
      ===================================================================== */
+  /* Grundsatz: ein inszenierter Moment beim Laden, danach nur Antworten auf
+     das Scrollen. Nichts wiederholt sich, nichts läuft dauerhaft. Bewegt
+     werden nur transform, opacity, clip-path und Strichlängen. */
   function bewegung() {
     G.registerPlugin(ST);
     G.defaults({ ease: "power3.out", duration: 0.9 });
+    var alle = function (sel, ctx) { return [].slice.call((ctx || d).querySelectorAll(sel)); };
+    var platz = d.querySelector(".platz");
 
-    /* --- Startbereich: „Philathlos“ baut sich Buchstabe für Buchstabe auf --- */
-    var start = d.querySelector(".start");
-    if (start) {
-      var wort = start.querySelector(".start__wort");
-      var text = wort.textContent;
-      /* Vorlesbarer Text bleibt ein Wort; die Einzelbuchstaben sind nur Optik */
-      wort.innerHTML = '<span class="sr">' + text + '</span><span aria-hidden="true">' +
-        text.split("").map(function (c) { return '<span class="b">' + c + "</span>"; }).join("") + "</span>";
-      var tl = G.timeline({ defaults: { ease: "power3.out" } });
-      tl.fromTo(wort.querySelectorAll(".b"), { yPercent: 55, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 1.1, stagger: 0.05, ease: "power4.out" }, 0)
-        .fromTo(".start__oben", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.7 }, 0.1)
-        .fromTo(".start__unter", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.9 }, 0.5)
-        .fromTo(".start__bild .bild__rahmen", { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.5, ease: "power3.inOut" }, 0.45)
-        .fromTo(".start__bild img", { scale: 1.2 }, { scale: 1.08, duration: 2.2, ease: "power2.out" }, 0.45)
-        .fromTo(".start__unten > *", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.12 }, 1);
+    /* 1 · Der Platz: Linien werden gezogen wie nach dem Abziehen, dann Foto und Schrift */
+    if (platz) {
+      var linien = [];
+      ["grund", "seite", "auf", "mitte", "mark"].forEach(function (art) {
+        linien = linien.concat(alle(".platz__linie--" + art, platz));
+      });
+      var netz = alle(".platz__netz", platz);
+      G.set(linien.concat(netz), { strokeDasharray: 1, strokeDashoffset: 1 });
+      var foto = platz.querySelector(".platz__foto");
+      var tl = G.timeline({ delay: 0.15 });
+      tl.to(linien, { strokeDashoffset: 0, duration: 0.85, ease: "power2.inOut", stagger: 0.07 }, 0)
+        .to(netz, { strokeDashoffset: 0, duration: 0.7, ease: "power2.inOut" }, 0.35);
+      if (foto) {
+        tl.fromTo(foto, { autoAlpha: 1, clipPath: "inset(0% 0% 100% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.15, ease: "power3.inOut" }, 0.55)
+          .fromTo(foto.querySelector("img"), { scale: 1.18 }, { scale: 1, duration: 1.8, ease: "power2.out" }, 0.55);
+      }
+      tl.fromTo(".platz__titel", { autoAlpha: 0, y: 26 }, { autoAlpha: 1, y: 0, duration: 1 }, 0.7)
+        .fromTo(".platz__unten", { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 1 }, 0.9)
+        .fromTo(".platz__gasse", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.8, stagger: 0.1 }, 1.1);
     }
 
-    /* --- Einblenden beim Scrollen: zusammengehörige Elemente versetzt --- */
-    var zeigen = G.utils.toArray("[data-zeigen]");
-    if (zeigen.length) {
-      G.set(zeigen, { opacity: 0, y: 28 });
-      ST.batch(zeigen, {
-        start: "top 88%",
-        once: true,
-        onEnter: function (stapel) {
-          G.to(stapel, { opacity: 1, y: 0, duration: 0.95, stagger: 0.09, overwrite: true, clearProps: "transform" });
+    /* 2 · Seitenköpfe: Titel steigt auf, Bilder öffnen sich. Einmal beim Laden */
+    var auftritt = alle("[data-auftritt]");
+    if (auftritt.length) {
+      var kt = G.timeline({ delay: 0.1 });
+      auftritt.forEach(function (el, i) {
+        var rahmen = el.matches(".bild") ? el.querySelector(".bild__rahmen") : null;
+        var t0 = i * 0.12;
+        if (rahmen) {
+          kt.set(el, { autoAlpha: 1 }, t0)
+            .fromTo(rahmen, { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.2, ease: "power3.inOut" }, t0)
+            .fromTo(rahmen.querySelector("img"), { scale: 1.15 }, { scale: 1, duration: 1.7, ease: "power2.out" }, t0);
+        } else {
+          kt.fromTo(el, { autoAlpha: 0, y: 28 }, { autoAlpha: 1, y: 0, duration: 1 }, t0);
         }
       });
     }
 
-    /* --- Bilder öffnen sich von unten, das Foto setzt sich dabei --- */
-    G.utils.toArray(".bild__rahmen").forEach(function (r) {
-      if (r.closest(".start")) return;
-      var img = r.querySelector("img");
-      var tlb = G.timeline({ scrollTrigger: { trigger: r, start: "top 86%", once: true } });
-      tlb.fromTo(r, { clipPath: "inset(14% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.2, ease: "power3.out" })
-         .fromTo(img, { scale: 1.14 }, { scale: 1, duration: 1.6, ease: "power2.out" }, 0);
-      var fig = r.closest(".bild");
-      var unter = fig && fig.querySelector("figcaption");
-      if (unter) tlb.fromTo(unter, { opacity: 0 }, { opacity: 1, duration: 0.6 }, 0.5);
+    /* 3 · Texte beim Scrollen: einmal, kurz, nur leicht angehoben */
+    var zeigen = alle("[data-zeigen]");
+    if (zeigen.length) {
+      G.set(zeigen, { opacity: 0, y: 24 });
+      ST.batch(zeigen, {
+        start: "top 90%",
+        once: true,
+        onEnter: function (els) {
+          G.to(els, { opacity: 1, y: 0, duration: 0.85, stagger: 0.08, overwrite: true, clearProps: "transform" });
+        }
+      });
+    }
+
+    /* 4 · Inhaltsbilder öffnen sich von unten; große Bilder bekommen ab 900 px leichte Parallaxe */
+    var parallaxe = ".jugend__bild, .abend__bild, .paar__bild";
+    alle(".bild .bild__rahmen").forEach(function (rahmen) {
+      if (rahmen.closest(".platz, [data-auftritt], .index__bilder")) return;
+      var img = rahmen.querySelector("img");
+      var t = G.timeline({ scrollTrigger: { trigger: rahmen, start: "top 88%", once: true } });
+      t.fromTo(rahmen, { clipPath: "inset(14% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.2 });
+      if (!rahmen.closest(parallaxe)) t.fromTo(img, { scale: 1.12 }, { scale: 1, duration: 1.6, ease: "power2.out" }, 0);
+      var cap = rahmen.parentNode.querySelector("figcaption");
+      if (cap) t.fromTo(cap, { opacity: 0 }, { opacity: 1, duration: 0.6 }, 0.5);
     });
 
-    /* --- Schlusszeile: Zeile für Zeile --- */
-    var schluss = d.querySelectorAll(".schluss h2 span");
-    if (schluss.length) {
-      G.fromTo(schluss, { opacity: 0, y: 36 }, {
-        opacity: 1, y: 0, duration: 1, stagger: 0.12,
-        scrollTrigger: { trigger: ".schluss h2", start: "top 85%", once: true }
-      });
-    }
-
-    /* --- Steckbrief: die fünf Plätze nacheinander --- */
-    var plaetze = d.querySelectorAll(".plaetze svg");
-    if (plaetze.length) {
-      G.fromTo(plaetze, { opacity: 0, y: 8 }, {
-        opacity: 1, y: 0, duration: 0.5, stagger: 0.07, delay: 0.2,
-        scrollTrigger: { trigger: ".plaetze", start: "top 92%", once: true }
-      });
-    }
-
-    /* --- Dezente Parallaxe, nur auf größeren Bildschirmen --- */
     var mm = G.matchMedia();
     mm.add("(min-width: 900px)", function () {
-      if (start) {
-        G.to(".start__bild img", { yPercent: 6, ease: "none", scrollTrigger: { trigger: ".start__bild", start: "top 60%", end: "bottom top", scrub: true } });
-      }
-      G.utils.toArray(".bild--parallax .bild__rahmen").forEach(function (r) {
-        var img = r.querySelector("img");
-        G.set(img, { scale: 1.12 });
-        G.fromTo(img, { yPercent: -5 }, { yPercent: 5, ease: "none", scrollTrigger: { trigger: r, start: "top bottom", end: "bottom top", scrub: true } });
+      alle(".jugend__bild img, .abend__bild img, .paar__bild img").forEach(function (img) {
+        G.fromTo(img, { yPercent: -4, scale: 1.1 }, {
+          yPercent: 4, scale: 1.1, ease: "none",
+          scrollTrigger: { trigger: img.closest(".bild"), start: "top bottom", end: "bottom top", scrub: 0.6 }
+        });
       });
-      /* Die Bilder der Anlage ziehen leicht unterschiedlich schnell: Tiefe ohne Effekthascherei */
-      G.utils.toArray(".ort .bild__rahmen").forEach(function (r, i) {
-        var bildInnen = r.querySelector("img");
-        var weg = i % 2 ? 7 : 4;
-        G.set(bildInnen, { scale: 1.15 });
-        G.fromTo(bildInnen, { yPercent: -weg }, { yPercent: weg, ease: "none", scrollTrigger: { trigger: r, start: "top bottom", end: "bottom top", scrub: true } });
-      });
-      var bogen = d.querySelector(".jugend .bild__rahmen");
-      if (bogen) {
-        G.fromTo(bogen, { boxShadow: "0rem 0rem 0 #094a8c" }, { boxShadow: "1.25rem 1.25rem 0 #094a8c", ease: "none", scrollTrigger: { trigger: bogen, start: "top 90%", end: "center 50%", scrub: true } });
+      var stehend = d.querySelector(".index__bilder .bild__rahmen");
+      if (stehend) {
+        G.fromTo(stehend, { clipPath: "inset(0% 0% 100% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.3, ease: "power3.inOut", scrollTrigger: { trigger: stehend, start: "top 85%", once: true } });
       }
     });
+    mm.add("(max-width: 899px)", function () {
+      alle(".jugend__bild img, .abend__bild img, .paar__bild img").forEach(function (img) {
+        G.fromTo(img, { scale: 1.12 }, { scale: 1, duration: 1.6, ease: "power2.out", scrollTrigger: { trigger: img, start: "top 90%", once: true } });
+      });
+    });
 
-    /* Positionen nach dem Laden der Schriften neu berechnen */
+    /* 5 · Beiträge: Aufschlag- und Mittellinie werden gezogen */
+    alle(".beitraege").forEach(function (b) {
+      var quer = b.querySelector(".beitraege__linie--quer");
+      var laengs = b.querySelector(".beitraege__linie--laengs");
+      if (!quer || !laengs) return;
+      G.timeline({ scrollTrigger: { trigger: b, start: "top 75%", once: true } })
+        .fromTo(quer, { scaleX: 0, transformOrigin: "0% 50%" }, { scaleX: 1, duration: 1.1, ease: "power2.inOut" })
+        .fromTo(laengs, { scaleY: 0, transformOrigin: "50% 0%" }, { scaleY: 1, duration: 1.2, ease: "power2.inOut" }, 0.55);
+    });
+
+    /* Nachberechnung, wenn Schriften und Bilder da sind */
     if (d.fonts && d.fonts.ready) d.fonts.ready.then(function () { ST.refresh(); });
     window.addEventListener("load", function () { ST.refresh(); });
   }
@@ -324,7 +325,6 @@
   try {
     if (mitBewegung) bewegung();
   } finally {
-    /* Startzustände liegen jetzt inline an den Elementen; die CSS-Sperre wird nicht mehr gebraucht. */
     h.classList.remove("bewegt");
   }
 })();

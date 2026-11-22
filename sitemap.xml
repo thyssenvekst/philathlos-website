@@ -2,8 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://www.philathlos.de/</loc><priority>1.0</priority></url>
   <url><loc>https://www.philathlos.de/verein.html</loc><priority>0.8</priority></url>
+  <url><loc>https://www.philathlos.de/anlage.html</loc><priority>0.8</priority></url>
   <url><loc>https://www.philathlos.de/tennisschule.html</loc><priority>0.8</priority></url>
   <url><loc>https://www.philathlos.de/clubleben.html</loc><priority>0.8</priority></url>
+  <url><loc>https://www.philathlos.de/aktuelles.html</loc><priority>0.8</priority></url>
   <url><loc>https://www.philathlos.de/mitgliedschaft.html</loc><priority>0.8</priority></url>
   <url><loc>https://www.philathlos.de/galerie.html</loc><priority>0.8</priority></url>
   <url><loc>https://www.philathlos.de/kontakt.html</loc><priority>0.8</priority></url>

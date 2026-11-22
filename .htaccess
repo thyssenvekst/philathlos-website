@@ -16,11 +16,10 @@ AddDefaultCharset utf-8
 
   # Arbeitsordner nicht ausliefern
   RewriteRule ^(_quellen|\.git)(/|$) - [F,L]
-  RewriteRule ^(README|CLAUDE)\.md$ - [F,L]
+  RewriteRule ^(README|CLAUDE|DESIGN|HANDOFF)\.md$ - [F,L]
 
   # Adressen der bisherigen Website dauerhaft umleiten (301)
   RewriteRule ^ueber_uns\.html$      /verein.html [R=301,L]
-  RewriteRule ^aktuelles\.html$      /index.html#aktuelles [NE,R=301,L]
   RewriteRule ^partner\.htm$         /verein.html#partner [NE,R=301,L]
   RewriteRule ^impressum\.htm$       /impressum.html [R=301,L]
   RewriteRule ^Integration\.html$    /verein.html#projekte [NE,R=301,L]
