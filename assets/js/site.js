@@ -306,9 +306,11 @@
           var sek = d.querySelector(sel);
           if (!sek) return;
           var ul = sek.querySelector("ul");
-          if (liste.length) liste.forEach(function (x) { ul.appendChild(eintrag(x, art)); });
-          else if (leer) ul.appendChild(el("li", "brett__leer", leer));
-          else return;
+          /* Der leere Hinweis steht schon im HTML (sichtbar auch ohne Verwaltung); bei Einträgen weicht er */
+          if (liste.length) {
+            [].forEach.call(ul.querySelectorAll(".brett__leer"), function (l) { l.remove(); });
+            liste.forEach(function (x) { ul.appendChild(eintrag(x, art)); });
+          } else if (leer && !ul.querySelector(".brett__leer")) ul.appendChild(el("li", "brett__leer", leer));
           sek.hidden = false;
         };
         fuellen("[data-brett]", daten.mitteilungen || [], "mitteilung", "Zurzeit gibt es keine neuen Mitteilungen.");

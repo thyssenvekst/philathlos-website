@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Aktuelles und Veranstaltungen – T.C. Philathlos München e.V.</title>
-<meta name="description" content="Was beim T.C. Philathlos München in der Saison ansteht: Tennis- und Beachsportcamps in den Sommerferien, Turniere, Feste und gesellige Abende. Termine am Aushang im Club.">
+<meta name="description" content="Was beim T.C. Philathlos München in der Saison ansteht: Tennis- und Beachsportcamps in den Sommerferien, Turniere, Feste und gesellige Abende. Mitteilungen und Termine des Vorstands am schwarzen Brett.">
 <link rel="canonical" href="https://www.philathlos.de/aktuelles.html">
 <meta name="theme-color" content="#1b3f94">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="de_DE">
 <meta property="og:site_name" content="T.C. Philathlos München e.V.">
 <meta property="og:title" content="Aktuelles und Veranstaltungen – T.C. Philathlos München e.V.">
-<meta property="og:description" content="Was beim T.C. Philathlos München in der Saison ansteht: Tennis- und Beachsportcamps in den Sommerferien, Turniere, Feste und gesellige Abende. Termine am Aushang im Club.">
+<meta property="og:description" content="Was beim T.C. Philathlos München in der Saison ansteht: Tennis- und Beachsportcamps in den Sommerferien, Turniere, Feste und gesellige Abende. Mitteilungen und Termine des Vorstands am schwarzen Brett.">
 <meta property="og:url" content="https://www.philathlos.de/aktuelles.html">
 <meta property="og:image" content="https://www.philathlos.de/assets/img/galerie/sommerfest-03.jpg">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -23,7 +23,7 @@
 <script>(function(h){if(matchMedia("(prefers-reduced-motion: no-preference)").matches){h.classList.add("bewegt");setTimeout(function(){if(!window.gsap)h.classList.remove("bewegt")},2500)}})(document.documentElement)</script>
 <script src="assets/js/lib/gsap.min.js?v=47da594c" defer></script>
 <script src="assets/js/lib/ScrollTrigger.min.js?v=ba1fa78e" defer></script>
-<script src="assets/js/site.js?v=f4c71054" defer></script>
+<script src="assets/js/site.js?v=06528ad2" defer></script>
 </head>
 <body class="seite-aktuelles">
 <a class="sprung" href="#inhalt">Zum Inhalt springen</a>
@@ -59,29 +59,29 @@
       <p class="lead">Camps in den Sommerferien, Turniere im Verein und Abende auf der Terrasse.</p>
     </div>
     <div class="seitenkopf__neben" data-auftritt-text>
-      <b>Am Aushang</b>
-      <p>Aktivitäten und Spielpläne der Saison werden auf der Infotafel im Club veröffentlicht. Für Termine und Einzelheiten fragen Sie bitte direkt bei uns nach.</p>
+      <b>Schwarzes Brett</b>
+      <p>Hier veröffentlicht der Vorstand Mitteilungen und Termine, sobald sie feststehen.</p>
     </div>
   </div>
 </section>
 
-<section class="abschnitt" id="brett" aria-labelledby="brett-titel" data-brett hidden>
+<section class="abschnitt" id="brett" aria-labelledby="brett-titel" data-brett>
   <div class="rahmen">
     <div class="kopfzeile">
       <h2 id="brett-titel">Schwarzes Brett</h2>
       <div><p>Mitteilungen des Vorstands. Wichtiges steht oben.</p></div>
     </div>
-    <ul class="brett" data-brett-liste></ul>
+    <ul class="brett" data-brett-liste><li class="brett__leer">Zurzeit gibt es keine neuen Mitteilungen.</li></ul>
   </div>
 </section>
 
-<section class="abschnitt" id="termine" aria-labelledby="termine-titel" data-termine hidden>
+<section class="abschnitt" id="termine" aria-labelledby="termine-titel" data-termine>
   <div class="rahmen">
     <div class="kopfzeile">
       <h2 id="termine-titel">Termine</h2>
       <div><p>Die nächsten Veranstaltungen auf der Anlage und im Verein.</p></div>
     </div>
-    <ul class="termine" data-termine-liste></ul>
+    <ul class="brett brett--termine" data-termine-liste><li class="brett__leer">Die nächsten Termine werden hier eingetragen, sobald sie feststehen.</li></ul>
   </div>
 </section>
 
@@ -89,7 +89,7 @@
   <div class="rahmen">
     <div class="kopfzeile">
       <h2 id="programm-titel">Was jedes Jahr stattfindet</h2>
-      <div><p>Termine und Einzelheiten hängen am Aushang im Club und stehen, sobald sie feststehen, oben unter Termine.</p></div>
+      <div><p>Die genauen Daten stehen oben am schwarzen Brett, sobald sie feststehen.</p></div>
     </div>
     <ul class="aushang">
       <li id="camps">
@@ -112,7 +112,7 @@
             <li>Familientennisolympiade</li>
           </ul>
         </div>
-        <a class="aushang__wie weiter" href="kontakt.html?anliegen=sonstiges#formular">Termine erfragen</a>
+        <a class="aushang__wie weiter" href="#termine">Zu den Terminen</a>
       </li>
       <li id="gesellig">
         <span class="aushang__wann">Über die Saison verteilt</span>
@@ -146,23 +146,6 @@
       <summary><h2 id="archiv-titel">Archiv</h2><span>Vergangene Termine und ältere Mitteilungen</span></summary>
       <ul class="brett brett--archiv" data-archiv-liste></ul>
     </details>
-  </div>
-</section>
-
-<section class="abschnitt" aria-labelledby="fragen-titel">
-  <div class="rahmen raster anschnitt">
-    <figure class="foto foto--43 anschnitt__foto bis-links">
-      <img src="assets/img/galerie/sommerfest-01.jpg" width="798" height="598" alt="Gäste an langen Tischen im Biergarten unter Sonnenschirmen" loading="lazy">
-    </figure>
-    <div class="anschnitt__text">
-      <h2 id="fragen-titel">Termine erfahren Sie im Club</h2>
-      <p>Rufen Sie an oder schreiben Sie uns, wir sagen Ihnen, was als Nächstes ansteht.</p>
-      <div class="verzeichnis" style="margin-top:2rem;grid-template-columns:1fr">
-        <div><h3>Christos, mobil</h3><p><a href="tel:+491729138965">0172 913 89 65</a></p></div>
-        <div><h3>Club</h3><p><a href="tel:+498932210100">089 32 21 01 00</a></p></div>
-        <div><h3>E-Mail</h3><p><a href="mailto:tc@philathlos.de">tc@philathlos.de</a></p></div>
-      </div>
-    </div>
   </div>
 </section>
 </main>
