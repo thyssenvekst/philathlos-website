@@ -48,44 +48,8 @@ SYMBOLE = {
 }
 
 
-# ---------------------------------------------------------------------------
-# Der Platz: Tennisplatz in echten Maßen (Meter), als Linienzeichnung.
-# Länge 23,77 m, Breite Doppel 10,97 m, Einzel 8,23 m, Aufschlaglinie 6,40 m
-# vom Netz. Auslauf: 3 m hinter der Grundlinie, 2 m neben der Seitenlinie.
-# Jede Linie ist ein eigener Pfad mit pathLength="1", damit GSAP sie ziehen kann.
-# ---------------------------------------------------------------------------
-L, B, E = 23.77, 10.97, 1.37
-AUF = 5.485            # Grundlinie bis Aufschlaglinie (11,885 - 6,40)
-NETZ = L / 2
-MITTE = B / 2
-LINIEN = [
-    ("grund", (0, 0), (0, B)), ("grund", (L, 0), (L, B)),
-    ("seite", (0, 0), (L, 0)), ("seite", (0, B), (L, B)),
-    ("seite", (0, E), (L, E)), ("seite", (0, B - E), (L, B - E)),
-    ("auf", (AUF, E), (AUF, B - E)), ("auf", (L - AUF, E), (L - AUF, B - E)),
-    ("mitte", (AUF, MITTE), (L - AUF, MITTE)),
-    ("mark", (0, MITTE), (0.2, MITTE)), ("mark", (L - 0.2, MITTE), (L, MITTE)),
-]
-
-
-def platz_svg(hoch: bool = False) -> str:
-    def pt(x, y):
-        return (round(y, 3), round(x, 3)) if hoch else (round(x, 3), round(y, 3))
-    box = "-2 -3 14.97 29.77" if hoch else "-3 -2 29.77 14.97"
-    teile = []
-    for art, a, b in LINIEN:
-        (x1, y1), (x2, y2) = pt(*a), pt(*b)
-        teile.append(f'<path class="platz__linie platz__linie--{art}" d="M{x1} {y1}L{x2} {y2}" pathLength="1"/>')
-    (x1, y1), (x2, y2) = pt(NETZ, -0.914), pt(NETZ, B + 0.914)
-    teile.append(f'<path class="platz__netz" d="M{x1} {y1}L{x2} {y2}" pathLength="1"/>')
-    form = "hoch" if hoch else "quer"
-    return (f'<svg class="platz__zeichnung platz__zeichnung--{form}" viewBox="{box}" '
-            f'aria-hidden="true" focusable="false">{"".join(teile)}</svg>')
-
-
 def ersetze_symbole(text: str) -> str:
     text = re.sub(r"\s*\{\{pfeil\}\}", "", text)
-    text = text.replace("{{platz_quer}}", platz_svg()).replace("{{platz_hoch}}", platz_svg(hoch=True))
     return re.sub(r"\{\{(\w+)\}\}", lambda m: SYMBOLE.get(m.group(1), m.group(0)), text)
 
 
@@ -102,49 +66,46 @@ def kopfblock(text: str):
     return meta, text
 
 
-def nav_liste(aktiv: str) -> str:
+def nav_liste(eintraege, aktiv: str) -> str:
     teile = []
-    for datei, name in NAV:
+    for datei, name in eintraege:
         cur = ' aria-current="page"' if datei == aktiv else ""
         teile.append(f'<li><a href="{datei}"{cur}>{name}</a></li>')
     return "".join(teile)
 
 
-def logo(gross: int = 44) -> str:
+def marke(gross: int = 52, klasse: str = "marke") -> str:
     return (
-        f'<a class="logo" href="index.html" aria-label="T.C. Philathlos München, zur Startseite">'
+        f'<a class="{klasse}" href="index.html" aria-label="T.C. Philathlos München, zur Startseite">'
         f'<img src="assets/img/wappen.svg" width="{gross}" height="{gross}" alt="">'
-        f'<span class="logo__text"><span class="logo__name">T.C. Philathlos</span>'
-        f'<span class="logo__zusatz">München, seit 1995</span></span></a>'
+        f'<span class="marke__name">T.C. Philathlos<span>München</span></span></a>'
     )
 
 
 def kopf(aktiv: str) -> str:
+    links, rechts = NAV[:4], NAV[4:]
     return f"""<a class="sprung" href="#inhalt">Zum Inhalt springen</a>
 <header class="kopf">
-  <div class="kopf__innen">
-    {logo()}
-    <nav class="hauptnav" aria-label="Hauptnavigation"><ul>{nav_liste(aktiv)}</ul></nav>
-    <div class="kopf__aktion">
-      <a class="knopf knopf--gelb knopf--klein kopf__schnuppern" href="mitgliedschaft.html#schnuppern"><span>Schnupperstunde</span></a>
-      <a class="kopf__anruf" href="tel:+491729138965" aria-label="Christos anrufen, 0172 913 89 65">{SYMBOLE["telefon"].replace('class="symbol" ', '')}<span>Anrufen</span></a>
-      <button class="menue-knopf" type="button" aria-expanded="false" aria-controls="menue"><span class="menue-knopf__striche" aria-hidden="true"><i></i><i></i></span><span class="menue-knopf__text">Menü</span></button>
-    </div>
-  </div>
+  <nav class="kopf__innen" aria-label="Hauptnavigation">
+    <ul class="kopf__liste kopf__liste--links">{nav_liste(links, aktiv)}</ul>
+    {marke()}
+    <ul class="kopf__liste kopf__liste--rechts">{nav_liste(rechts, aktiv)}</ul>
+    <button class="menue-knopf" type="button" aria-expanded="false" aria-controls="menue">Menü</button>
+  </nav>
 </header>
 <dialog class="menue" id="menue" aria-label="Menü">
   <div class="menue__innen">
     <div class="menue__kopf">
-      {logo(40)}
+      {marke(44, "marke marke--hell")}
       <button class="schliessen" type="button">Schließen {SYMBOLE["schliessen"]}</button>
     </div>
-    <nav class="menue__nav" aria-label="Hauptnavigation, Menü"><ul><li><a href="index.html"{' aria-current="page"' if aktiv == "index.html" else ""}>Start</a></li>{nav_liste(aktiv)}</ul></nav>
+    <nav class="menue__nav" aria-label="Hauptnavigation, Menü"><ul><li><a href="index.html"{' aria-current="page"' if aktiv == "index.html" else ""}>Start</a></li>{nav_liste(NAV, aktiv)}</ul></nav>
     <div class="menue__kontakt">
-      <a class="knopf knopf--gelb" href="mitgliedschaft.html#schnuppern"><span>Schnupperstunde vereinbaren</span></a>
-      <p><a href="tel:+491729138965">0172 913 89 65</a> <span>Christos, Tennisschule</span></p>
-      <p><a href="tel:+498932210100">089 32 21 01 00</a> <span>Club</span></p>
+      <a class="knopf knopf--gelb" href="mitgliedschaft.html#schnuppern">Schnupperstunde vereinbaren</a>
+      <p><a href="tel:+491729138965">0172 913 89 65</a>, Christos, Tennisschule</p>
+      <p><a href="tel:+498932210100">089 32 21 01 00</a>, Club</p>
       <p><a href="mailto:tc@philathlos.de">tc@philathlos.de</a></p>
-      <p class="menue__adresse">Föhringer Ring 5, 80805 München<br>U6, Haltestelle Studentenstadt</p>
+      <p>Föhringer Ring 5, 80805 München<br>U6, Haltestelle Studentenstadt</p>
     </div>
   </div>
 </dialog>"""
@@ -153,39 +114,46 @@ def kopf(aktiv: str) -> str:
 def fuss() -> str:
     seiten = "".join(f'<li><a href="{d}">{n}</a></li>' for d, n in NAV)
     return f"""<footer class="fuss">
-  <div class="rahmen">
-    <div class="fuss__oben">
-      <img class="fuss__wappen" src="assets/img/wappen.svg" width="96" height="96" alt="Wappen des T.C. Philathlos München" loading="lazy">
-      <p class="fuss__adresse">Föhringer Ring 5<br>80805 München</p>
-      <p class="fuss__weg">Tennisverein in der Beach-Arena.<br>U6, Haltestelle Studentenstadt. Parkplätze an der Anlage.<br><a class="weiter" href="{OSM}" rel="noopener">Route auf OpenStreetMap</a></p>
-    </div>
-    <div class="fuss__raster">
+  <div class="rahmen fuss__innen">
+    <div class="fuss__ort">
+      <img src="assets/img/wappen.svg" width="88" height="88" alt="Wappen des T.C. Philathlos München" loading="lazy">
       <div>
-        <h2>Telefon und E-Mail</h2>
-        <ul>
-          <li><a href="tel:+491729138965">0172 913 89 65</a> <span>Christos, mobil</span></li>
-          <li><a href="tel:+498932210100">089 32 21 01 00</a> <span>Club</span></li>
-          <li>089 32 21 01 01 <span>Fax</span></li>
-          <li><a href="mailto:tc@philathlos.de">tc@philathlos.de</a></li>
-        </ul>
+        <p class="fuss__adresse"><a href="{OSM}" rel="noopener">Föhringer Ring 5<br>80805 München</a></p>
+        <p>Tennisverein in der Beach-Arena. U6, Haltestelle Studentenstadt. Parkplätze an der Anlage.</p>
       </div>
-      <div>
-        <h2>Post</h2>
-        <address>T.C. Philathlos München e.V.<br>c/o Christos Theodosiadis<br>Marianne-Brandt-Str. 20<br>80807 München</address>
-      </div>
-      <nav id="seiten" aria-label="Alle Seiten">
-        <h2>Seiten</h2>
-        <ul class="fuss__seiten"><li><a href="index.html">Start</a></li>{seiten}</ul>
-      </nav>
     </div>
+    <div class="fuss__block">
+      <h2>Telefon und E-Mail</h2>
+      <ul>
+        <li><a href="tel:+491729138965">0172 913 89 65</a> Christos, mobil</li>
+        <li><a href="tel:+498932210100">089 32 21 01 00</a> Club</li>
+        <li>089 32 21 01 01 Fax</li>
+        <li><a href="mailto:tc@philathlos.de">tc@philathlos.de</a></li>
+      </ul>
+    </div>
+    <div class="fuss__block">
+      <h2>Post</h2>
+      <address>T.C. Philathlos München e.V.<br>c/o Christos Theodosiadis<br>Marianne-Brandt-Str. 20<br>80807 München</address>
+    </div>
+    <nav class="fuss__block" id="seiten" aria-label="Alle Seiten">
+      <h2>Seiten</h2>
+      <ul class="fuss__seiten"><li><a href="index.html">Start</a></li>{seiten}</ul>
+    </nav>
     <div class="fuss__unten">
       <p>© {JAHR} T.C. Philathlos München e.V.</p>
-      <ul class="fuss__verbaende" aria-label="Vereinsnummern"><li>BLSV 13425</li><li>BTV 01115</li><li>DTB 2611</li></ul>
-      <ul class="fuss__recht"><li><a href="impressum.html">Impressum</a></li><li><a href="datenschutz.html">Datenschutz</a></li></ul>
+      <p>BLSV 13425, BTV 01115, DTB 2611</p>
+      <ul><li><a href="impressum.html">Impressum</a></li><li><a href="datenschutz.html">Datenschutz</a></li></ul>
     </div>
   </div>
 </footer>"""
 
+
+def leiste() -> str:
+    """Telefonleiste für schmale Bildschirme (per CSS nur dort sichtbar)."""
+    return """<nav class="leiste" aria-label="Schnellkontakt">
+  <a class="leiste__anruf" href="tel:+491729138965">Anrufen</a>
+  <a class="leiste__haupt" href="mitgliedschaft.html#schnuppern">Schnupperstunde</a>
+</nav>"""
 
 def strukturdaten() -> str:
     daten = {
@@ -235,7 +203,7 @@ def seite(datei: str, meta: dict, inhalt: str) -> str:
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{voll}</title>
 <meta name="description" content="{beschreibung}">
-{robots}{kanon}<meta name="theme-color" content="#1c3a2b">
+{robots}{kanon}<meta name="theme-color" content="#1b3f94">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="de_DE">
 <meta property="og:site_name" content="T.C. Philathlos München e.V.">
@@ -246,8 +214,8 @@ def seite(datei: str, meta: dict, inhalt: str) -> str:
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="preload" href="assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/newsreader.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/vollkorn.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/fira-sans-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/site.css?v={version("assets/css/site.css")}">
 <script>(function(h){{if(matchMedia("(prefers-reduced-motion: no-preference)").matches){{h.classList.add("bewegt");setTimeout(function(){{if(!window.gsap)h.classList.remove("bewegt")}},2500)}}}})(document.documentElement)</script>
 <script src="assets/js/lib/gsap.min.js?v={version("assets/js/lib/gsap.min.js")}" defer></script>
@@ -260,6 +228,7 @@ def seite(datei: str, meta: dict, inhalt: str) -> str:
 {inhalt.strip()}
 </main>
 {fuss()}
+{leiste()}
 </body>
 </html>
 """

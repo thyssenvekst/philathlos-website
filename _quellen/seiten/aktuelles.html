@@ -4,36 +4,59 @@ beschreibung: Was beim T.C. Philathlos München in der Saison ansteht: Tennis- u
 nav: aktuelles.html
 bild: galerie/sommerfest-03.jpg
 -->
-<section class="kopf-aktuell" aria-labelledby="seiten-titel">
+<section class="seitenkopf" aria-labelledby="seiten-titel">
   <div class="rahmen raster">
-    <div class="kopf-aktuell__titel" data-auftritt>
+    <div class="seitenkopf__text" data-auftritt-text>
       <h1 id="seiten-titel">Was in der Saison ansteht</h1>
-      <p class="lead" style="margin-top:1.5rem">Camps in den Sommerferien, Turniere im Verein und Abende auf der Terrasse.</p>
+      <p class="lead">Camps in den Sommerferien, Turniere im Verein und Abende auf der Terrasse.</p>
     </div>
-    <div class="kopf-aktuell__tafel" data-auftritt>
+    <div class="seitenkopf__neben" data-auftritt-text>
       <b>Am Aushang</b>
       <p>Aktivitäten und Spielpläne der Saison werden auf der Infotafel im Club veröffentlicht. Für Termine und Einzelheiten fragen Sie bitte direkt bei uns nach.</p>
     </div>
   </div>
 </section>
 
-<section class="abschnitt abschnitt--eng" aria-labelledby="programm-titel">
+<section class="abschnitt" id="brett" aria-labelledby="brett-titel" data-brett hidden>
   <div class="rahmen">
-    <h2 class="sr" id="programm-titel">Veranstaltungen im Überblick</h2>
-    <ul class="termine">
-      <li id="camps" data-zeigen>
-        <span class="termine__wann">Sommerferien</span>
-        <div class="termine__was">
+    <div class="kopfzeile">
+      <h2 id="brett-titel">Schwarzes Brett</h2>
+      <div><p>Mitteilungen des Vorstands. Wichtiges steht oben.</p></div>
+    </div>
+    <ul class="brett" data-brett-liste></ul>
+  </div>
+</section>
+
+<section class="abschnitt" id="termine" aria-labelledby="termine-titel" data-termine hidden>
+  <div class="rahmen">
+    <div class="kopfzeile">
+      <h2 id="termine-titel">Termine</h2>
+      <div><p>Die nächsten Veranstaltungen auf der Anlage und im Verein.</p></div>
+    </div>
+    <ul class="termine" data-termine-liste></ul>
+  </div>
+</section>
+
+<section class="abschnitt" aria-labelledby="programm-titel">
+  <div class="rahmen">
+    <div class="kopfzeile">
+      <h2 id="programm-titel">Was jedes Jahr stattfindet</h2>
+      <div><p>Termine und Einzelheiten hängen am Aushang im Club und stehen, sobald sie feststehen, oben unter Termine.</p></div>
+    </div>
+    <ul class="aushang">
+      <li id="camps">
+        <span class="aushang__wann">Sommerferien</span>
+        <div class="aushang__was">
           <h3>Tennis- und Beachsportcamps</h3>
           <p>Während der Sommerferien täglich Tennis und Beachsport, dazu Ferienkurse und Trainingscamps für Kinder.</p>
         </div>
-        <a class="termine__wie weiter" href="tel:+491729138965">Anmeldung bei Christos, 0172 913 89 65</a>
+        <a class="aushang__wie weiter" href="tel:+491729138965">Anmeldung bei Christos, 0172 913 89 65</a>
       </li>
-      <li id="turniere" data-zeigen>
-        <span class="termine__wann">Saison</span>
-        <div class="termine__was">
+      <li id="turniere">
+        <span class="aushang__wann">Saison</span>
+        <div class="aushang__was">
           <h3>Turniere im Verein</h3>
-          <ul class="liste liste--zwei">
+          <ul>
             <li>Clubmeisterschaft</li>
             <li>Schleifchenturnier</li>
             <li>Tie-Break-Turnier</li>
@@ -41,13 +64,13 @@ bild: galerie/sommerfest-03.jpg
             <li>Familientennisolympiade</li>
           </ul>
         </div>
-        <a class="termine__wie weiter" href="kontakt.html?anliegen=sonstiges#formular">Termine erfragen</a>
+        <a class="aushang__wie weiter" href="kontakt.html?anliegen=sonstiges#formular">Termine erfragen</a>
       </li>
-      <li id="gesellig" data-zeigen>
-        <span class="termine__wann">Saison</span>
-        <div class="termine__was">
+      <li id="gesellig">
+        <span class="aushang__wann">Über die Saison verteilt</span>
+        <div class="aushang__was">
           <h3>Gesellig, für alle</h3>
-          <ul class="liste liste--zwei">
+          <ul>
             <li>Doppel-Abend und Kennenlernnachmittag</li>
             <li>Lauftreffs</li>
             <li>Grillfest und Sommerfest</li>
@@ -55,32 +78,41 @@ bild: galerie/sommerfest-03.jpg
             <li>Tenniscamp in Griechenland</li>
           </ul>
         </div>
-        <a class="termine__wie weiter" href="galerie.html#sommerfest">Bilder von Sommerfesten</a>
+        <a class="aushang__wie weiter" href="galerie.html#sommerfest">Bilder von Sommerfesten</a>
       </li>
-      <li id="mannschaften" data-zeigen>
-        <span class="termine__wann">Spielbetrieb</span>
-        <div class="termine__was">
+      <li id="mannschaften">
+        <span class="aushang__wann">Spielbetrieb</span>
+        <div class="aushang__was">
           <h3>Mannschaften</h3>
           <p>Die Mannschaften des Vereins spielen auf der Tennisanlage bei der Beach-Arena. Wer mitspielen möchte, meldet sich bei Christos.</p>
         </div>
-        <a class="termine__wie weiter" href="tennisschule.html#mannschaften">Zu den Mannschaften</a>
+        <a class="aushang__wie weiter" href="tennisschule.html#mannschaften">Zu den Mannschaften</a>
       </li>
     </ul>
   </div>
 </section>
 
-<section class="abschnitt abschnitt--tief" aria-labelledby="fragen-titel">
-  <div class="rahmen raster paar">
-    <figure class="bild bild--43 paar__bild" style="grid-column:1 / span 5">
-      <div class="bild__rahmen"><img src="assets/img/galerie/sommerfest-04.jpg" width="798" height="598" alt="Sommerfest in der Abenddämmerung, Gäste an den Tischen am Bistro" loading="lazy"></div>
+<section class="abschnitt" id="archiv" aria-labelledby="archiv-titel" data-archiv hidden>
+  <div class="rahmen">
+    <details class="archiv">
+      <summary><h2 id="archiv-titel">Archiv</h2><span>Vergangene Termine und ältere Mitteilungen</span></summary>
+      <ul class="brett brett--archiv" data-archiv-liste></ul>
+    </details>
+  </div>
+</section>
+
+<section class="abschnitt" aria-labelledby="fragen-titel">
+  <div class="rahmen raster anschnitt">
+    <figure class="foto foto--43 anschnitt__foto bis-links">
+      <img src="assets/img/galerie/sommerfest-01.jpg" width="798" height="598" alt="Gäste an langen Tischen im Biergarten unter Sonnenschirmen" loading="lazy">
     </figure>
-    <div class="paar__text" style="grid-column:7 / -1">
-      <h2 id="fragen-titel" data-zeigen>Termine erfahren Sie im Club</h2>
-      <p data-zeigen>Rufen Sie an oder schreiben Sie uns, wir sagen Ihnen, was als Nächstes ansteht.</p>
-      <div class="verzeichnis" style="margin-top:2rem" data-zeigen>
-        <div><h3>Christos, mobil</h3><p><a class="gross" href="tel:+491729138965">0172 913 89 65</a></p></div>
-        <div><h3>Club</h3><p><a class="gross" href="tel:+498932210100">089 32 21 01 00</a></p></div>
-        <div><h3>E-Mail</h3><p><a class="gross" href="mailto:tc@philathlos.de">tc@philathlos.de</a></p></div>
+    <div class="anschnitt__text">
+      <h2 id="fragen-titel">Termine erfahren Sie im Club</h2>
+      <p>Rufen Sie an oder schreiben Sie uns, wir sagen Ihnen, was als Nächstes ansteht.</p>
+      <div class="verzeichnis" style="margin-top:2rem;grid-template-columns:1fr">
+        <div><h3>Christos, mobil</h3><p><a href="tel:+491729138965">0172 913 89 65</a></p></div>
+        <div><h3>Club</h3><p><a href="tel:+498932210100">089 32 21 01 00</a></p></div>
+        <div><h3>E-Mail</h3><p><a href="mailto:tc@philathlos.de">tc@philathlos.de</a></p></div>
       </div>
     </div>
   </div>

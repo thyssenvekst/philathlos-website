@@ -4,27 +4,29 @@ beschreibung: Mitglied werden beim T.C. Philathlos München, ohne Aufnahmegebüh
 nav: mitgliedschaft.html
 bild: plaetze-spielbetrieb.jpg
 -->
-<section class="seitenkopf" aria-labelledby="seiten-titel">
-  <div class="rahmen raster kopf-mitglied">
-    <div class="kopf-mitglied__titel" data-auftritt>
+<section class="seitenkopf" aria-labelledby="seiten-titel" data-auftritt>
+  <div class="rahmen raster">
+    <div class="seitenkopf__text" data-auftritt-text>
       <h1 id="seiten-titel">Mitglied werden</h1>
       <p class="lead">Schnuppern Sie rein in unseren Verein, mit Sport und Geselligkeit. Rufen Sie uns an, wir vereinbaren gern eine Schnupperstunde.</p>
     </div>
-    <div class="kopf-mitglied__fakt" data-auftritt>
+    <div class="seitenkopf__neben" data-auftritt-text>
       <b>Keine Aufnahmegebühr</b>
       <p>Kinder bis 12 Jahre ab 60 Euro im Jahr, Familien mit eigenen Beiträgen.</p>
     </div>
+    <figure class="foto foto--32 seitenkopf__bild bis-rechts" style="grid-column:5 / -1">
+      <img src="assets/img/galerie/anlage-01.jpg" width="798" height="478" alt="Spielbetrieb auf den Sandplätzen, dahinter hohe Bäume" fetchpriority="high">
+    </figure>
   </div>
 </section>
 
-<section class="abschnitt abschnitt--ziegel beitraege" id="beitraege" aria-labelledby="beitraege-titel">
-  <span class="beitraege__linie beitraege__linie--quer" aria-hidden="true"></span><span class="beitraege__linie beitraege__linie--laengs" aria-hidden="true"></span>
-  <div class="rahmen raster">
+<section class="abschnitt abschnitt--stein" id="beitraege" aria-labelledby="beitraege-titel">
+  <div class="rahmen raster beitraege">
     <div class="beitraege__kopf">
-      <h2 id="beitraege-titel" data-zeigen>Jahresbeiträge</h2>
-      <p data-zeigen>Eine Aufnahmegebühr gibt es nicht. Für Familien gibt es eigene Beiträge, wer den Verein nur fördern möchte, wird passives Mitglied.</p>
+      <h2 id="beitraege-titel">Jahresbeiträge</h2>
+      <p>Eine Aufnahmegebühr gibt es nicht. Für Familien gibt es eigene Beiträge, wer den Verein nur fördern möchte, wird passives Mitglied.</p>
     </div>
-    <div class="beitraege__tabelle" data-zeigen>
+    <div class="beitraege__tabelle">
       <table class="preise">
         <caption>Alle Angaben in Euro pro Jahr.</caption>
         <thead><tr><th scope="col">Mitgliedschaft</th><th scope="col">Euro pro Jahr</th></tr></thead>
@@ -51,17 +53,17 @@ bild: plaetze-spielbetrieb.jpg
 
 <section class="abschnitt" id="schnuppern" aria-labelledby="schnuppern-titel">
   <div class="rahmen">
-    <div class="spalten" style="margin-bottom:clamp(2.5rem,5vw,4rem)">
-      <header class="spalten__kopf"><h2 id="schnuppern-titel" data-zeigen>In drei Schritten auf den Platz</h2></header>
-      <p class="spalten__inhalt lead" data-zeigen>Schnuppertennis zum Kennenlernen gibt es für Kinder und Erwachsene. Alles Weitere, etwa wann es passt, klärt Christos am Telefon.</p>
+    <div class="kopfzeile">
+      <h2 id="schnuppern-titel">In drei Schritten auf den Platz</h2>
+      <div><p>Schnuppertennis zum Kennenlernen gibt es für Kinder und Erwachsene. Alles Weitere, etwa wann es passt, klärt Christos am Telefon.</p></div>
     </div>
     <ol class="schritte">
-      <li data-zeigen><span class="nr" aria-hidden="true">1</span><h3>Anrufen oder schreiben</h3><p>Christos erreichen Sie unter <a href="tel:+491729138965">0172 913 89 65</a>, den Club unter <a href="tel:+498932210100">089 32 21 01 00</a> oder per E-Mail an <a href="mailto:tc@philathlos.de">tc@philathlos.de</a>.</p></li>
-      <li data-zeigen><span class="nr" aria-hidden="true">2</span><h3>Schnuppern</h3><p>Wir vereinbaren eine Schnupperstunde und zeigen Ihnen die Anlage.</p></li>
-      <li data-zeigen><span class="nr" aria-hidden="true">3</span><h3>Mitglied werden</h3><p>Wenn es Ihnen gefällt, werden Sie Mitglied, ohne Aufnahmegebühr.</p></li>
+      <li><span class="nr" aria-hidden="true">1</span><h3>Anrufen oder schreiben</h3><p>Christos erreichen Sie unter <a href="tel:+491729138965">0172 913 89 65</a>, den Club unter <a href="tel:+498932210100">089 32 21 01 00</a> oder per E-Mail an <a href="mailto:tc@philathlos.de">tc@philathlos.de</a>.</p></li>
+      <li><span class="nr" aria-hidden="true">2</span><h3>Schnuppern</h3><p>Wir vereinbaren eine Schnupperstunde und zeigen Ihnen die Anlage.</p></li>
+      <li><span class="nr" aria-hidden="true">3</span><h3>Mitglied werden</h3><p>Wenn es Ihnen gefällt, werden Sie Mitglied, ohne Aufnahmegebühr.</p></li>
     </ol>
-    <div class="aktionen" data-zeigen>
-      <a class="knopf knopf--gelb" href="tel:+491729138965">{{telefon}}<span>Christos anrufen, 0172 913 89 65</span></a>
+    <div class="aktionen" style="margin-top:var(--luft-klein)">
+      <a class="knopf" href="tel:+491729138965">{{telefon}}Christos anrufen, 0172 913 89 65</a>
       <a class="weiter" href="kontakt.html?anliegen=mitgliedschaft#formular">Lieber schreiben</a>
     </div>
   </div>

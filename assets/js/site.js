@@ -1,4 +1,4 @@
-/* T.C. Philathlos München – Interaktionen und Bewegung („Platzraster“).
+/* T.C. Philathlos München – Interaktionen und Bewegung („Pergola“).
    Ohne Cookies, ohne Tracking. GSAP 3.12.5 und ScrollTrigger liegen selbst
    gehostet unter assets/js/lib/. Alles funktioniert auch ohne JavaScript und
    ohne GSAP; hier wird nur verfeinert. Wer „Bewegung reduzieren“ eingestellt
@@ -41,7 +41,7 @@
       menue.classList.add("ist-animiert");
       menueTl = G.timeline({ paused: true, defaults: { ease: "power3.out" } })
         .fromTo(menue, { opacity: 0 }, { opacity: 1, duration: 0.25 })
-        .fromTo(menue.querySelectorAll(".menue__nav a"), { yPercent: 105 }, { yPercent: 0, duration: 0.7, stagger: 0.04 }, 0.05)
+        .fromTo(menue.querySelectorAll(".menue__nav li"), { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.035 }, 0.05)
         .fromTo(menue.querySelectorAll(".menue__kontakt > *"), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45, stagger: 0.04 }, 0.3);
     }
     var schliessen = function () {
@@ -63,25 +63,9 @@
     menue.addEventListener("cancel", function (e) { e.preventDefault(); schliessen(); });
     menue.querySelector(".schliessen").addEventListener("click", schliessen);
     menue.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", function () { menue.close(); }); });
-    window.addEventListener("resize", function () { if (window.innerWidth >= 1240 && menue.open) menue.close(); });
+    window.addEventListener("resize", function () { if (window.innerWidth >= 1180 && menue.open) menue.close(); });
   } else if (menueKnopf) {
     menueKnopf.addEventListener("click", function () { location.hash = "seiten"; });
-  }
-
-  /* ---------- Index „Was es bei uns gibt“: Bild wechselt mit Maus und Tastatur ---------- */
-  var index = d.querySelector("[data-index]");
-  if (index) {
-    var bilder = index.querySelectorAll(".index__bilder img");
-    var eintraege = index.querySelectorAll(".index__eintrag");
-    var aktiv = function (i) {
-      bilder.forEach(function (b, n) { b.classList.toggle("ist-aktiv", n === i); });
-      eintraege.forEach(function (e, n) { e.classList.toggle("ist-aktiv", n === i); });
-    };
-    eintraege.forEach(function (e, i) {
-      var a = e.querySelector("a");
-      a.addEventListener("mouseenter", function () { aktiv(i); });
-      a.addEventListener("focus", function () { aktiv(i); });
-    });
   }
 
   /* ---------- Galerie: Filter und Lichtbild ---------- */
@@ -118,7 +102,7 @@
 
     var lb = d.getElementById("lichtbild");
     if (lb && typeof lb.showModal === "function") {
-      var lbBild = lb.querySelector("img");
+      var lbBild = lb.querySelector(".lichtbild__buehne img") || lb.querySelector(".lichtbild__buehne").appendChild(d.createElement("img"));
       var lbText = lb.querySelector(".lichtbild__text");
       var lbZahl = lb.querySelector(".lichtbild__zahl");
       var sichtbar = [];
@@ -213,111 +197,228 @@
     });
   }
 
+  /* ---------- Inhalte aus der Verwaltung: Hinweis, schwarzes Brett, Termine, Archiv ----------
+     Die Seiten funktionieren auch ohne diese Daten (statische Inhalte bleiben stehen).
+     Alles wird mit textContent gesetzt, nie als HTML: kein Einschleusen von Code möglich. */
+  var brauchtInhalte = d.querySelector("[data-hinweis],[data-aushang],[data-brett],[data-termine],[data-archiv]");
+  if (brauchtInhalte && window.fetch && location.protocol !== "file:") {
+    var MONATE = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
+    var TAGE = ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"];
+    var datum = function (iso, mitTag) {
+      var t = iso.split("-").map(Number);
+      var dt = new Date(t[0], t[1] - 1, t[2]);
+      return (mitTag ? TAGE[dt.getDay()] + ", " : "") + t[2] + ". " + MONATE[t[1] - 1] + " " + t[0];
+    };
+    var el = function (tag, klasse, text) {
+      var e = d.createElement(tag);
+      if (klasse) e.className = klasse;
+      if (text != null) e.textContent = text;
+      return e;
+    };
+    /* Text mit Internetadressen als Links, sicher als Textknoten */
+    var absatz = function (text) {
+      var p = el("p");
+      text.split(/(https?:\/\/[^\s<>"]+)/g).forEach(function (teil, i) {
+        if (i % 2) {
+          var url = teil.replace(/[.,;:!?)]+$/, "");
+          var a = el("a", null, url.replace(/^https?:\/\/(www\.)?/, ""));
+          a.href = url;
+          a.rel = "noopener";
+          p.appendChild(a);
+          if (url.length < teil.length) p.appendChild(d.createTextNode(teil.slice(url.length)));
+        } else if (teil) {
+          teil.split("\n").forEach(function (z, j) { if (j) p.appendChild(el("br")); p.appendChild(d.createTextNode(z)); });
+        }
+      });
+      return p;
+    };
+    var sicher = function (url) { return /^(https?:\/\/|mailto:|tel:|\/|[\w-]+\.html)/i.test(url || "") ? url : null; };
+    var eintrag = function (x, art) {
+      var li = el("li", "brett__eintrag" + (x.wichtig ? " brett__eintrag--wichtig" : ""));
+      li.id = x.id;
+      var wann = el("div", "brett__wann");
+      if (x.wichtig) wann.appendChild(el("span", "brett__marke", "Wichtig"));
+      var zeit = el("time", null, datum(x.datum, art === "termin"));
+      zeit.dateTime = x.datum;
+      wann.appendChild(zeit);
+      if (art === "termin" && x.beginn) wann.appendChild(el("span", "brett__zeit", x.beginn + (x.ende ? "–" + x.ende : "") + " Uhr"));
+      li.appendChild(wann);
+      var was = el("div", "brett__was");
+      was.appendChild(el("h3", null, x.titel));
+      if (art === "termin") was.appendChild(el("p", "brett__ort", x.ort || "Auf der Anlage, Föhringer Ring 5"));
+      (x.absaetze || []).forEach(function (t) { was.appendChild(absatz(t)); });
+      if (x.anhang && x.anhang.url) {
+        var a = el("a", "weiter brett__pdf", x.anhang.titel + " (PDF)");
+        a.href = x.anhang.url;
+        a.target = "_blank";
+        a.rel = "noopener";
+        was.appendChild(a);
+      }
+      li.appendChild(was);
+      if (x.bild && x.bild.url) {
+        var fig = el("figure", "foto brett__bild");
+        var img = el("img");
+        img.src = x.bild.klein || x.bild.url;
+        img.alt = x.bild.alt || "";
+        img.loading = "lazy";
+        img.width = x.bild.breite || 800;
+        img.height = x.bild.hoehe || 600;
+        fig.appendChild(img);
+        li.appendChild(fig);
+      }
+      return li;
+    };
+
+    fetch("api/inhalte.php", { headers: { Accept: "application/json" }, cache: "no-store" })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function (daten) {
+        /* Hinweis oben auf der Startseite */
+        var band = d.querySelector("[data-hinweis]");
+        if (band && daten.hinweis && daten.hinweis.text) {
+          var p = band.querySelector("p");
+          p.textContent = daten.hinweis.text + " ";
+          var ziel = sicher(daten.hinweis.link);
+          if (ziel) { var a = el("a", null, daten.hinweis.linktext || "Mehr erfahren"); a.href = ziel; p.appendChild(a); }
+          band.hidden = false;
+        }
+        /* Startseite „Am Aushang“: wichtige Mitteilungen und die nächsten Termine vorn */
+        var aushang = d.querySelector("[data-aushang]");
+        if (aushang) {
+          var neu = [];
+          (daten.mitteilungen || []).filter(function (m) { return m.wichtig; }).slice(0, 2).forEach(function (m) { neu.push([m, "Mitteilung", "aktuelles.html#" + m.id]); });
+          (daten.termine || []).slice(0, 3).forEach(function (t) { neu.push([t, "Termin", "aktuelles.html#" + t.id]); });
+          neu.reverse().forEach(function (n) {
+            var x = n[0];
+            var li = el("li", "aushang__neu" + (x.wichtig ? " aushang__neu--wichtig" : ""));
+            li.appendChild(el("span", "aushang__wann", n[1] === "Termin" ? datum(x.datum, true) + (x.beginn ? ", " + x.beginn + " Uhr" : "") : (x.wichtig ? "Wichtig" : datum(x.datum))));
+            var was = el("div", "aushang__was");
+            was.appendChild(el("h3", null, x.titel));
+            if (x.absaetze && x.absaetze[0]) was.appendChild(el("p", null, x.absaetze[0].length > 160 ? x.absaetze[0].slice(0, 157) + " …" : x.absaetze[0]));
+            li.appendChild(was);
+            var a = el("a", "aushang__wie weiter", n[1] === "Termin" ? "Zum Termin" : "Ganze Mitteilung");
+            a.href = n[2];
+            li.appendChild(a);
+            aushang.insertBefore(li, aushang.firstChild);
+          });
+        }
+        /* Aktuelles: schwarzes Brett, Termine, Archiv */
+        var fuellen = function (sel, liste, art, leer) {
+          var sek = d.querySelector(sel);
+          if (!sek) return;
+          var ul = sek.querySelector("ul");
+          if (liste.length) liste.forEach(function (x) { ul.appendChild(eintrag(x, art)); });
+          else if (leer) ul.appendChild(el("li", "brett__leer", leer));
+          else return;
+          sek.hidden = false;
+        };
+        fuellen("[data-brett]", daten.mitteilungen || [], "mitteilung", "Zurzeit gibt es keine neuen Mitteilungen.");
+        fuellen("[data-termine]", daten.termine || [], "termin", "Die nächsten Termine werden hier eingetragen, sobald sie feststehen.");
+        var archiv = [].concat((daten.archiv && daten.archiv.termine || []).map(function (t) { t._art = "termin"; return t; }),
+          (daten.archiv && daten.archiv.mitteilungen || []).map(function (m) { m._art = "mitteilung"; m.wichtig = false; return m; }))
+          .sort(function (a, b) { return a.datum < b.datum ? 1 : -1; });
+        var arch = d.querySelector("[data-archiv]");
+        if (arch && archiv.length) {
+          var ula = arch.querySelector("ul");
+          archiv.forEach(function (x) { ula.appendChild(eintrag(x, x._art)); });
+          arch.hidden = false;
+        }
+        /* Sprungziel wie aktuelles.html#t3 nach dem Einfügen anspringen */
+        if (location.hash && /^#[mt]\d+$/.test(location.hash)) {
+          var z = d.getElementById(location.hash.slice(1));
+          if (z) { var det = z.closest("details"); if (det) det.open = true; z.scrollIntoView(); }
+        }
+        if (window.ScrollTrigger) window.ScrollTrigger.refresh();
+      })
+      .catch(function () { /* ohne Verwaltung (z. B. rein statisches Hosting) bleiben die festen Inhalte stehen */ });
+  }
+
+  /* ---------- Telefonleiste (schmal): erscheint nach dem ersten Bildschirm ---------- */
+  var leiste = d.querySelector(".leiste");
+  if (leiste) {
+    var leisteWartet = false;
+    var leistePruefen = function () {
+      var unten = window.innerHeight + window.scrollY >= d.documentElement.scrollHeight - 40;
+      leiste.classList.toggle("ist-da", window.scrollY > window.innerHeight * 0.7 && !unten);
+      leisteWartet = false;
+    };
+    window.addEventListener("scroll", function () { if (!leisteWartet) { leisteWartet = true; requestAnimationFrame(leistePruefen); } }, { passive: true });
+    leistePruefen();
+  }
+
   /* =====================================================================
      Bewegung mit GSAP
      ===================================================================== */
-  /* Grundsatz: ein inszenierter Moment beim Laden, danach nur Antworten auf
-     das Scrollen. Nichts wiederholt sich, nichts läuft dauerhaft. Bewegt
-     werden nur transform, opacity, clip-path und Strichlängen. */
+  /* Grundsatz: ein inszenierter Moment beim Laden (die Fotos des Kopfes),
+     beim Scrollen öffnen sich Fotos einmal leicht, und das Motto wird Wort
+     für Wort dunkel. Texte bewegen sich beim Scrollen nicht. */
   function bewegung() {
     G.registerPlugin(ST);
-    G.defaults({ ease: "power3.out", duration: 0.9 });
+    G.defaults({ ease: "power3.out" });
     var alle = function (sel, ctx) { return [].slice.call((ctx || d).querySelectorAll(sel)); };
-    var platz = d.querySelector(".platz");
 
-    /* 1 · Der Platz: Linien werden gezogen wie nach dem Abziehen, dann Foto und Schrift */
-    if (platz) {
-      var linien = [];
-      ["grund", "seite", "auf", "mitte", "mark"].forEach(function (art) {
-        linien = linien.concat(alle(".platz__linie--" + art, platz));
-      });
-      var netz = alle(".platz__netz", platz);
-      G.set(linien.concat(netz), { strokeDasharray: 1, strokeDashoffset: 1 });
-      var foto = platz.querySelector(".platz__foto");
-      var tl = G.timeline({ delay: 0.15 });
-      tl.to(linien, { strokeDashoffset: 0, duration: 0.85, ease: "power2.inOut", stagger: 0.07 }, 0)
-        .to(netz, { strokeDashoffset: 0, duration: 0.7, ease: "power2.inOut" }, 0.35);
-      if (foto) {
-        tl.fromTo(foto, { autoAlpha: 1, clipPath: "inset(0% 0% 100% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.15, ease: "power3.inOut" }, 0.55)
-          .fromTo(foto.querySelector("img"), { scale: 1.18 }, { scale: 1, duration: 1.8, ease: "power2.out" }, 0.55);
-      }
-      tl.fromTo(".platz__titel", { autoAlpha: 0, y: 26 }, { autoAlpha: 1, y: 0, duration: 1 }, 0.7)
-        .fromTo(".platz__unten", { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 1 }, 0.9)
-        .fromTo(".platz__gasse", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.8, stagger: 0.1 }, 1.1);
+    /* 1 · Kopf der Seite: Fotos öffnen sich nacheinander von unten, danach der Text */
+    var kopfFotos = alle(".diptychon .foto, [data-auftritt] .foto");
+    var kopfText = alle("[data-auftritt-text]");
+    var tl = G.timeline({ delay: 0.1 });
+    var parallaxe = window.matchMedia("(min-width: 900px)").matches;
+    kopfFotos.forEach(function (f, i) {
+      var img = f.querySelector("img");
+      tl.set(img, { visibility: "visible" }, i * 0.18)
+        .fromTo(f, { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.15, ease: "power3.inOut", clearProps: "clipPath" }, i * 0.18);
+      /* Im Diptychon übernimmt ab 900 px die Parallaxe die Bildgröße */
+      if (!(parallaxe && f.closest(".diptychon"))) tl.fromTo(img, { scale: 1.12 }, { scale: 1, duration: 1.7, clearProps: "transform" }, i * 0.18);
+    });
+    if (kopfText.length) {
+      tl.fromTo(kopfText, { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 0.9, stagger: 0.1, clearProps: "transform" }, kopfFotos.length ? 0.55 : 0);
     }
 
-    /* 2 · Seitenköpfe: Titel steigt auf, Bilder öffnen sich. Einmal beim Laden */
-    var auftritt = alle("[data-auftritt]");
-    if (auftritt.length) {
-      var kt = G.timeline({ delay: 0.1 });
-      auftritt.forEach(function (el, i) {
-        var rahmen = el.matches(".bild") ? el.querySelector(".bild__rahmen") : null;
-        var t0 = i * 0.12;
-        if (rahmen) {
-          kt.set(el, { autoAlpha: 1 }, t0)
-            .fromTo(rahmen, { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.2, ease: "power3.inOut" }, t0)
-            .fromTo(rahmen.querySelector("img"), { scale: 1.15 }, { scale: 1, duration: 1.7, ease: "power2.out" }, t0);
-        } else {
-          kt.fromTo(el, { autoAlpha: 0, y: 28 }, { autoAlpha: 1, y: 0, duration: 1 }, t0);
-        }
-      });
-    }
-
-    /* 3 · Texte beim Scrollen: einmal, kurz, nur leicht angehoben */
-    var zeigen = alle("[data-zeigen]");
-    if (zeigen.length) {
-      G.set(zeigen, { opacity: 0, y: 24 });
-      ST.batch(zeigen, {
-        start: "top 90%",
-        once: true,
-        onEnter: function (els) {
-          G.to(els, { opacity: 1, y: 0, duration: 0.85, stagger: 0.08, overwrite: true, clearProps: "transform" });
-        }
-      });
-    }
-
-    /* 4 · Inhaltsbilder öffnen sich von unten; große Bilder bekommen ab 900 px leichte Parallaxe */
-    var parallaxe = ".jugend__bild, .abend__bild, .paar__bild";
-    alle(".bild .bild__rahmen").forEach(function (rahmen) {
-      if (rahmen.closest(".platz, [data-auftritt], .index__bilder")) return;
-      var img = rahmen.querySelector("img");
-      var t = G.timeline({ scrollTrigger: { trigger: rahmen, start: "top 88%", once: true } });
-      t.fromTo(rahmen, { clipPath: "inset(14% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.2 });
-      if (!rahmen.closest(parallaxe)) t.fromTo(img, { scale: 1.12 }, { scale: 1, duration: 1.6, ease: "power2.out" }, 0);
-      var cap = rahmen.parentNode.querySelector("figcaption");
-      if (cap) t.fromTo(cap, { opacity: 0 }, { opacity: 1, duration: 0.6 }, 0.5);
+    /* 2 · Fotos im Inhalt: öffnen sich einmal leicht beim Hineinscrollen */
+    alle(".foto").forEach(function (f) {
+      if (f.closest(".diptychon, [data-auftritt]")) return;
+      var img = f.querySelector("img");
+      G.timeline({ scrollTrigger: { trigger: f, start: "top 90%", once: true } })
+        .fromTo(f, { clipPath: "inset(8% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.1, clearProps: "clipPath" })
+        .fromTo(img, { scale: 1.06 }, { scale: 1, duration: 1.4, clearProps: "transform" }, 0);
     });
 
+    /* 3 · Motto: Wort für Wort von Grau zu Tinte, an die Scrollposition gebunden */
+    alle("[data-motto] p").forEach(function (p) {
+      var worte = p.textContent.trim().split(/\s+/);
+      var text = p.textContent.trim();
+      p.innerHTML = '<span class="sr">' + text + "</span>" + worte.map(function (w) { return '<span class="wort" aria-hidden="true">' + w + "</span>"; }).join(" ");
+      var spans = alle(".wort", p);
+      G.fromTo(spans, { color: "#7a8089" }, {
+        color: "#171c26", ease: "none", stagger: 0.5,
+        scrollTrigger: { trigger: p, start: "top 78%", end: "bottom 42%", scrub: 0.4 }
+      });
+    });
+
+    /* 4 · Nur auf großen Bildschirmen: Tiefe im Kopf der Startseite und der gestapelte Rundgang */
     var mm = G.matchMedia();
     mm.add("(min-width: 900px)", function () {
-      alle(".jugend__bild img, .abend__bild img, .paar__bild img").forEach(function (img) {
-        G.fromTo(img, { yPercent: -4, scale: 1.1 }, {
-          yPercent: 4, scale: 1.1, ease: "none",
-          scrollTrigger: { trigger: img.closest(".bild"), start: "top bottom", end: "bottom top", scrub: 0.6 }
+      /* Parallaxe: das Tagfoto bewegt sich langsamer als die Seite, das Abendfoto etwas schneller.
+         Beide sind leicht vergrößert, damit keine Kante sichtbar wird. */
+      alle(".diptychon .foto").forEach(function (f, i) {
+        var img = f.querySelector("img");
+        G.fromTo(img, { yPercent: 0, scale: 1.12 }, {
+          yPercent: i ? 9 : 6, scale: 1.12, ease: "none",
+          scrollTrigger: { trigger: ".diptychon", start: "top top", end: "bottom top", scrub: true }
         });
       });
-      var stehend = d.querySelector(".index__bilder .bild__rahmen");
-      if (stehend) {
-        G.fromTo(stehend, { clipPath: "inset(0% 0% 100% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.3, ease: "power3.inOut", scrollTrigger: { trigger: stehend, start: "top 85%", once: true } });
-      }
     });
-    mm.add("(max-width: 899px)", function () {
-      alle(".jugend__bild img, .abend__bild img, .paar__bild img").forEach(function (img) {
-        G.fromTo(img, { scale: 1.12 }, { scale: 1, duration: 1.6, ease: "power2.out", scrollTrigger: { trigger: img, start: "top 90%", once: true } });
+    mm.add("(min-width: 900px) and (min-height: 640px)", function () {
+      /* Rundgang: die bedeckte Station tritt etwas zurück, während die nächste darüber gleitet */
+      var stationen = alle(".rundgang__station");
+      stationen.forEach(function (st, i) {
+        var naechste = stationen[i + 1];
+        if (!naechste) return;
+        G.to(st, {
+          scale: 0.965, ease: "none",
+          scrollTrigger: { trigger: naechste, start: "top bottom", end: "top " + (16 + (i + 1) * 52) + "px", scrub: true }
+        });
       });
     });
 
-    /* 5 · Beiträge: Aufschlag- und Mittellinie werden gezogen */
-    alle(".beitraege").forEach(function (b) {
-      var quer = b.querySelector(".beitraege__linie--quer");
-      var laengs = b.querySelector(".beitraege__linie--laengs");
-      if (!quer || !laengs) return;
-      G.timeline({ scrollTrigger: { trigger: b, start: "top 75%", once: true } })
-        .fromTo(quer, { scaleX: 0, transformOrigin: "0% 50%" }, { scaleX: 1, duration: 1.1, ease: "power2.inOut" })
-        .fromTo(laengs, { scaleY: 0, transformOrigin: "50% 0%" }, { scaleY: 1, duration: 1.2, ease: "power2.inOut" }, 0.55);
-    });
-
-    /* Nachberechnung, wenn Schriften und Bilder da sind */
     if (d.fonts && d.fonts.ready) d.fonts.ready.then(function () { ST.refresh(); });
     window.addEventListener("load", function () { ST.refresh(); });
   }

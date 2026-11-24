@@ -1,1 +1,6 @@
 .DS_Store
+# Verwaltung: Zugangsdaten, Datenbank und hochgeladene Dateien gehören nicht ins Repository
+verwaltung/konfiguration.php
+daten/
+medien/*
+!medien/.htaccess

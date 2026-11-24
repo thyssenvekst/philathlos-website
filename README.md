@@ -13,11 +13,13 @@ Läuft auf jedem Webspace (Apache empfohlen wegen `.htaccess`).
 | `assets/css/site.css` | komplettes Designsystem |
 | `assets/js/site.js` | Menü, Galerie mit Lichtbild, Kontaktformular, Bewegung mit GSAP |
 | `assets/js/lib/` | GSAP 3.12.5 und ScrollTrigger (selbst gehostet, kein CDN) |
-| `assets/fonts/` | Archivo (Überschriften, Bedienung), Newsreader (Text), Commissioner nur für griechische Buchstaben; alle selbst gehostet, SIL Open Font License |
+| `assets/fonts/` | Vollkorn (Überschriften und Text, mit griechischem Teilset für φίλαθλος), Fira Sans (Bedienung, Tabellen, kleine Angaben); alle selbst gehostet, SIL Open Font License |
 | `assets/img/` | Fotos, Wappen (`wappen.svg`), Galerie mit Vorschaubildern (`galerie/klein/`) |
 | `.htaccess` | 301-Weiterleitungen der alten Adressen, Caching, Sicherheits-Header |
 | `ueber_uns.html`, `partner.htm`, `impressum.htm`, `Integration.html` | Weiterleitungsseiten für alte Adressen (falls der Server `.htaccess` nicht kennt). `aktuelles.html` ist jetzt wieder eine echte Seite |
-| `DESIGN.md` | Designsystem „Platzraster“: Leitidee, Schrift, Farben, Raster, Bilder, Komponenten, Bewegung, Responsive |
+| `verwaltung/`, `api/`, `medien/` | Verwaltungsbereich für den Vorstand (PHP + SQLite): schwarzes Brett, Termine, Bilder und PDFs, Hinweis auf der Startseite, Benutzer, Sicherung. Einrichtung und Bedienung in `VERWALTUNG.md` |
+| `VERWALTUNG.md` | Entscheidung, Voraussetzungen beim Hoster, Einrichtung, Sicherheit, Kurzanleitung für den Vorstand, Sicherung |
+| `DESIGN.md` | Designsystem „Pergola“: Leitidee, Farbe, Schrift, Raster, Fotografie, Bausteine, Bewegung, Seiten, Responsive |
 
 ## Seiten bearbeiten
 
@@ -30,19 +32,25 @@ CSS und JS bekommen beim Bauen automatisch eine Versionsnummer, damit Besucher n
 
 ## Designsystem in Kürze
 
-**Idee „Platzraster“:** Der Platz ist das Raster. Ziegelmehl (Sandplatz), Kreidelinie, Tanne (Windschutz und Bäume) und Wappengelb. Auf der Startseite ist der Kopf ein Tennisplatz in echten Maßen, dessen Linien beim Laden gezogen werden; das Foto liegt im rechten Feld zwischen Netz und Grundlinie. Ausführlich in `DESIGN.md`.
+**Idee „Pergola“:** Die Fotos führen, das Wappen gibt die Farben. Weiße Fläche, Vereinsfotos in wechselnden Kompositionen (Diptychon, Anschnitt, Trio, Hoch und klein, Paar, Wand), Blau und Gelb aus Wappen, Pergola und Biergartenbänken. Ersetzt die Entwürfe „Ägäis“ und „Platzraster“. Ausführlich in `DESIGN.md`.
 
-**Farben** (Tokens in `:root` von `assets/css/site.css`): Kreide `#f2f3ee`, Tinte `#13241b`, Tanne `#1c3a2b`, Ziegel `#b0461f`, Wappengelb `#f3d23c` (nur Hauptknopf, Fokus, Markierung).
+**Farben** (Tokens in `:root` von `assets/css/site.css`): Papier `#ffffff`, Stein `#f1f2ef`, Tinte `#171c26`, Pergola-Blau `#1b3f94` (Fuß, Menü, Links), Bank-Gelb `#f5dc3a` (Hauptknopf, Schlussband).
 
-**Schrift:** Archivo breit für Überschriften und Bedienung, Newsreader für Text, φίλαθλος in Commissioner.
+**Schrift:** Vollkorn für Überschriften und Text, Fira Sans für Bedienung und kleine Angaben.
 
-**Seiten:** Start, Verein, Anlage (neu), Tennisschule, Clubleben, Aktuelles (neu), Mitgliedschaft, Galerie, Kontakt, Impressum, Datenschutz, 404. Jede Unterseite hat einen eigenen Seitenkopf.
+**Seiten:** Start, Verein, Anlage, Tennisschule, Clubleben, Aktuelles, Mitgliedschaft, Galerie, Kontakt, Impressum, Datenschutz, 404. Jede Seite beginnt mit einer eigenen Bildkomposition.
 
-**Bewegung (GSAP 3.12.5, selbst gehostet):** Linien des Platzes, Seitenköpfe, einmalige Text- und Bild-Reveals, leichte Parallaxe ab 900 px, Kreidelinien bei den Beiträgen, Menü, Galerie-Filter, Lichtbild; Seitenwechsel per View Transition. Bei „Bewegung reduzieren“ ist alles sofort sichtbar.
+**Bewegung (GSAP 3.12.5, selbst gehostet):** Parallaxe im Diptychon der Startseite, Rundgang über die Anlage als gestapelte Stationen, Fotos im Seitenkopf öffnen sich beim Laden, Fotos im Inhalt öffnen sich einmal leicht beim Scrollen, das Vereinsmotto wird Wort für Wort dunkel; dazu Menü, Galerie-Filter, Lichtbild und Seitenwechsel per View Transition. Texte bewegen sich beim Scrollen nicht. Bei „Bewegung reduzieren“ ist alles sofort sichtbar.
+
+## Verwaltung (schwarzes Brett und Termine)
+
+Der Vorstand pflegt Mitteilungen, Termine, Dateien und den Hinweis auf der Startseite selbst unter `/verwaltung/`. Die Inhalte erscheinen sofort auf der Startseite („Am Aushang“, Hinweisband) und unter *Aktuelles* (schwarzes Brett, Termine, Archiv). Voraussetzung ist PHP 8.1+ mit SQLite beim Hoster; ohne PHP bleiben die festen Texte stehen. Alles Weitere in `VERWALTUNG.md`.
+
+Lokal testen: `php -S 127.0.0.1:8770 _quellen/dev-router.php` im Website-Ordner, dazu eine `verwaltung/konfiguration.php` mit `'https_erzwingen' => false`.
 
 ## Veröffentlichen
 
-- Alles außer `_quellen/`, `.git/`, `README.md`, `CLAUDE.md` hochladen (die `.htaccess` sperrt diese Pfade zusätzlich).
+- Alles außer `_quellen/`, `.git/` und den `*.md`-Dateien hochladen (die `.htaccess` sperrt diese Pfade zusätzlich). `verwaltung/konfiguration.php` wird auf dem Server angelegt, siehe `VERWALTUNG.md`.
 - **HTTPS:** Die bisherige Seite ist nur per `http://` erreichbar. Beim Hoster ein SSL-Zertifikat (z. B. Let’s Encrypt) aktivieren, danach in der `.htaccess` die drei auskommentierten Zeilen für HTTPS/www einschalten.
 - Nach dem Umzug die Sitemap (`https://www.philathlos.de/sitemap.xml`) in der Google Search Console einreichen.
 

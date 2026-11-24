@@ -4,111 +4,97 @@ beschreibung: Die Anlage des T.C. Philathlos München an der Beach-Arena: fünf 
 nav: anlage.html
 bild: plaetze-panorama.jpg
 -->
-<section class="seitenkopf kopf-anlage" aria-labelledby="seiten-titel">
+<section class="seitenkopf" aria-labelledby="seiten-titel" data-auftritt>
   <div class="rahmen raster">
-    <div style="grid-column:1 / span 8" data-auftritt>
+    <div class="seitenkopf__text" data-auftritt-text>
       <h1 id="seiten-titel">Fünf Sandplätze an der Beach-Arena</h1>
       <p class="lead">Im Münchner Norden, direkt an der U6 Studentenstadt: Sandplätze vor hohen Bäumen, Beachfelder mit Palmen und ein Biergarten mit Sonnenterrasse.</p>
     </div>
-    <figure class="bild kopf-anlage__bild" style="grid-column:3 / -1" data-auftritt>
-      <div class="bild__rahmen"><img src="assets/img/plaetze-panorama.jpg" width="798" height="412" alt="Blick über die Sandplätze des Vereins, auf mehreren Plätzen wird gespielt, dahinter hohe Bäume" fetchpriority="high"></div>
+    <figure class="foto foto--quer seitenkopf__bild bis-links" style="grid-column:1 / span 9">
+      <img src="assets/img/plaetze-panorama.jpg" width="798" height="412" alt="Blick über die Sandplätze des Vereins, auf mehreren Plätzen wird gespielt, dahinter hohe Bäume" fetchpriority="high">
     </figure>
   </div>
 </section>
 
 <section class="abschnitt" id="plaetze" aria-labelledby="plaetze-titel">
-  <div class="rahmen spalten">
-    <header class="spalten__kopf">
-      <h2 id="plaetze-titel" data-zeigen>Die Sandplätze</h2>
-    </header>
-    <div class="spalten__inhalt">
-      <p class="lead" data-zeigen>Fünf Sandplätze bilden das Herz der Anlage. Hier trainiert im Sommer die Tennisschule, hier spielen die Mannschaften, und hier treffen sich die Mitglieder zu den Turnieren des Vereins.</p>
-      <p style="margin-top:1.5rem" data-zeigen><a class="weiter" href="tennisschule.html">Zur Tennisschule</a></p>
-    </div>
-  </div>
-  <div class="rahmen raster plaetze-bilder">
-    <figure class="bild bild--43 plaetze-bilder__a">
-      <div class="bild__rahmen"><img src="assets/img/galerie/anlage-04.jpg" width="798" height="598" alt="Training am Netz auf einem der Sandplätze, im Hintergrund Windschutz und Bäume" loading="lazy"></div>
-    </figure>
-    <figure class="bild bild--34 plaetze-bilder__b">
-      <div class="bild__rahmen"><img src="assets/img/galerie/beach-01.jpg" width="798" height="530" alt="Junger Spieler bei der Vorhand auf dem Sandplatz" loading="lazy" style="object-position:60% 50%"></div>
-    </figure>
-  </div>
-</section>
-
-<section class="abschnitt abschnitt--tief" id="beachfelder" aria-labelledby="beach-titel">
-  <div class="rahmen raster paar paar--rechts">
-    <figure class="bild bild--34 paar__bild" style="grid-column:8 / -1">
-      <div class="bild__rahmen"><img src="assets/img/galerie/beach-02.jpg" width="798" height="598" alt="Palmen am Beachfeld, dahinter wird gespielt" loading="lazy" style="object-position:38% 50%"></div>
-    </figure>
-    <div class="paar__text" style="grid-column:1 / span 6">
-      <h2 id="beach-titel" data-zeigen>Beachfelder mit Palmen</h2>
-      <p data-zeigen>Neben den Tennisplätzen liegen die Beachfelder der Beach-Arena. Mitglieder spielen hier Beachvolleyball, Beachtennis, Beachbadminton und Beachsoccer. In den Sommerferien gibt es Tennis- und Beachsportcamps.</p>
-      <ul class="wortreihe wortreihe--klein" data-zeigen>
-        <li>Beachvolleyball</li>
-        <li>Beachtennis</li>
-        <li>Beachbadminton</li>
-        <li>Beachsoccer</li>
-      </ul>
-      <a class="weiter" href="clubleben.html#beachsport">Alle Sportarten im Clubleben</a>
-    </div>
-  </div>
-</section>
-
-<section class="abschnitt abschnitt--tanne" id="clubhaus" aria-labelledby="clubhaus-titel">
   <div class="rahmen raster paar">
-    <figure class="bild bild--43 paar__bild" style="grid-column:1 / span 7">
-      <div class="bild__rahmen"><img src="assets/img/galerie/anlage-02.jpg" width="798" height="598" alt="Bistro mit überdachter Terrasse, blauer Pergola und Blumenampeln" loading="lazy"></div>
+    <div class="paar__text">
+      <h2 id="plaetze-titel">Die Sandplätze</h2>
+      <p>Fünf Sandplätze bilden das Herz der Anlage. Hier trainiert im Sommer die Tennisschule, hier spielen die Mannschaften, und hier treffen sich die Mitglieder zu den Turnieren des Vereins.</p>
+      <div class="aktionen"><a class="weiter" href="tennisschule.html">Zur Tennisschule</a></div>
+    </div>
+    <figure class="foto foto--43">
+      <img src="assets/img/galerie/anlage-04.jpg" width="798" height="598" alt="Training am Netz auf einem der Sandplätze, im Hintergrund Windschutz und Bäume" loading="lazy">
     </figure>
-    <div class="paar__text" style="grid-column:9 / -1">
-      <h2 id="clubhaus-titel" data-zeigen>Bistro, Terrasse und Service</h2>
-      <p data-zeigen>Café, Bistro und Beach-Biergarten liegen direkt an den Plätzen. Wer nur schnell eine neue Saite braucht, wird auch fündig.</p>
+    <figure class="foto foto--43">
+      <img src="assets/img/galerie/events-02.jpg" width="798" height="598" alt="Match auf den Sandplätzen an einem Sommertag" loading="lazy">
+    </figure>
+  </div>
+</section>
+
+<section class="abschnitt" id="beachfelder" aria-labelledby="beach-titel">
+  <div class="rahmen raster hochklein hochklein--rechts">
+    <figure class="foto foto--45 hochklein__hoch">
+      <img src="assets/img/galerie/beach-02.jpg" width="798" height="598" alt="Palmen am Beachfeld, dahinter wird gespielt" loading="lazy" style="object-position:38% 50%">
+    </figure>
+    <div class="hochklein__seite">
+      <div>
+        <h2 id="beach-titel">Beachfelder mit Palmen</h2>
+        <p>Neben den Tennisplätzen liegen die Beachfelder der Beach-Arena. Mitglieder spielen hier Beachvolleyball, Beachtennis, Beachbadminton und Beachsoccer. In den Sommerferien gibt es Tennis- und Beachsportcamps.</p>
+        <div class="aktionen"><a class="weiter" href="clubleben.html#beachsport">Alle Sportarten im Clubleben</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="abschnitt" id="clubhaus" aria-labelledby="clubhaus-titel">
+  <div class="rahmen raster anschnitt">
+    <figure class="foto foto--43 anschnitt__foto bis-links">
+      <img src="assets/img/galerie/anlage-02.jpg" width="798" height="598" alt="Bistro mit überdachter Terrasse, blauer Pergola und Blumenampeln" loading="lazy">
+    </figure>
+    <div class="anschnitt__text">
+      <h2 id="clubhaus-titel">Bistro, Terrasse und Service</h2>
+      <p>Café, Bistro und Beach-Biergarten liegen direkt an den Plätzen. Wer nur schnell eine neue Saite braucht, wird auch fündig.</p>
       <ul class="liste">
         <li>Tennisstüberl mit Sonnenterrasse</li>
         <li>Café, Bistro und Beach-Biergarten</li>
         <li>Verkauf von Tenniszubehör</li>
         <li>Bespannservice</li>
       </ul>
-      <a class="knopf knopf--hell" href="clubleben.html#bistro"><span>Mehr über Bistro und Biergarten</span></a>
+      <a class="weiter" href="clubleben.html#bistro">Mehr über Bistro und Biergarten</a>
     </div>
   </div>
 </section>
 
 <section class="abschnitt" id="jahreszeiten" aria-labelledby="jahr-titel">
-  <div class="rahmen spalten">
-    <header class="spalten__kopf">
-      <h2 id="jahr-titel" data-zeigen>Sommer auf Sand, Winter in der Halle</h2>
-    </header>
-    <div class="spalten__inhalt" data-zeigen>
-      <div class="jahreszeiten">
-        <div>
-          <h3>Sommer</h3>
-          <p>Tennisanlage bei der Beach-Arena<br>Föhringer Ring 5, 80805 München<br><span class="leise">U6, Haltestelle Studentenstadt</span></p>
-        </div>
-        <div>
-          <h3>Winter</h3>
-          <p>Winterspielbetrieb in der Halle<br>Tennishalle bei Iphitos, Aumeisterweg 10<br><span class="leise">80805 München</span></p>
-        </div>
-      </div>
-      <p class="hinweis" style="margin-top:1.25rem">Hallenstandort laut Website der Tennisschule. Bitte im Zweifel bei Christos nachfragen.</p>
+  <div class="rahmen raster spalten">
+    <div class="spalten__kopf">
+      <h2 id="jahr-titel">Sommer auf Sand, Winter in der Halle</h2>
+    </div>
+    <div class="spalten__inhalt">
+      <ul class="zeilen zeilen--zwei">
+        <li><b>Sommer</b><small>Tennisanlage bei der Beach-Arena, Föhringer Ring 5, 80805 München, U6 Haltestelle Studentenstadt</small></li>
+        <li><b>Winter</b><small>Winterspielbetrieb in der Tennishalle bei Iphitos, Aumeisterweg 10, 80805 München</small></li>
+      </ul>
+      <p class="hinweis" style="margin-top:1.25rem">Wo im Winter gespielt wird, sagt Ihnen Christos gern am Telefon.</p>
     </div>
   </div>
 </section>
 
-<section class="abschnitt abschnitt--tief" id="anreise" aria-labelledby="anreise-titel">
-  <div class="rahmen spalten">
-    <header class="spalten__kopf">
-      <h2 id="anreise-titel" data-zeigen>Anreise</h2>
-      <p data-zeigen>Föhringer Ring 5, 80805 München. Die Anlage liegt im Münchner Norden an der Beach-Arena.</p>
-    </header>
-    <div class="spalten__inhalt" data-zeigen>
+<section class="abschnitt abschnitt--stein" id="anreise" aria-labelledby="anreise-titel">
+  <div class="rahmen raster spalten">
+    <div class="spalten__kopf">
+      <h2 id="anreise-titel">Anreise</h2>
+      <p>Die Anlage liegt im Münchner Norden an der Beach-Arena.</p>
+    </div>
+    <div class="spalten__inhalt">
       <dl class="fakten">
+        <dt>Adresse</dt><dd>Föhringer Ring 5, 80805 München, Tennisverein in der Beach-Arena</dd>
         <dt>U-Bahn</dt><dd>U6, Haltestelle Studentenstadt</dd>
         <dt>Auto</dt><dd>Parkplätze direkt an der Anlage</dd>
-        <dt>Winter</dt><dd>Tennishalle bei Iphitos, Aumeisterweg 10, 80805 München</dd>
       </dl>
-      <div class="aktionen" style="margin-top:2rem">
-        <a class="knopf knopf--rand" href="{{osm}}" rel="noopener">{{karte}}<span>Route auf OpenStreetMap planen</span></a>
+      <div class="aktionen">
+        <a class="knopf knopf--rand" href="{{osm}}" rel="noopener">{{karte}}Route auf OpenStreetMap planen</a>
       </div>
       <p class="hinweis" style="margin-top:1rem">Der Link öffnet OpenStreetMap. Erst dann werden Daten an diesen Dienst übertragen.</p>
     </div>

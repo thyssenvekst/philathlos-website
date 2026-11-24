@@ -1,4 +1,5 @@
 # T.C. Philathlos München e.V. – Serverregeln für Apache-Hosting
+# Die Verwaltung (verwaltung/, api/) braucht PHP 8.1 oder neuer mit SQLite, GD und fileinfo, siehe VERWALTUNG.md.
 # Bei einem anderen Hoster (z. B. nginx, GitHub Pages) gelten diese Regeln nicht;
 # die Weiterleitungsseiten (ueber_uns.html usw.) fangen die alten Adressen dann trotzdem ab.
 
@@ -15,8 +16,9 @@ AddDefaultCharset utf-8
   # RewriteRule ^ https://www.philathlos.de%{REQUEST_URI} [L,R=301]
 
   # Arbeitsordner nicht ausliefern
-  RewriteRule ^(_quellen|\.git)(/|$) - [F,L]
-  RewriteRule ^(README|CLAUDE|DESIGN|HANDOFF)\.md$ - [F,L]
+  RewriteRule ^(_quellen|\.git|daten|verwaltung/lib)(/|$) - [F,L]
+  RewriteRule ^verwaltung/konfiguration(\.beispiel)?\.php$ - [F,L]
+  RewriteRule \.(sqlite|sqlite-wal|sqlite-shm|log|md)$ - [F,L]
 
   # Adressen der bisherigen Website dauerhaft umleiten (301)
   RewriteRule ^ueber_uns\.html$      /verein.html [R=301,L]
@@ -42,6 +44,8 @@ AddDefaultCharset utf-8
   ExpiresActive On
   ExpiresDefault "access plus 1 week"
   ExpiresByType text/html "access plus 0 seconds"
+  # Inhalte aus der Verwaltung sollen sofort erscheinen
+  ExpiresByType application/json "access plus 0 seconds"
   # CSS und JS tragen eine Versionsnummer (?v=…), dürfen also lange im Cache bleiben
   ExpiresByType text/css "access plus 1 year"
   ExpiresByType application/javascript "access plus 1 year"

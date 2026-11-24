@@ -6,27 +6,29 @@ bild: plaetze-panorama.jpg
 -->
 <section class="seitenkopf" aria-labelledby="seiten-titel">
   <div class="rahmen">
-    <h1 id="seiten-titel" data-auftritt>Anrufen, schreiben oder vorbeikommen</h1>
-    <p class="lead" data-auftritt>Wir stehen Ihnen mit Rat und Tat zur Seite. Am schnellsten erreichen Sie Christos, die Anlage liegt direkt an der U6 Studentenstadt.</p>
-    <div class="kopf-kontakt__nummern" data-auftritt>
-      <a href="tel:+491729138965"><span>0172 913 89 65</span><small>Christos, mobil und Tennisschule</small></a>
-      <a href="tel:+498932210100"><span>089 32 21 01 00</span><small>Club</small></a>
-      <a href="mailto:tc@philathlos.de"><span>tc@philathlos.de</span><small>E-Mail</small></a>
+    <div data-auftritt-text>
+      <h1 id="seiten-titel">Anrufen, schreiben oder vorbeikommen</h1>
+      <p class="lead" style="margin-top:1.25rem;max-width:32em">Wir stehen Ihnen mit Rat und Tat zur Seite. Am schnellsten erreichen Sie Christos, die Anlage liegt direkt an der U6 Studentenstadt.</p>
+    </div>
+    <div class="nummern">
+      <a href="tel:+491729138965"><b>0172 913 89 65</b><span>Christos, mobil und Tennisschule</span></a>
+      <a href="tel:+498932210100"><b>089 32 21 01 00</b><span>Club</span></a>
+      <a href="mailto:tc@philathlos.de"><b>tc@philathlos.de</b><span>E-Mail</span></a>
     </div>
   </div>
 </section>
 
-<section class="abschnitt abschnitt--tief" aria-labelledby="formular">
-  <div class="rahmen spalten">
+<section class="abschnitt abschnitt--stein" aria-labelledby="formular">
+  <div class="rahmen raster spalten">
     <div class="spalten__kopf">
       <h2 class="sr">Weitere Nummern und Post</h2>
-      <dl class="fakten" data-zeigen>
+      <dl class="fakten">
         <dt>Tennisschule</dt><dd><a href="tel:+498935004114">089 35 00 41 14</a></dd>
         <dt>Fax</dt><dd>089 32 21 01 01</dd>
         <dt>Post</dt><dd>T.C. Philathlos München e.V.<br>c/o Christos Theodosiadis<br>Marianne-Brandt-Str. 20<br>80807 München</dd>
       </dl>
     </div>
-    <div class="spalten__inhalt" data-zeigen>
+    <div class="spalten__inhalt">
 <form class="formular" id="anfrage" action="mailto:tc@philathlos.de" method="post" enctype="text/plain" novalidate>
       <h2 id="formular">Nachricht vorbereiten</h2>
       <p>Füllen Sie die Felder aus, dann öffnet sich Ihr E-Mail-Programm mit der fertigen Nachricht an <strong>tc@philathlos.de</strong>. Gespeichert wird hier nichts.</p>
@@ -58,7 +60,7 @@ bild: plaetze-panorama.jpg
         <span class="feld__fehler" id="f-nachricht-fehler"></span>
       </div>
       <div class="formular__fuss">
-        <button class="knopf" type="submit">{{post}}<span>E-Mail-Programm öffnen</span></button>
+        <button class="knopf knopf--blau" type="submit">{{post}}E-Mail-Programm öffnen</button>
         <span class="hinweis">Kein E-Mail-Programm? Schreiben Sie direkt an <a href="mailto:tc@philathlos.de">tc@philathlos.de</a>.</span>
       </div>
       <p class="formular__status" id="anfrage-status" tabindex="-1" hidden>Ihr E-Mail-Programm sollte sich jetzt mit der vorbereiteten Nachricht geöffnet haben. Bitte dort auf „Senden“ klicken. Falls nichts passiert ist, schreiben Sie bitte direkt an tc@philathlos.de oder rufen Sie an.</p>
@@ -68,21 +70,25 @@ bild: plaetze-panorama.jpg
 </section>
 
 <section class="abschnitt" id="anfahrt" aria-labelledby="anfahrt-titel">
-  <div class="rahmen raster paar">
-    <figure class="bild paar__bild" style="grid-column:1 / span 7">
-      <div class="bild__rahmen" style="aspect-ratio:798/412"><img src="assets/img/plaetze-panorama.jpg" width="798" height="412" alt="Die Tennisanlage am Föhringer Ring mit fünf Sandplätzen" loading="lazy"></div>
-    </figure>
-    <div class="paar__text" style="grid-column:9 / -1">
-      <h2 id="anfahrt-titel" data-zeigen>Anfahrt</h2>
-      <dl class="fakten" data-zeigen>
-        <dt>Adresse</dt><dd>Föhringer Ring 5, 80805 München<br><span class="leise">Tennisverein in der Beach-Arena</span></dd>
-        <dt>U-Bahn</dt><dd>U6, Haltestelle Studentenstadt</dd>
-        <dt>Auto</dt><dd>Parkplätze an der Anlage</dd>
-      </dl>
-      <div class="aktionen" data-zeigen>
-        <a class="knopf knopf--rand" href="{{osm}}" rel="noopener">{{karte}}<span>Route auf OpenStreetMap planen</span></a>
+  <div class="rahmen raster besuch besuch--offen">
+    <h2 id="anfahrt-titel">Anfahrt</h2>
+    <p class="adresse-gross"><a href="{{osm}}" rel="noopener">Föhringer Ring 5</a></p>
+    <div class="besuch__tafel">
+      <div>
+        <h3>Adresse</h3>
+        <p>Föhringer Ring 5<br>80805 München<br>Tennisverein in der Beach-Arena</p>
       </div>
-      <p class="hinweis" style="margin-top:1rem">Der Link öffnet OpenStreetMap. Erst dann werden Daten an diesen Dienst übertragen.</p>
+      <div>
+        <h3>Anreise</h3>
+        <p>U6, Haltestelle Studentenstadt<br>Parkplätze an der Anlage</p>
+      </div>
+      <div class="aktionen">
+        <a class="knopf knopf--rand" href="{{osm}}" rel="noopener">{{karte}}Route auf OpenStreetMap planen</a>
+      </div>
+      <p class="hinweis" style="grid-column:1 / -1">Der Link öffnet OpenStreetMap. Erst dann werden Daten an diesen Dienst übertragen.</p>
     </div>
+    <figure class="foto foto--43 besuch__foto">
+      <img src="assets/img/plaetze-panorama.jpg" width="798" height="412" alt="Die Tennisanlage am Föhringer Ring mit fünf Sandplätzen" loading="lazy">
+    </figure>
   </div>
 </section>
