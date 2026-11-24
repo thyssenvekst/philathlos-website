@@ -175,9 +175,20 @@ a:focus-visible:not(.knopf){background-color:var(--bank);color:var(--tinte)}
 .diptychon .foto{height:min(calc(100svh - var(--kopf-hoehe) - 22rem),34rem);min-height:16rem}
 .start__text{padding-top:clamp(2rem,1.25rem + 2.5vw,3.5rem)}
 .start__titel{max-width:16em}
+.zusammen{white-space:nowrap}
 .start__neben{margin-top:1rem;max-width:40em}
 .start__neben p{color:var(--tinte-leise)}
 .start__neben .aktionen{margin-top:1.5rem}
+/* ab 1024px: Titel links, Text rechts – die rechte Spalte beginnt genau an der Fuge zwischen den beiden Fotos */
+@media (min-width:1024px){
+  .start__text{
+    --dip:min(100vw,120rem);
+    display:grid;align-items:start;
+    grid-template-columns:calc((100vw - var(--dip)) / 2 + (var(--dip) - 4px) * .625 + 4px - var(--aussen)) minmax(0,1fr);
+  }
+  .start__titel{padding-right:clamp(2rem,4vw,4rem)}
+  .start__neben{margin-top:.55em;max-width:30em}
+}
 .anruf{font:500 var(--t-klein)/1.3 var(--grotesk);text-decoration:none;color:var(--tinte-leise)}
 .anruf b{display:block;font:450 1.375rem/1.2 var(--antiqua);font-variant-numeric:lining-nums;color:var(--pergola)}
 .anruf:hover b{text-decoration:underline;text-underline-offset:.2em}
