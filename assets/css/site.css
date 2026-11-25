@@ -210,7 +210,7 @@ a:focus-visible:not(.knopf){background-color:var(--bank);color:var(--tinte)}
 .anschnitt{align-items:start}
 .anschnitt__foto{grid-column:1 / span 7;max-width:62.5rem}
 .anschnitt__foto.bis-rechts{justify-self:end}
-.anschnitt__text{grid-column:9 / -1;padding-top:clamp(2rem,7vw,8rem)}
+.anschnitt__text{grid-column:9 / -1;align-self:center}
 .anschnitt--rechts .anschnitt__foto{grid-column:6 / -1;grid-row:1}
 .anschnitt--rechts .anschnitt__text{grid-column:1 / span 4;grid-row:1}
 .anschnitt__text h2{margin-bottom:1.25rem}
@@ -246,7 +246,7 @@ a:focus-visible:not(.knopf){background-color:var(--bank);color:var(--tinte)}
 .rundgang__station:nth-child(even) .rundgang__text{grid-column:1 / span 4;grid-row:1}
 @media (min-width:900px) and (min-height:640px){
   .rundgang__liste{position:relative}
-  .rundgang__station{position:sticky;top:calc(1rem + var(--i) * 3.25rem);min-height:calc(100svh - 2rem - var(--i) * 3.25rem);display:flex;align-items:center;transform-origin:50% 0}
+  .rundgang__station{position:sticky;top:calc(1rem + var(--i) * 3.25rem);transform-origin:50% 0}
   .rundgang__station > .rahmen{width:var(--breite)}
   .rundgang__foto{max-height:calc(100svh - 10rem)}
 }
@@ -516,6 +516,43 @@ a:focus-visible:not(.knopf){background-color:var(--bank);color:var(--tinte)}
 }
 @media (min-width:1180px){
   .menue{display:none}
+}
+/* Breite Bildschirme: keine leeren Halbseiten. Wo eine Spalte kurz ist, steht ihr Gegenstück daneben statt darunter. */
+@media (min-width:1024px){
+  /* Seitenkopf ohne Nebentext: Titel links, Einleitung rechts */
+  .seitenkopf__text:only-child{grid-column:1 / -1;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--fuge);align-items:end}
+  .seitenkopf__text:only-child h1{grid-column:1 / span 7}
+  .seitenkopf__text:only-child .lead{grid-column:8 / -1;margin-top:0;max-width:none;padding-bottom:.35em}
+  /* Seitenkopf mit Foto: der Nebentext steht links neben dem Foto */
+  .seitenkopf--bild .seitenkopf__text{grid-column:1 / span 5;grid-row:1}
+  .seitenkopf--bild .seitenkopf__neben{grid-column:1 / span 4;grid-row:2;align-self:end;margin-bottom:.25rem}
+  .seitenkopf--bild .seitenkopf__bild{grid-column:6 / -1;grid-row:1 / span 2;margin-top:0}
+  .seitenkopf__diptychon{margin-top:var(--luft-klein)}
+  .seitenkopf__diptychon .foto{height:clamp(18rem,30vw,30rem)}
+  /* Abschnittsköpfe: Überschrift links, Erklärung rechts */
+  .kopfzeile{max-width:none;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--fuge);align-items:start}
+  .kopfzeile > h2{grid-column:1 / span 6}
+  .kopfzeile > div{grid-column:8 / -1;margin-top:0;padding-top:.45em}
+  /* Text über zwei Fotos: Überschrift links, Text rechts */
+  .paar__text{grid-column:1 / -1;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--fuge);align-items:start}
+  .paar__text > h2{grid-column:1 / span 6;grid-row:1 / span 3}
+  .paar__text > :not(h2){grid-column:8 / -1}
+  .paar__text h2 + p{margin-top:.35em}
+  /* Kontakt: Titel links, Nummern rechts */
+  .kontaktkopf{align-items:end}
+  .kontaktkopf__text{grid-column:1 / span 7}
+  .kontaktkopf .nummern{grid-column:8 / -1;margin-top:0}
+  /* Mitgliedschaft: Foto neben den drei Schritten */
+  .schnuppern{align-items:center}
+  .schnuppern__liste{grid-column:1 / span 7}
+  .schnuppern__foto{grid-column:9 / -1}
+}
+@media (max-width:1023px){
+  .schnuppern__liste,.schnuppern__foto{grid-column:1 / -1}
+  .schnuppern__foto{margin-top:var(--luft-klein);max-width:28rem}
+  .seitenkopf__diptychon{margin-top:var(--luft-klein)}
+  .seitenkopf__diptychon .foto{height:clamp(14rem,40vw,24rem)}
+  .kontaktkopf__text,.kontaktkopf .nummern,.seitenkopf--bild .seitenkopf__bild{grid-column:1 / -1}
 }
 @media (max-width:1023px){
   .trio .verweis:nth-child(1){grid-column:1 / span 7}

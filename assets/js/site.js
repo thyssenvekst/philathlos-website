@@ -74,6 +74,55 @@
     var kacheln = [].slice.call(galerie.querySelectorAll("li"));
     var knoepfe = d.querySelectorAll(".filter button");
     var status = d.getElementById("galerie-status");
+    /* Lücken am Ende des Rasters schließen: Die Kachel über einer leeren Zelle wird eine Reihe höher,
+       sonst wird die Kachel links daneben breiter. Läuft nach jedem Filtern und bei neuer Breite. */
+    var lueckenSchliessen = function () {
+      var sicht = kacheln.filter(function (li) { return !li.hidden; });
+      sicht.forEach(function (li) { li.style.gridRow = ""; li.style.gridColumn = ""; });
+      if (!sicht.length) return;
+      var cs = getComputedStyle(galerie);
+      var spalten = cs.gridTemplateColumns.split(" ").length;
+      var luecke = parseFloat(cs.rowGap) || 0;
+      var g = galerie.getBoundingClientRect();
+      var zeileH = parseFloat(cs.gridAutoRows) + luecke;
+      if (!(zeileH > luecke)) return;
+      var spalteB = (g.width + luecke) / spalten;
+      var belegt = {}, info = [], letzte = 0;
+      sicht.forEach(function (li) {
+        var r = li.getBoundingClientRect();
+        var z0 = Math.round((r.top - g.top) / zeileH), z1 = Math.round((r.bottom - g.top + luecke) / zeileH);
+        var s0 = Math.round((r.left - g.left) / spalteB), s1 = Math.round((r.right - g.left + luecke) / spalteB);
+        for (var z = z0; z < z1; z++) for (var s = s0; s < s1; s++) belegt[z + "," + s] = li;
+        info.push({ li: li, z0: z0, z1: z1, s0: s0, s1: s1 });
+        letzte = Math.max(letzte, z1);
+      });
+      var finde = function (li) { return info.filter(function (x) { return x.li === li; })[0]; };
+      var geaendert = [];
+      for (var s = 0; s < spalten; s++) {
+        var z = letzte - 1;
+        if (belegt[z + "," + s]) continue;
+        var oben = belegt[(z - 1) + "," + s], o = oben && finde(oben);
+        if (o && o.z1 === z && geaendert.indexOf(oben) < 0) {
+          oben.style.gridRow = "span " + (o.z1 - o.z0 + 1);
+          geaendert.push(oben);
+          continue;
+        }
+        for (var l = s - 1; l >= 0; l--) {
+          var links = belegt[z + "," + l];
+          if (!links) continue;
+          var x = finde(links);
+          if (x.z0 === z && x.z1 === z + 1 && geaendert.indexOf(links) < 0) {
+            var bis = s; while (bis + 1 < spalten && !belegt[z + "," + (bis + 1)]) bis++;
+            links.style.gridColumn = (x.s0 + 1) + " / " + (bis + 2);
+            geaendert.push(links);
+          }
+          break;
+        }
+      }
+    };
+    lueckenSchliessen();
+    var lueckenZeit;
+    window.addEventListener("resize", function () { clearTimeout(lueckenZeit); lueckenZeit = setTimeout(lueckenSchliessen, 150); });
     knoepfe.forEach(function (k) {
       k.addEventListener("click", function () {
         var album = k.getAttribute("data-filter");
@@ -86,6 +135,7 @@
           if (passt) { n++; gezeigt.push(li); }
         });
         if (status) status.textContent = n + (n === 1 ? " Bild" : " Bilder") + " angezeigt";
+        lueckenSchliessen();
         if (mitBewegung) {
           G.fromTo(gezeigt, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.03, ease: "power2.out", overwrite: true });
           ST.refresh();
